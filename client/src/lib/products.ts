@@ -1,7 +1,7 @@
 /*
  * DESIGN PHILOSOPHY: Dark Academic Editorial — CTP Product Data
  * All book data sourced from store.commonthreadpublishing.com
- * Shopify store links used for checkout (print books via Lulu POD, ebooks direct)
+ * Shopify store links used for checkout (print books via POD fulfillment, ebooks direct)
  */
 
 export type BookFormat = 'print' | 'ebook' | 'both';
@@ -30,7 +30,7 @@ export interface Book {
   genre: BookGenre[];
   coverImage: string;
   shopifyUrl: string;
-  luluUrl?: string;
+  fulfillmentUrl?: string;
   featured?: boolean;
   badge?: string;
   isbn?: string;

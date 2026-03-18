@@ -237,7 +237,7 @@ export default function BookDetail() {
                     className="text-xs leading-relaxed"
                     style={{ fontFamily: 'Lora, serif', color: 'rgba(245,240,232,0.4)' }}
                   >
-                    Print editions are fulfilled by <strong style={{ color: 'rgba(245,240,232,0.6)' }}>Lulu's global print-on-demand network</strong>. Ships to 150+ countries in 3–5 business days.
+                    Print editions are fulfilled by our print-on-demand partner and shipped directly to your door. Delivery to 150+ countries in 3–5 business days. Shipping rates calculated at checkout.
                   </p>
                 </div>
               </div>

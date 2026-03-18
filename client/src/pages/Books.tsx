@@ -59,7 +59,7 @@ export default function Books() {
             className="text-base max-w-lg"
             style={{ fontFamily: 'Lora, serif', color: 'rgba(245,240,232,0.7)' }}
           >
-            Every title published by Common Thread Publishing — available in print via Lulu's global network, with select titles available as instant eBook downloads.
+            Every title published by Common Thread Publishing — available in print with worldwide delivery, with select titles available as instant eBook downloads.
           </p>
         </div>
       </section>
@@ -129,7 +129,7 @@ export default function Books() {
         </div>
       </section>
 
-      {/* Lulu Integration Note */}
+      {/* Print Fulfillment Note */}
       <section
         className="py-12"
         style={{ background: 'oklch(0.08 0.015 265)', borderTop: '1px solid rgba(255,255,255,0.05)' }}
@@ -141,7 +141,7 @@ export default function Books() {
               className="text-sm leading-relaxed"
               style={{ fontFamily: 'Lora, serif', color: 'rgba(245,240,232,0.5)' }}
             >
-              All print books are fulfilled through <strong style={{ color: 'rgba(245,240,232,0.75)' }}>Lulu's global print-on-demand network</strong>. Your book is printed fresh and shipped directly to you — no inventory, no waste. Orders ship to over 150 countries within 3–5 business days at wholesale rates.
+              All print books are fulfilled through our <strong style={{ color: 'rgba(245,240,232,0.75)' }}>print-on-demand fulfillment partner</strong>. Your book is printed fresh and shipped directly to you — no inventory, no waste. Orders ship to over 150 countries within 3–5 business days. Shipping rates are calculated at checkout.
             </p>
           </div>
         </div>

@@ -1,6 +1,6 @@
 /*
  * DESIGN: Dark Academic Editorial — About Page
- * Asymmetric layout with parchment panel, mission statement, and Lulu integration info
+ * Asymmetric layout with parchment panel, mission statement, and print fulfillment info
  */
 
 import { Link } from 'wouter';
@@ -101,7 +101,7 @@ export default function About() {
                   },
                   {
                     title: 'Accessible to All',
-                    desc: 'Through print-on-demand fulfillment via Lulu\'s global network, our books are available to readers in over 150 countries. Great literature should not be limited by geography.',
+                    desc: 'Through our print-on-demand fulfillment network, our books are available to readers in over 150 countries. Great literature should not be limited by geography.',
                   },
                   {
                     title: 'Authors We Believe In',
@@ -133,7 +133,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* How We Work — Lulu Integration */}
+      {/* How We Work — Print Fulfillment */}
       <section
         className="py-20"
         style={{ background: 'oklch(0.08 0.015 265)', borderTop: '1px solid rgba(255,255,255,0.05)' }}
@@ -164,14 +164,14 @@ export default function About() {
               {
                 icon: Package,
                 step: '02',
-                title: 'Lulu Prints & Ships',
-                desc: 'Your order is transmitted to Lulu\'s global print-on-demand network. Your book is printed fresh and shipped directly to your door within 3–5 business days.',
+                title: 'Printed & Shipped',
+                desc: 'Your order is sent to our fulfillment partner. Your book is printed fresh and shipped directly to your door within 3–5 business days. Shipping rates are calculated at checkout.',
               },
               {
                 icon: Globe,
                 step: '03',
                 title: 'Delivered Worldwide',
-                desc: 'Lulu ships to over 150 countries at competitive rates. Whether you\'re in the USA or overseas, your book arrives with the same quality and care.',
+                desc: 'We ship to over 150 countries. Whether you\'re in the USA or overseas, your book arrives with the same quality and care.',
               },
             ].map(item => (
               <div

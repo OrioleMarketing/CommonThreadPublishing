@@ -138,7 +138,7 @@ export default function Footer() {
                 className="text-xs leading-relaxed"
                 style={{ fontFamily: 'Lora, serif', color: 'rgba(245,240,232,0.4)' }}
               >
-                Print editions are fulfilled through Lulu's global print-on-demand network, shipping to 150+ countries within 3–5 business days.
+                Print editions are fulfilled through our print-on-demand partner and shipped directly to your door — available in 150+ countries within 3–5 business days.
               </p>
             </div>
           </div>

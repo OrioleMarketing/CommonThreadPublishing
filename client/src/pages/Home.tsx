@@ -162,8 +162,8 @@ export default function Home() {
               {
                 icon: Package,
                 title: 'Print Books',
-                desc: 'Fulfilled by Lulu\'s global print-on-demand network. Ships to 150+ countries in 3–5 business days.',
-                label: 'Lulu POD',
+                desc: 'Printed fresh and shipped directly to your door. Available to readers in over 150 countries within 3–5 business days.',
+                label: 'Print on Demand',
               },
               {
                 icon: Download,
@@ -173,9 +173,9 @@ export default function Home() {
               },
               {
                 icon: BookOpen,
-                title: 'Free Shipping',
-                desc: 'No inventory, no waste. Every book is printed fresh and shipped directly to your door worldwide.',
-                label: 'Print on Demand',
+                title: 'Worldwide Delivery',
+                desc: 'No inventory, no waste. Every book is printed fresh and shipped directly to your door. Standard shipping rates apply.',
+                label: 'Global Shipping',
               },
             ].map(item => (
               <div
