@@ -1,21 +1,20 @@
 /*
- * DESIGN: Dark Academic Editorial — Authors Page
- * Author cards with circular portraits, bio, and their books
+ * DESIGN: Light Editorial — Authors Page
+ * White/parchment backgrounds, dark navy text, crimson accents.
  */
 
 import { authors, getBooksByAuthor } from '@/lib/products';
 import BookCard from '@/components/BookCard';
-import { Link } from 'wouter';
 
 export default function Authors() {
   return (
-    <div className="min-h-screen" style={{ background: 'oklch(0.10 0.015 265)' }}>
+    <div className="min-h-screen" style={{ background: '#ffffff' }}>
       {/* Header */}
       <section
         className="pt-32 pb-16"
         style={{
-          background: 'oklch(0.08 0.015 265)',
-          borderBottom: '1px solid rgba(196,30,58,0.15)',
+          background: '#F7F3ED',
+          borderBottom: '1px solid rgba(196,30,58,0.12)',
         }}
       >
         <div className="container">
@@ -25,7 +24,7 @@ export default function Authors() {
             style={{
               fontFamily: 'Playfair Display, serif',
               fontSize: 'clamp(2.5rem, 6vw, 4rem)',
-              color: '#F5F0E8',
+              color: '#1A1A2E',
               lineHeight: 1.05,
             }}
           >
@@ -37,7 +36,7 @@ export default function Authors() {
       </section>
 
       {/* Authors */}
-      <section className="py-16">
+      <section className="py-16" style={{ background: '#ffffff' }}>
         <div className="container">
           <div className="space-y-20">
             {authors.map((author, idx) => {
@@ -50,14 +49,26 @@ export default function Authors() {
                 >
                   {/* Author Header */}
                   <div className="flex flex-col sm:flex-row gap-6 mb-10">
-                    {author.photo && (
+                    {author.photo ? (
                       <div className="flex-shrink-0">
                         <img
                           src={author.photo}
                           alt={author.name}
                           className="w-24 h-24 rounded-full object-cover"
-                          style={{ border: '3px solid rgba(196,30,58,0.5)' }}
+                          style={{ border: '3px solid rgba(196,30,58,0.4)' }}
                         />
+                      </div>
+                    ) : (
+                      <div
+                        className="flex-shrink-0 w-24 h-24 rounded-full flex items-center justify-center"
+                        style={{ background: '#F0EBE3', border: '3px solid rgba(196,30,58,0.25)' }}
+                      >
+                        <span
+                          className="text-2xl font-black"
+                          style={{ fontFamily: 'Playfair Display, serif', color: '#C41E3A' }}
+                        >
+                          {author.name.charAt(0)}
+                        </span>
                       </div>
                     )}
                     <div className="flex-1">
@@ -72,14 +83,14 @@ export default function Authors() {
                         style={{
                           fontFamily: 'Playfair Display, serif',
                           fontSize: 'clamp(1.5rem, 3vw, 2.2rem)',
-                          color: '#F5F0E8',
+                          color: '#1A1A2E',
                         }}
                       >
                         {author.name}
                       </h2>
                       <p
                         className="text-base leading-relaxed max-w-2xl"
-                        style={{ fontFamily: 'Lora, serif', color: 'rgba(245,240,232,0.7)', lineHeight: 1.8 }}
+                        style={{ fontFamily: 'Lora, serif', color: 'rgba(26,26,46,0.7)', lineHeight: 1.8 }}
                       >
                         {author.bio}
                       </p>
@@ -103,7 +114,7 @@ export default function Authors() {
                   ) : (
                     <p
                       className="text-sm italic"
-                      style={{ fontFamily: 'Lora, serif', color: 'rgba(245,240,232,0.4)' }}
+                      style={{ fontFamily: 'Lora, serif', color: 'rgba(26,26,46,0.4)' }}
                     >
                       No titles currently listed.
                     </p>
@@ -113,7 +124,7 @@ export default function Authors() {
                   {idx < authors.length - 1 && (
                     <div
                       className="mt-16"
-                      style={{ height: '1px', background: 'rgba(255,255,255,0.06)' }}
+                      style={{ height: '1px', background: 'rgba(26,26,46,0.07)' }}
                     />
                   )}
                 </div>

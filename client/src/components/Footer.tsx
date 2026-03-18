@@ -1,7 +1,8 @@
 /*
- * DESIGN: Dark Academic Editorial — Footer
- * Deep ink background, multi-column editorial layout
- * Diamond ornament dividers, crimson accent links
+ * DESIGN: Light Editorial — Footer
+ * Footer uses deep navy as a deliberate brand anchor at the bottom of the light site.
+ * This is intentional: the footer should feel grounded and authoritative.
+ * White/light text on dark navy, crimson accent links.
  */
 
 import { Link } from 'wouter';
@@ -11,8 +12,8 @@ export default function Footer() {
   return (
     <footer
       style={{
-        background: 'oklch(0.08 0.015 265)',
-        borderTop: '1px solid rgba(196, 30, 58, 0.25)',
+        background: '#1A1A2E',
+        borderTop: '3px solid #C41E3A',
       }}
     >
       {/* Main Footer Content */}
@@ -27,13 +28,13 @@ export default function Footer() {
             />
             <p
               className="text-sm leading-relaxed mb-6"
-              style={{ fontFamily: 'Lora, serif', color: 'rgba(245,240,232,0.6)', maxWidth: '320px' }}
+              style={{ fontFamily: 'Lora, serif', color: 'rgba(247,243,237,0.62)', maxWidth: '320px' }}
             >
               Common Thread Publishing LLC is dedicated to bringing stories of faith, history, and conviction to readers worldwide. Every book we publish carries a thread that connects us to something greater.
             </p>
             <p
               className="text-xs italic mb-6"
-              style={{ fontFamily: 'Playfair Display, serif', color: 'rgba(196, 30, 58, 0.8)' }}
+              style={{ fontFamily: 'Playfair Display, serif', color: 'rgba(196, 30, 58, 0.85)' }}
             >
               "Unleash Your Story"
             </p>
@@ -53,16 +54,16 @@ export default function Footer() {
                   aria-label={label}
                   className="w-8 h-8 flex items-center justify-center rounded-full border transition-all duration-200"
                   style={{
-                    borderColor: 'rgba(245,240,232,0.15)',
-                    color: 'rgba(245,240,232,0.5)',
+                    borderColor: 'rgba(247,243,237,0.18)',
+                    color: 'rgba(247,243,237,0.5)',
                   }}
                   onMouseEnter={e => {
                     (e.currentTarget as HTMLElement).style.borderColor = '#C41E3A';
                     (e.currentTarget as HTMLElement).style.color = '#C41E3A';
                   }}
                   onMouseLeave={e => {
-                    (e.currentTarget as HTMLElement).style.borderColor = 'rgba(245,240,232,0.15)';
-                    (e.currentTarget as HTMLElement).style.color = 'rgba(245,240,232,0.5)';
+                    (e.currentTarget as HTMLElement).style.borderColor = 'rgba(247,243,237,0.18)';
+                    (e.currentTarget as HTMLElement).style.color = 'rgba(247,243,237,0.5)';
                   }}
                 >
                   <Icon size={14} />
@@ -73,11 +74,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4
-              className="ctp-section-label mb-5"
-            >
-              Navigate
-            </h4>
+            <h4 className="ctp-section-label mb-5">Navigate</h4>
             <ul className="space-y-3">
               {[
                 { href: '/', label: 'Home' },
@@ -92,10 +89,10 @@ export default function Footer() {
                     className="text-sm transition-colors duration-200"
                     style={{
                       fontFamily: 'Montserrat, sans-serif',
-                      color: 'rgba(245,240,232,0.55)',
+                      color: 'rgba(247,243,237,0.55)',
                     }}
                     onMouseEnter={e => ((e.target as HTMLElement).style.color = '#C41E3A')}
-                    onMouseLeave={e => ((e.target as HTMLElement).style.color = 'rgba(245,240,232,0.55)')}
+                    onMouseLeave={e => ((e.target as HTMLElement).style.color = 'rgba(247,243,237,0.55)')}
                   >
                     {link.label}
                   </Link>
@@ -112,9 +109,9 @@ export default function Footer() {
                 <a
                   href="mailto:Info@CommonThreadPublishing.com"
                   className="text-sm flex items-center gap-2 transition-colors duration-200"
-                  style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(245,240,232,0.55)' }}
+                  style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(247,243,237,0.55)' }}
                   onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = '#C41E3A')}
-                  onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = 'rgba(245,240,232,0.55)')}
+                  onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = 'rgba(247,243,237,0.55)')}
                 >
                   <Mail size={13} />
                   Info@CommonThreadPublishing.com
@@ -136,7 +133,7 @@ export default function Footer() {
               <h4 className="ctp-section-label mb-4">Shipping & Delivery</h4>
               <p
                 className="text-xs leading-relaxed"
-                style={{ fontFamily: 'Lora, serif', color: 'rgba(245,240,232,0.4)' }}
+                style={{ fontFamily: 'Lora, serif', color: 'rgba(247,243,237,0.4)' }}
               >
                 Print editions ship directly to your door, available in 150+ countries within 3–5 business days. Shipping rates calculated at checkout.
               </p>
@@ -148,12 +145,12 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div
         className="border-t"
-        style={{ borderColor: 'rgba(255,255,255,0.06)' }}
+        style={{ borderColor: 'rgba(255,255,255,0.07)' }}
       >
         <div className="container py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p
             className="text-xs"
-            style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(245,240,232,0.3)' }}
+            style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(247,243,237,0.3)' }}
           >
             © {new Date().getFullYear()} Common Thread Publishing LLC. All rights reserved.
           </p>
@@ -163,9 +160,9 @@ export default function Footer() {
                 key={item}
                 href="#"
                 className="text-xs transition-colors duration-200"
-                style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(245,240,232,0.3)' }}
-                onMouseEnter={e => ((e.target as HTMLElement).style.color = 'rgba(245,240,232,0.7)')}
-                onMouseLeave={e => ((e.target as HTMLElement).style.color = 'rgba(245,240,232,0.3)')}
+                style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(247,243,237,0.3)' }}
+                onMouseEnter={e => ((e.target as HTMLElement).style.color = 'rgba(247,243,237,0.7)')}
+                onMouseLeave={e => ((e.target as HTMLElement).style.color = 'rgba(247,243,237,0.3)')}
               >
                 {item}
               </a>

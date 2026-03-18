@@ -1,6 +1,6 @@
 /*
- * DESIGN: Dark Academic Editorial — Contact Page
- * Simple, clean contact form with brand styling
+ * DESIGN: Light Editorial — Contact Page
+ * White/parchment backgrounds, dark navy text, crimson accents.
  */
 
 import { useState } from 'react';
@@ -12,14 +12,14 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In production, this would connect to a form service or GoHighLevel
+    // In production, connect to a form service or GoHighLevel webhook
     setSubmitted(true);
   };
 
-  const inputStyle = {
-    background: 'oklch(0.14 0.015 265)',
-    border: '1px solid rgba(255,255,255,0.1)',
-    color: '#F5F0E8',
+  const inputStyle: React.CSSProperties = {
+    background: '#ffffff',
+    border: '1px solid rgba(26,26,46,0.18)',
+    color: '#1A1A2E',
     fontFamily: 'Lora, serif',
     fontSize: '0.9rem',
     padding: '0.75rem 1rem',
@@ -29,11 +29,11 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen" style={{ background: 'oklch(0.10 0.015 265)' }}>
+    <div className="min-h-screen" style={{ background: '#ffffff' }}>
       {/* Header */}
       <section
         className="pt-32 pb-16"
-        style={{ background: 'oklch(0.08 0.015 265)', borderBottom: '1px solid rgba(196,30,58,0.15)' }}
+        style={{ background: '#F7F3ED', borderBottom: '1px solid rgba(196,30,58,0.12)' }}
       >
         <div className="container">
           <div className="ctp-section-label mb-3">◆ Get In Touch</div>
@@ -42,7 +42,7 @@ export default function Contact() {
             style={{
               fontFamily: 'Playfair Display, serif',
               fontSize: 'clamp(2.5rem, 6vw, 4rem)',
-              color: '#F5F0E8',
+              color: '#1A1A2E',
               lineHeight: 1.05,
             }}
           >
@@ -53,7 +53,7 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="py-16" style={{ background: '#ffffff' }}>
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">
             {/* Contact Info */}
@@ -63,16 +63,16 @@ export default function Contact() {
                 <div>
                   <h3
                     className="font-bold mb-2"
-                    style={{ fontFamily: 'Playfair Display, serif', color: '#F5F0E8', fontSize: '1.1rem' }}
+                    style={{ fontFamily: 'Playfair Display, serif', color: '#1A1A2E', fontSize: '1.1rem' }}
                   >
                     General Inquiries
                   </h3>
                   <a
                     href="mailto:Info@CommonThreadPublishing.com"
                     className="flex items-center gap-2 text-sm transition-colors duration-200"
-                    style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(245,240,232,0.6)' }}
+                    style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.55)' }}
                     onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = '#C41E3A')}
-                    onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = 'rgba(245,240,232,0.6)')}
+                    onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = 'rgba(26,26,46,0.55)')}
                   >
                     <Mail size={14} />
                     Info@CommonThreadPublishing.com
@@ -81,17 +81,17 @@ export default function Contact() {
 
                 <div
                   className="p-5"
-                  style={{ border: '1px solid rgba(255,255,255,0.06)', background: 'oklch(0.12 0.015 265)' }}
+                  style={{ border: '1px solid rgba(26,26,46,0.08)', background: '#F7F3ED' }}
                 >
                   <h4
                     className="font-bold mb-2"
-                    style={{ fontFamily: 'Playfair Display, serif', color: '#F5F0E8', fontSize: '0.95rem' }}
+                    style={{ fontFamily: 'Playfair Display, serif', color: '#1A1A2E', fontSize: '0.95rem' }}
                   >
                     For Authors
                   </h4>
                   <p
                     className="text-sm leading-relaxed"
-                    style={{ fontFamily: 'Lora, serif', color: 'rgba(245,240,232,0.55)' }}
+                    style={{ fontFamily: 'Lora, serif', color: 'rgba(26,26,46,0.6)' }}
                   >
                     Interested in publishing with Common Thread? We'd love to hear about your manuscript. Please include a brief description and your contact information.
                   </p>
@@ -99,17 +99,17 @@ export default function Contact() {
 
                 <div
                   className="p-5"
-                  style={{ border: '1px solid rgba(255,255,255,0.06)', background: 'oklch(0.12 0.015 265)' }}
+                  style={{ border: '1px solid rgba(26,26,46,0.08)', background: '#F7F3ED' }}
                 >
                   <h4
                     className="font-bold mb-2"
-                    style={{ fontFamily: 'Playfair Display, serif', color: '#F5F0E8', fontSize: '0.95rem' }}
+                    style={{ fontFamily: 'Playfair Display, serif', color: '#1A1A2E', fontSize: '0.95rem' }}
                   >
                     Order Support
                   </h4>
                   <p
                     className="text-sm leading-relaxed"
-                    style={{ fontFamily: 'Lora, serif', color: 'rgba(245,240,232,0.55)' }}
+                    style={{ fontFamily: 'Lora, serif', color: 'rgba(26,26,46,0.6)' }}
                   >
                     For questions about existing orders, shipping, or returns, please contact us with your order number and we'll respond within 1–2 business days.
                   </p>
@@ -122,18 +122,18 @@ export default function Contact() {
               {submitted ? (
                 <div
                   className="flex flex-col items-center justify-center py-16 text-center"
-                  style={{ border: '1px solid rgba(196,30,58,0.3)', background: 'rgba(196,30,58,0.05)' }}
+                  style={{ border: '1px solid rgba(196,30,58,0.25)', background: 'rgba(196,30,58,0.04)' }}
                 >
                   <CheckCircle size={48} style={{ color: '#C41E3A', marginBottom: '1rem' }} />
                   <h3
                     className="font-black mb-2"
-                    style={{ fontFamily: 'Playfair Display, serif', color: '#F5F0E8', fontSize: '1.5rem' }}
+                    style={{ fontFamily: 'Playfair Display, serif', color: '#1A1A2E', fontSize: '1.5rem' }}
                   >
                     Message Sent
                   </h3>
                   <p
                     className="text-sm"
-                    style={{ fontFamily: 'Lora, serif', color: 'rgba(245,240,232,0.6)' }}
+                    style={{ fontFamily: 'Lora, serif', color: 'rgba(26,26,46,0.6)' }}
                   >
                     Thank you for reaching out. We'll respond within 1–2 business days.
                   </p>
@@ -144,7 +144,7 @@ export default function Contact() {
                     <div>
                       <label
                         className="block text-xs mb-2"
-                        style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(245,240,232,0.4)', letterSpacing: '0.1em', textTransform: 'uppercase' }}
+                        style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.45)', letterSpacing: '0.1em', textTransform: 'uppercase' }}
                       >
                         Your Name *
                       </label>
@@ -155,13 +155,13 @@ export default function Contact() {
                         onChange={e => setForm({ ...form, name: e.target.value })}
                         style={inputStyle}
                         onFocus={e => ((e.target as HTMLElement).style.borderColor = 'rgba(196,30,58,0.5)')}
-                        onBlur={e => ((e.target as HTMLElement).style.borderColor = 'rgba(255,255,255,0.1)')}
+                        onBlur={e => ((e.target as HTMLElement).style.borderColor = 'rgba(26,26,46,0.18)')}
                       />
                     </div>
                     <div>
                       <label
                         className="block text-xs mb-2"
-                        style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(245,240,232,0.4)', letterSpacing: '0.1em', textTransform: 'uppercase' }}
+                        style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.45)', letterSpacing: '0.1em', textTransform: 'uppercase' }}
                       >
                         Email Address *
                       </label>
@@ -172,7 +172,7 @@ export default function Contact() {
                         onChange={e => setForm({ ...form, email: e.target.value })}
                         style={inputStyle}
                         onFocus={e => ((e.target as HTMLElement).style.borderColor = 'rgba(196,30,58,0.5)')}
-                        onBlur={e => ((e.target as HTMLElement).style.borderColor = 'rgba(255,255,255,0.1)')}
+                        onBlur={e => ((e.target as HTMLElement).style.borderColor = 'rgba(26,26,46,0.18)')}
                       />
                     </div>
                   </div>
@@ -180,7 +180,7 @@ export default function Contact() {
                   <div>
                     <label
                       className="block text-xs mb-2"
-                      style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(245,240,232,0.4)', letterSpacing: '0.1em', textTransform: 'uppercase' }}
+                      style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.45)', letterSpacing: '0.1em', textTransform: 'uppercase' }}
                     >
                       Subject
                     </label>
@@ -189,21 +189,21 @@ export default function Contact() {
                       onChange={e => setForm({ ...form, subject: e.target.value })}
                       style={{ ...inputStyle, cursor: 'pointer' }}
                       onFocus={e => ((e.target as HTMLElement).style.borderColor = 'rgba(196,30,58,0.5)')}
-                      onBlur={e => ((e.target as HTMLElement).style.borderColor = 'rgba(255,255,255,0.1)')}
+                      onBlur={e => ((e.target as HTMLElement).style.borderColor = 'rgba(26,26,46,0.18)')}
                     >
-                      <option value="" style={{ background: 'oklch(0.14 0.015 265)' }}>Select a subject…</option>
-                      <option value="general" style={{ background: 'oklch(0.14 0.015 265)' }}>General Inquiry</option>
-                      <option value="order" style={{ background: 'oklch(0.14 0.015 265)' }}>Order Support</option>
-                      <option value="author" style={{ background: 'oklch(0.14 0.015 265)' }}>Author Submission</option>
-                      <option value="media" style={{ background: 'oklch(0.14 0.015 265)' }}>Media / Press</option>
-                      <option value="other" style={{ background: 'oklch(0.14 0.015 265)' }}>Other</option>
+                      <option value="">Select a subject…</option>
+                      <option value="general">General Inquiry</option>
+                      <option value="order">Order Support</option>
+                      <option value="author">Author Submission</option>
+                      <option value="media">Media / Press</option>
+                      <option value="other">Other</option>
                     </select>
                   </div>
 
                   <div>
                     <label
                       className="block text-xs mb-2"
-                      style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(245,240,232,0.4)', letterSpacing: '0.1em', textTransform: 'uppercase' }}
+                      style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.45)', letterSpacing: '0.1em', textTransform: 'uppercase' }}
                     >
                       Message *
                     </label>
@@ -214,7 +214,7 @@ export default function Contact() {
                       onChange={e => setForm({ ...form, message: e.target.value })}
                       style={{ ...inputStyle, resize: 'vertical' }}
                       onFocus={e => ((e.target as HTMLElement).style.borderColor = 'rgba(196,30,58,0.5)')}
-                      onBlur={e => ((e.target as HTMLElement).style.borderColor = 'rgba(255,255,255,0.1)')}
+                      onBlur={e => ((e.target as HTMLElement).style.borderColor = 'rgba(26,26,46,0.18)')}
                     />
                   </div>
 

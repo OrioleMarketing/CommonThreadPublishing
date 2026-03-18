@@ -1,7 +1,7 @@
 /*
- * DESIGN: Dark Academic Editorial — Home Page
- * Full-bleed dark hero with library background, featured books staggered grid,
- * parchment about panel, newsletter dark section
+ * DESIGN: Light Editorial — Home Page
+ * Hero keeps dark overlay (text on image), all other sections use warm parchment/white backgrounds.
+ * Deep navy text, crimson accents, Playfair Display + Lora typography.
  */
 
 import { Link } from 'wouter';
@@ -31,7 +31,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* ═══════════════════════════════════════════════════
-          HERO SECTION
+          HERO SECTION — dark overlay on image (intentional)
       ═══════════════════════════════════════════════════ */}
       <section
         className="relative min-h-screen flex items-center overflow-hidden"
@@ -41,7 +41,7 @@ export default function Home() {
           backgroundPosition: 'center',
         }}
       >
-        {/* Dark overlay gradient */}
+        {/* Dark overlay — text must be light on dark image */}
         <div
           className="absolute inset-0"
           style={{
@@ -57,18 +57,16 @@ export default function Home() {
 
         <div className="container relative z-10 pt-24 pb-16">
           <div className="max-w-2xl">
-            {/* Section label */}
             <div className="ctp-section-label mb-6 animate-fade-up">
               ◆ Common Thread Publishing LLC
             </div>
 
-            {/* Main headline */}
             <h1
               className="font-black leading-none mb-6 animate-fade-up-delay-1"
               style={{
                 fontFamily: 'Playfair Display, serif',
                 fontSize: 'clamp(3rem, 7vw, 5.5rem)',
-                color: '#F5F0E8',
+                color: '#F7F3ED',
                 lineHeight: 1.05,
               }}
             >
@@ -79,19 +77,17 @@ export default function Home() {
               Story.
             </h1>
 
-            {/* Tagline */}
             <p
               className="text-lg leading-relaxed mb-8 animate-fade-up-delay-2"
               style={{
                 fontFamily: 'Lora, serif',
-                color: 'rgba(245,240,232,0.75)',
+                color: 'rgba(247,243,237,0.78)',
                 maxWidth: '480px',
               }}
             >
               Faith-grounded books that challenge, inspire, and connect. From political fiction to biblical scholarship — stories that carry the thread of something greater.
             </p>
 
-            {/* CTAs */}
             <div className="flex flex-wrap gap-4 animate-fade-up-delay-3">
               <Link href="/books" className="ctp-btn-primary flex items-center gap-2">
                 <BookOpen size={16} />
@@ -101,14 +97,13 @@ export default function Home() {
                 href="https://store.commonthreadpublishing.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ctp-btn-outline flex items-center gap-2"
+                className="ctp-btn-outline-light flex items-center gap-2"
               >
                 <Package size={16} />
                 Visit Our Store
               </a>
             </div>
 
-            {/* Stats */}
             <div className="flex gap-10 mt-12 animate-fade-up-delay-4">
               {[
                 { value: '7+', label: 'Titles Published' },
@@ -124,7 +119,7 @@ export default function Home() {
                   </div>
                   <div
                     className="text-xs tracking-widest uppercase"
-                    style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(245,240,232,0.4)' }}
+                    style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(247,243,237,0.45)' }}
                   >
                     {stat.label}
                   </div>
@@ -138,23 +133,23 @@ export default function Home() {
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
           <div
             className="text-xs tracking-widest uppercase"
-            style={{ fontFamily: 'Montserrat, sans-serif', color: '#F5F0E8' }}
+            style={{ fontFamily: 'Montserrat, sans-serif', color: '#F7F3ED' }}
           >
             Scroll
           </div>
           <div
             className="w-px h-12"
-            style={{ background: 'linear-gradient(to bottom, #F5F0E8, transparent)' }}
+            style={{ background: 'linear-gradient(to bottom, #F7F3ED, transparent)' }}
           />
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════
-          HOW IT WORKS — FORMAT BADGES
+          FORMAT BADGES — light warm panel
       ═══════════════════════════════════════════════════ */}
       <section
         className="py-12"
-        style={{ background: 'oklch(0.08 0.015 265)', borderBottom: '1px solid rgba(196,30,58,0.15)' }}
+        style={{ background: '#F0EBE3', borderBottom: '1px solid rgba(196,30,58,0.12)' }}
       >
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -174,37 +169,37 @@ export default function Home() {
               {
                 icon: BookOpen,
                 title: 'Worldwide Delivery',
-                desc: 'We ship to readers in over 150 countries. Whether you’re in the USA or overseas, your order arrives with the same quality and care.',
+                desc: 'We ship to readers in over 150 countries. Whether you\'re in the USA or overseas, your order arrives with the same quality and care.',
                 label: 'Global Shipping',
               },
             ].map(item => (
               <div
                 key={item.title}
                 className="flex items-start gap-4 p-6"
-                style={{ border: '1px solid rgba(255,255,255,0.06)' }}
+                style={{ border: '1px solid rgba(26,26,46,0.08)', background: '#fff' }}
               >
                 <div
                   className="w-10 h-10 flex items-center justify-center flex-shrink-0"
-                  style={{ background: 'rgba(196, 30, 58, 0.12)', border: '1px solid rgba(196,30,58,0.3)' }}
+                  style={{ background: 'rgba(196, 30, 58, 0.08)', border: '1px solid rgba(196,30,58,0.2)' }}
                 >
                   <item.icon size={18} style={{ color: '#C41E3A' }} />
                 </div>
                 <div>
                   <div
                     className="text-xs mb-1"
-                    style={{ fontFamily: 'Montserrat, sans-serif', color: '#C41E3A', letterSpacing: '0.1em' }}
+                    style={{ fontFamily: 'Montserrat, sans-serif', color: '#C41E3A', letterSpacing: '0.1em', textTransform: 'uppercase' }}
                   >
                     {item.label}
                   </div>
                   <h3
                     className="font-bold mb-1"
-                    style={{ fontFamily: 'Playfair Display, serif', color: '#F5F0E8', fontSize: '1rem' }}
+                    style={{ fontFamily: 'Playfair Display, serif', color: '#1A1A2E', fontSize: '1rem' }}
                   >
                     {item.title}
                   </h3>
                   <p
                     className="text-sm leading-relaxed"
-                    style={{ fontFamily: 'Lora, serif', color: 'rgba(245,240,232,0.5)' }}
+                    style={{ fontFamily: 'Lora, serif', color: 'rgba(26,26,46,0.55)' }}
                   >
                     {item.desc}
                   </p>
@@ -216,11 +211,10 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════
-          FEATURED BOOKS
+          FEATURED BOOKS — white background
       ═══════════════════════════════════════════════════ */}
-      <section className="py-20" style={{ background: 'oklch(0.10 0.015 265)' }}>
+      <section className="py-20" style={{ background: '#ffffff' }}>
         <div className="container">
-          {/* Section Header */}
           <div className="flex items-end justify-between mb-12">
             <div>
               <div className="ctp-section-label mb-3">◆ Featured Titles</div>
@@ -229,7 +223,7 @@ export default function Home() {
                 style={{
                   fontFamily: 'Playfair Display, serif',
                   fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
-                  color: '#F5F0E8',
+                  color: '#1A1A2E',
                   lineHeight: 1.1,
                 }}
               >
@@ -241,27 +235,22 @@ export default function Home() {
             <Link
               href="/books"
               className="hidden md:flex items-center gap-2 text-sm font-medium transition-colors duration-200"
-              style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(245,240,232,0.5)' }}
+              style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.45)' }}
               onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = '#C41E3A')}
-              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = 'rgba(245,240,232,0.5)')}
+              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = 'rgba(26,26,46,0.45)')}
             >
               View All Books <ArrowRight size={16} />
             </Link>
           </div>
 
-          {/* Featured Books Grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5">
             {featuredBooks.map((book, i) => (
-              <div
-                key={book.id}
-                className={i === 0 ? 'md:col-span-1 lg:col-span-1' : ''}
-              >
+              <div key={book.id} className={i === 0 ? 'md:col-span-1 lg:col-span-1' : ''}>
                 <BookCard book={book} size={i === 0 ? 'large' : 'default'} />
               </div>
             ))}
           </div>
 
-          {/* View All Link (mobile) */}
           <div className="mt-8 text-center md:hidden">
             <Link href="/books" className="ctp-btn-outline inline-flex items-center gap-2">
               View All Books <ArrowRight size={14} />
@@ -271,9 +260,9 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════
-          ALL BOOKS PREVIEW
+          ALL BOOKS — warm parchment background
       ═══════════════════════════════════════════════════ */}
-      <section className="py-20" style={{ background: 'oklch(0.12 0.015 265)' }}>
+      <section className="py-20" style={{ background: '#F7F3ED' }}>
         <div className="container">
           <div className="ctp-section-label mb-3">◆ Complete Catalog</div>
           <div className="flex items-end justify-between mb-10">
@@ -282,14 +271,14 @@ export default function Home() {
               style={{
                 fontFamily: 'Playfair Display, serif',
                 fontSize: 'clamp(1.5rem, 3vw, 2.2rem)',
-                color: '#F5F0E8',
+                color: '#1A1A2E',
               }}
             >
               All Titles
             </h2>
             <span
               className="text-sm"
-              style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(245,240,232,0.35)' }}
+              style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.4)' }}
             >
               {allBooks.length} books available
             </span>
@@ -304,7 +293,7 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════
-          ABOUT TEASER — PARCHMENT PANEL
+          ABOUT TEASER — dark overlay on image (intentional)
       ═══════════════════════════════════════════════════ */}
       <section
         className="relative py-24 overflow-hidden"
@@ -326,7 +315,7 @@ export default function Home() {
               style={{
                 fontFamily: 'Playfair Display, serif',
                 fontSize: 'clamp(2rem, 4vw, 3rem)',
-                color: '#F5F0E8',
+                color: '#F7F3ED',
                 lineHeight: 1.1,
               }}
             >
@@ -336,13 +325,13 @@ export default function Home() {
             </h2>
             <p
               className="text-base leading-relaxed mb-4"
-              style={{ fontFamily: 'Lora, serif', color: 'rgba(245,240,232,0.75)' }}
+              style={{ fontFamily: 'Lora, serif', color: 'rgba(247,243,237,0.78)' }}
             >
               Common Thread Publishing LLC was founded on the belief that every story — whether of faith, history, or conviction — carries a thread that connects us to something greater than ourselves.
             </p>
             <p
               className="text-base leading-relaxed mb-8"
-              style={{ fontFamily: 'Lora, serif', color: 'rgba(245,240,232,0.65)' }}
+              style={{ fontFamily: 'Lora, serif', color: 'rgba(247,243,237,0.65)' }}
             >
               We publish books that challenge readers to think deeply, believe boldly, and live with purpose. Our authors write from the trenches of real faith and real history.
             </p>
@@ -354,7 +343,7 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════
-          NEWSLETTER
+          NEWSLETTER — dark overlay on image (intentional)
       ═══════════════════════════════════════════════════ */}
       <section
         className="relative py-20 overflow-hidden"
@@ -376,7 +365,7 @@ export default function Home() {
               style={{
                 fontFamily: 'Playfair Display, serif',
                 fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)',
-                color: '#F5F0E8',
+                color: '#F7F3ED',
               }}
             >
               New Releases &
@@ -385,7 +374,7 @@ export default function Home() {
             </h2>
             <p
               className="text-sm leading-relaxed mb-8"
-              style={{ fontFamily: 'Lora, serif', color: 'rgba(245,240,232,0.6)' }}
+              style={{ fontFamily: 'Lora, serif', color: 'rgba(247,243,237,0.6)' }}
             >
               Be the first to know about new titles, author events, and exclusive offers from Common Thread Publishing.
             </p>
@@ -400,13 +389,13 @@ export default function Home() {
               >
                 <p
                   className="font-medium"
-                  style={{ fontFamily: 'Playfair Display, serif', color: '#F5F0E8' }}
+                  style={{ fontFamily: 'Playfair Display, serif', color: '#F7F3ED' }}
                 >
                   Thank you for subscribing!
                 </p>
                 <p
                   className="text-sm mt-1"
-                  style={{ fontFamily: 'Lora, serif', color: 'rgba(245,240,232,0.6)' }}
+                  style={{ fontFamily: 'Lora, serif', color: 'rgba(247,243,237,0.6)' }}
                 >
                   You'll hear from us soon.
                 </p>
@@ -421,10 +410,10 @@ export default function Home() {
                   required
                   className="flex-1 px-4 py-3 text-sm outline-none"
                   style={{
-                    background: 'rgba(245,240,232,0.08)',
-                    border: '1px solid rgba(245,240,232,0.2)',
+                    background: 'rgba(247,243,237,0.1)',
+                    border: '1px solid rgba(247,243,237,0.25)',
                     borderRight: 'none',
-                    color: '#F5F0E8',
+                    color: '#F7F3ED',
                     fontFamily: 'Lora, serif',
                   }}
                 />

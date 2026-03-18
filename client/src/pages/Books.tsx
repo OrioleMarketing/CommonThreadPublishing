@@ -1,6 +1,7 @@
 /*
- * DESIGN: Dark Academic Editorial — Books Catalog Page
- * Bookstore banner, filter tabs, staggered grid
+ * DESIGN: Light Editorial — Books Catalog Page
+ * Banner keeps dark overlay on image; filter bar and grid use white/parchment.
+ * Deep navy text, crimson accents, Playfair Display + Lora typography.
  */
 
 import { useState } from 'react';
@@ -26,8 +27,8 @@ export default function Books() {
     : books.filter(b => b.genre.includes(activeFilter));
 
   return (
-    <div className="min-h-screen" style={{ background: 'oklch(0.10 0.015 265)' }}>
-      {/* Banner */}
+    <div className="min-h-screen" style={{ background: '#ffffff' }}>
+      {/* Banner — dark overlay on image (intentional, text must be light) */}
       <section
         className="relative pt-32 pb-16 overflow-hidden"
         style={{
@@ -47,7 +48,7 @@ export default function Books() {
             style={{
               fontFamily: 'Playfair Display, serif',
               fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
-              color: '#F5F0E8',
+              color: '#F7F3ED',
               lineHeight: 1.05,
             }}
           >
@@ -57,27 +58,28 @@ export default function Books() {
           </h1>
           <p
             className="text-base max-w-lg"
-            style={{ fontFamily: 'Lora, serif', color: 'rgba(245,240,232,0.7)' }}
+            style={{ fontFamily: 'Lora, serif', color: 'rgba(247,243,237,0.72)' }}
           >
             Every title published by Common Thread Publishing — available in print with worldwide delivery, with select titles available as instant eBook downloads.
           </p>
         </div>
       </section>
 
-      {/* Filter Bar */}
+      {/* Filter Bar — light */}
       <div
         className="sticky top-16 md:top-20 z-30 py-4"
         style={{
-          background: 'rgba(13,13,26,0.97)',
+          background: 'rgba(247, 243, 237, 0.97)',
           backdropFilter: 'blur(12px)',
-          borderBottom: '1px solid rgba(255,255,255,0.06)',
+          borderBottom: '1px solid rgba(26,26,46,0.10)',
+          boxShadow: '0 2px 8px rgba(26,26,46,0.05)',
         }}
       >
         <div className="container">
           <div className="flex items-center gap-2 overflow-x-auto pb-1">
             <span
               className="text-xs mr-2 whitespace-nowrap flex-shrink-0"
-              style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(245,240,232,0.35)', letterSpacing: '0.1em' }}
+              style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.38)', letterSpacing: '0.1em' }}
             >
               FILTER:
             </span>
@@ -90,8 +92,8 @@ export default function Books() {
                   fontFamily: 'Montserrat, sans-serif',
                   letterSpacing: '0.08em',
                   background: activeFilter === filter.value ? '#C41E3A' : 'transparent',
-                  color: activeFilter === filter.value ? '#fff' : 'rgba(245,240,232,0.55)',
-                  border: activeFilter === filter.value ? '1px solid #C41E3A' : '1px solid rgba(255,255,255,0.12)',
+                  color: activeFilter === filter.value ? '#fff' : 'rgba(26,26,46,0.55)',
+                  border: activeFilter === filter.value ? '1px solid #C41E3A' : '1px solid rgba(26,26,46,0.18)',
                 }}
               >
                 {filter.label}
@@ -99,7 +101,7 @@ export default function Books() {
             ))}
             <span
               className="ml-auto text-xs whitespace-nowrap flex-shrink-0"
-              style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(245,240,232,0.3)' }}
+              style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.35)' }}
             >
               {filteredBooks.length} title{filteredBooks.length !== 1 ? 's' : ''}
             </span>
@@ -108,13 +110,13 @@ export default function Books() {
       </div>
 
       {/* Books Grid */}
-      <section className="py-16">
+      <section className="py-16" style={{ background: '#ffffff' }}>
         <div className="container">
           {filteredBooks.length === 0 ? (
             <div className="text-center py-20">
               <p
                 className="text-lg"
-                style={{ fontFamily: 'Playfair Display, serif', color: 'rgba(245,240,232,0.4)' }}
+                style={{ fontFamily: 'Playfair Display, serif', color: 'rgba(26,26,46,0.4)' }}
               >
                 No titles found in this category.
               </p>
@@ -132,14 +134,14 @@ export default function Books() {
       {/* Shipping Note */}
       <section
         className="py-12"
-        style={{ background: 'oklch(0.08 0.015 265)', borderTop: '1px solid rgba(255,255,255,0.05)' }}
+        style={{ background: '#F0EBE3', borderTop: '1px solid rgba(26,26,46,0.07)' }}
       >
         <div className="container">
           <div className="max-w-2xl mx-auto text-center">
             <div className="ctp-section-label mb-3 justify-center">◆ Shipping & Delivery</div>
             <p
               className="text-sm leading-relaxed"
-              style={{ fontFamily: 'Lora, serif', color: 'rgba(245,240,232,0.5)' }}
+              style={{ fontFamily: 'Lora, serif', color: 'rgba(26,26,46,0.55)' }}
             >
               All print orders ship directly to your door. We deliver to over 150 countries within 3–5 business days. Shipping rates are calculated at checkout.
             </p>

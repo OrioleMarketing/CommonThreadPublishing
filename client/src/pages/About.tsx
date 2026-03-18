@@ -1,6 +1,7 @@
 /*
- * DESIGN: Dark Academic Editorial — About Page
- * Asymmetric layout with parchment panel, mission statement, and print fulfillment info
+ * DESIGN: Light Editorial — About Page
+ * Hero keeps dark overlay on image; all other sections use white/parchment backgrounds.
+ * Deep navy text, crimson accents, Playfair Display + Lora typography.
  */
 
 import { Link } from 'wouter';
@@ -10,8 +11,8 @@ const ABOUT_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3
 
 export default function About() {
   return (
-    <div className="min-h-screen" style={{ background: 'oklch(0.10 0.015 265)' }}>
-      {/* Hero */}
+    <div className="min-h-screen" style={{ background: '#ffffff' }}>
+      {/* Hero — dark overlay on image (intentional, text must be light) */}
       <section
         className="relative pt-32 pb-24 overflow-hidden"
         style={{
@@ -32,7 +33,7 @@ export default function About() {
               style={{
                 fontFamily: 'Playfair Display, serif',
                 fontSize: 'clamp(2.5rem, 6vw, 4rem)',
-                color: '#F5F0E8',
+                color: '#F7F3ED',
                 lineHeight: 1.05,
               }}
             >
@@ -44,7 +45,7 @@ export default function About() {
             </h1>
             <p
               className="text-base leading-relaxed"
-              style={{ fontFamily: 'Lora, serif', color: 'rgba(245,240,232,0.75)', lineHeight: 1.8 }}
+              style={{ fontFamily: 'Lora, serif', color: 'rgba(247,243,237,0.78)', lineHeight: 1.8 }}
             >
               A publishing house built on the conviction that every story — whether of faith, history, or conviction — carries a thread that connects us to something greater than ourselves.
             </p>
@@ -52,8 +53,8 @@ export default function About() {
         </div>
       </section>
 
-      {/* Mission Section */}
-      <section className="py-20" style={{ background: 'oklch(0.10 0.015 265)' }}>
+      {/* Mission Section — white background */}
+      <section className="py-20" style={{ background: '#ffffff' }}>
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             <div>
@@ -63,7 +64,7 @@ export default function About() {
                 style={{
                   fontFamily: 'Playfair Display, serif',
                   fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)',
-                  color: '#F5F0E8',
+                  color: '#1A1A2E',
                   lineHeight: 1.1,
                 }}
               >
@@ -73,7 +74,7 @@ export default function About() {
               </h2>
               <div
                 className="space-y-4 text-base leading-relaxed"
-                style={{ fontFamily: 'Lora, serif', color: 'rgba(245,240,232,0.7)', lineHeight: 1.8 }}
+                style={{ fontFamily: 'Lora, serif', color: 'rgba(26,26,46,0.7)', lineHeight: 1.8 }}
               >
                 <p>
                   Common Thread Publishing LLC was founded with a singular purpose: to bring stories of faith, history, and conviction to readers who are hungry for more than entertainment — readers who want to be challenged, changed, and connected.
@@ -115,13 +116,13 @@ export default function About() {
                   >
                     <h3
                       className="font-bold mb-1"
-                      style={{ fontFamily: 'Playfair Display, serif', color: '#F5F0E8', fontSize: '1rem' }}
+                      style={{ fontFamily: 'Playfair Display, serif', color: '#1A1A2E', fontSize: '1rem' }}
                     >
                       {item.title}
                     </h3>
                     <p
                       className="text-sm leading-relaxed"
-                      style={{ fontFamily: 'Lora, serif', color: 'rgba(245,240,232,0.6)' }}
+                      style={{ fontFamily: 'Lora, serif', color: 'rgba(26,26,46,0.6)' }}
                     >
                       {item.desc}
                     </p>
@@ -133,10 +134,10 @@ export default function About() {
         </div>
       </section>
 
-      {/* How We Work — Print Fulfillment */}
+      {/* How We Work — parchment background */}
       <section
         className="py-20"
-        style={{ background: 'oklch(0.08 0.015 265)', borderTop: '1px solid rgba(255,255,255,0.05)' }}
+        style={{ background: '#F7F3ED', borderTop: '1px solid rgba(26,26,46,0.07)' }}
       >
         <div className="container">
           <div className="ctp-section-label mb-4 text-center justify-center">◆ How We Publish</div>
@@ -145,7 +146,7 @@ export default function About() {
             style={{
               fontFamily: 'Playfair Display, serif',
               fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)',
-              color: '#F5F0E8',
+              color: '#1A1A2E',
             }}
           >
             Order Today,
@@ -177,29 +178,29 @@ export default function About() {
               <div
                 key={item.title}
                 className="p-8"
-                style={{ border: '1px solid rgba(255,255,255,0.06)' }}
+                style={{ background: '#ffffff', border: '1px solid rgba(26,26,46,0.08)' }}
               >
                 <div
                   className="text-4xl font-black mb-4"
-                  style={{ fontFamily: 'Playfair Display, serif', color: 'rgba(196,30,58,0.25)' }}
+                  style={{ fontFamily: 'Playfair Display, serif', color: 'rgba(196,30,58,0.18)' }}
                 >
                   {item.step}
                 </div>
                 <div
                   className="w-10 h-10 flex items-center justify-center mb-4"
-                  style={{ background: 'rgba(196,30,58,0.1)', border: '1px solid rgba(196,30,58,0.25)' }}
+                  style={{ background: 'rgba(196,30,58,0.07)', border: '1px solid rgba(196,30,58,0.2)' }}
                 >
                   <item.icon size={18} style={{ color: '#C41E3A' }} />
                 </div>
                 <h3
                   className="font-bold mb-3"
-                  style={{ fontFamily: 'Playfair Display, serif', color: '#F5F0E8', fontSize: '1.1rem' }}
+                  style={{ fontFamily: 'Playfair Display, serif', color: '#1A1A2E', fontSize: '1.1rem' }}
                 >
                   {item.title}
                 </h3>
                 <p
                   className="text-sm leading-relaxed"
-                  style={{ fontFamily: 'Lora, serif', color: 'rgba(245,240,232,0.55)' }}
+                  style={{ fontFamily: 'Lora, serif', color: 'rgba(26,26,46,0.58)' }}
                 >
                   {item.desc}
                 </p>
@@ -209,18 +210,18 @@ export default function About() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16" style={{ background: 'oklch(0.10 0.015 265)' }}>
+      {/* CTA — white background */}
+      <section className="py-16" style={{ background: '#ffffff', borderTop: '1px solid rgba(26,26,46,0.07)' }}>
         <div className="container text-center">
           <h2
             className="font-black mb-4"
-            style={{ fontFamily: 'Playfair Display, serif', color: '#F5F0E8', fontSize: '2rem' }}
+            style={{ fontFamily: 'Playfair Display, serif', color: '#1A1A2E', fontSize: '2rem' }}
           >
             Ready to Find Your Next Read?
           </h2>
           <p
             className="text-base mb-8 max-w-md mx-auto"
-            style={{ fontFamily: 'Lora, serif', color: 'rgba(245,240,232,0.6)' }}
+            style={{ fontFamily: 'Lora, serif', color: 'rgba(26,26,46,0.6)' }}
           >
             Browse our complete catalog and discover the story that was written for you.
           </p>

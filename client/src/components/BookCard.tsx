@@ -1,7 +1,7 @@
 /*
- * DESIGN: Dark Academic Editorial — Book Card
- * Dark ink card with cover image, lift on hover, crimson badge
- * Used in catalog grid and featured sections
+ * DESIGN: Light Editorial — Book Card
+ * White card with cover image, lift on hover, crimson badge.
+ * Dark navy text, crimson accents, clean border.
  *
  * FIX: The outer wrapper is a <div> (not a <Link>) to avoid nested <a> elements.
  * The cover image area is wrapped in a <Link>, and the Buy button is a separate <a>.
@@ -26,7 +26,7 @@ export default function BookCard({ book, size = 'default' }: BookCardProps) {
       <Link href={`/books/${book.slug}`} className="block">
         <div
           className="relative overflow-hidden"
-          style={{ aspectRatio: '2/3', background: 'oklch(0.12 0.015 265)' }}
+          style={{ aspectRatio: '2/3', background: '#F0EBE3' }}
         >
           <img
             src={book.coverImage}
@@ -38,9 +38,9 @@ export default function BookCard({ book, size = 'default' }: BookCardProps) {
               const parent = target.parentElement;
               if (parent) {
                 parent.innerHTML = `
-                  <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:oklch(0.14 0.015 265);padding:1.5rem;text-align:center;">
-                    <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#F5F0E8;margin-bottom:0.5rem;">${book.title}</div>
-                    <div style="font-family:'Montserrat',sans-serif;font-size:0.65rem;color:rgba(245,240,232,0.5);letter-spacing:0.1em;text-transform:uppercase;">${authorNames}</div>
+                  <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#EDE7DD;padding:1.5rem;text-align:center;">
+                    <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#1A1A2E;margin-bottom:0.5rem;">${book.title}</div>
+                    <div style="font-family:'Montserrat',sans-serif;font-size:0.65rem;color:rgba(26,26,46,0.5);letter-spacing:0.1em;text-transform:uppercase;">${authorNames}</div>
                   </div>
                 `;
               }
@@ -66,13 +66,13 @@ export default function BookCard({ book, size = 'default' }: BookCardProps) {
           {/* Hover Overlay */}
           <div
             className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            style={{ background: 'rgba(13, 13, 26, 0.75)' }}
+            style={{ background: 'rgba(13, 13, 26, 0.65)' }}
           >
             <div className="flex flex-col items-center gap-2">
               <BookOpen size={24} style={{ color: '#C41E3A' }} />
               <span
                 className="text-xs font-semibold tracking-widest uppercase"
-                style={{ fontFamily: 'Montserrat, sans-serif', color: '#F5F0E8' }}
+                style={{ fontFamily: 'Montserrat, sans-serif', color: '#F7F3ED' }}
               >
                 View Book
               </span>
@@ -89,7 +89,7 @@ export default function BookCard({ book, size = 'default' }: BookCardProps) {
             className="text-xs mb-1"
             style={{
               fontFamily: 'Montserrat, sans-serif',
-              color: 'rgba(196, 30, 58, 0.8)',
+              color: 'rgba(196, 30, 58, 0.85)',
               letterSpacing: '0.08em',
             }}
           >
@@ -104,10 +104,10 @@ export default function BookCard({ book, size = 'default' }: BookCardProps) {
             style={{
               fontFamily: 'Playfair Display, serif',
               fontSize: size === 'large' ? '1.1rem' : '0.95rem',
-              color: '#F5F0E8',
+              color: '#1A1A2E',
             }}
             onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = '#C41E3A')}
-            onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = '#F5F0E8')}
+            onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = '#1A1A2E')}
           >
             {book.title}
           </h3>
@@ -119,7 +119,7 @@ export default function BookCard({ book, size = 'default' }: BookCardProps) {
             style={{
               fontFamily: 'Lora, serif',
               fontStyle: 'italic',
-              color: 'rgba(245,240,232,0.5)',
+              color: 'rgba(26,26,46,0.5)',
             }}
           >
             {book.subtitle}
@@ -130,7 +130,7 @@ export default function BookCard({ book, size = 'default' }: BookCardProps) {
           className="text-xs mb-3"
           style={{
             fontFamily: 'Montserrat, sans-serif',
-            color: 'rgba(245,240,232,0.45)',
+            color: 'rgba(26,26,46,0.45)',
             letterSpacing: '0.05em',
           }}
         >
@@ -140,14 +140,14 @@ export default function BookCard({ book, size = 'default' }: BookCardProps) {
         {/* Price & CTA */}
         <div
           className="flex items-center justify-between mt-auto pt-3"
-          style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}
+          style={{ borderTop: '1px solid rgba(26,26,46,0.08)' }}
         >
           <span
             className="font-bold"
             style={{
               fontFamily: 'Montserrat, sans-serif',
               fontSize: '1rem',
-              color: '#F5F0E8',
+              color: '#1A1A2E',
             }}
           >
             ${book.price.toFixed(2)}

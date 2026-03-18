@@ -1,10 +1,10 @@
 /*
- * DESIGN PHILOSOPHY: Dark Academic Editorial
- * Common Thread Publishing LLC
+ * DESIGN PHILOSOPHY: Light Editorial — Common Thread Publishing LLC
  *
- * Core: Deep ink-dark backgrounds (#0D0D1A), warm parchment panels (#F5F0E8),
- * crimson red (#C41E3A) as blood-ink accent, serif typography (Playfair Display + Lora)
- * Asymmetric editorial layouts, staggered book grids, diamond ornament dividers
+ * Warm parchment/cream base (#F7F3ED) with deep navy ink (#1A1A2E) for text,
+ * crimson red (#C41E3A) as the signature accent, and subtle warm-grey panels.
+ * Matches the Shopify store's light aesthetic for a seamless handoff.
+ * Serif typography (Playfair Display + Lora), editorial asymmetric layouts.
  */
 
 @import "tailwindcss";
@@ -55,49 +55,49 @@
   --radius: 0.25rem;
 
   /* CTP Brand Colors */
-  --ctp-crimson: oklch(0.42 0.19 22);       /* #C41E3A deep crimson red */
-  --ctp-crimson-hover: oklch(0.35 0.19 22); /* darker crimson for hover */
-  --ctp-ink: oklch(0.10 0.015 265);         /* #0D0D1A near-black navy ink */
-  --ctp-ink-mid: oklch(0.16 0.015 265);     /* slightly lighter ink for cards */
-  --ctp-ink-light: oklch(0.22 0.012 265);   /* even lighter for borders */
-  --ctp-parchment: oklch(0.96 0.012 85);    /* #F5F0E8 warm parchment */
-  --ctp-parchment-dark: oklch(0.90 0.015 85); /* slightly darker parchment */
-  --ctp-gold: oklch(0.72 0.12 85);          /* aged gold accent */
-  --ctp-sepia: oklch(0.55 0.06 65);         /* sepia for metadata */
+  --ctp-crimson: oklch(0.42 0.19 22);            /* #C41E3A deep crimson red */
+  --ctp-crimson-hover: oklch(0.35 0.19 22);      /* darker crimson for hover */
+  --ctp-ink: oklch(0.18 0.018 265);              /* deep navy ink for headings */
+  --ctp-ink-mid: oklch(0.28 0.015 265);          /* mid navy for body text */
+  --ctp-parchment: oklch(0.97 0.010 85);         /* #F7F3ED warm parchment base */
+  --ctp-parchment-dark: oklch(0.93 0.012 85);    /* slightly darker parchment for panels */
+  --ctp-parchment-darker: oklch(0.88 0.014 85);  /* warm grey for section alternates */
+  --ctp-gold: oklch(0.62 0.10 75);               /* aged gold for subtle accents */
+  --ctp-sepia: oklch(0.50 0.05 65);              /* sepia for metadata/captions */
 
-  /* Theme tokens mapped to CTP palette */
-  --background: oklch(0.10 0.015 265);
-  --foreground: oklch(0.96 0.012 85);
-  --card: oklch(0.16 0.015 265);
-  --card-foreground: oklch(0.96 0.012 85);
-  --popover: oklch(0.16 0.015 265);
-  --popover-foreground: oklch(0.96 0.012 85);
-  --primary: oklch(0.42 0.19 22);
+  /* Theme tokens mapped to light CTP palette */
+  --background: oklch(0.97 0.010 85);            /* warm parchment */
+  --foreground: oklch(0.18 0.018 265);            /* deep navy ink */
+  --card: oklch(1 0 0);                           /* pure white cards */
+  --card-foreground: oklch(0.18 0.018 265);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.018 265);
+  --primary: oklch(0.42 0.19 22);                 /* crimson */
   --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.22 0.012 265);
-  --secondary-foreground: oklch(0.85 0.010 85);
-  --muted: oklch(0.18 0.012 265);
-  --muted-foreground: oklch(0.65 0.015 85);
-  --accent: oklch(0.22 0.012 265);
-  --accent-foreground: oklch(0.96 0.012 85);
+  --secondary: oklch(0.93 0.012 85);              /* parchment dark */
+  --secondary-foreground: oklch(0.28 0.015 265);
+  --muted: oklch(0.93 0.012 85);
+  --muted-foreground: oklch(0.50 0.020 265);
+  --accent: oklch(0.93 0.012 85);
+  --accent-foreground: oklch(0.18 0.018 265);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.25 0.012 265);
-  --input: oklch(0.22 0.012 265);
+  --border: oklch(0.85 0.010 85);
+  --input: oklch(0.93 0.012 85);
   --ring: oklch(0.42 0.19 22);
-  --sidebar: oklch(0.13 0.015 265);
-  --sidebar-foreground: oklch(0.96 0.012 85);
+  --sidebar: oklch(0.93 0.012 85);
+  --sidebar-foreground: oklch(0.18 0.018 265);
   --sidebar-primary: oklch(0.42 0.19 22);
   --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.22 0.012 265);
-  --sidebar-accent-foreground: oklch(0.96 0.012 85);
-  --sidebar-border: oklch(0.25 0.012 265);
+  --sidebar-accent: oklch(0.88 0.014 85);
+  --sidebar-accent-foreground: oklch(0.18 0.018 265);
+  --sidebar-border: oklch(0.85 0.010 85);
   --sidebar-ring: oklch(0.42 0.19 22);
   --chart-1: oklch(0.42 0.19 22);
-  --chart-2: oklch(0.72 0.12 85);
-  --chart-3: oklch(0.55 0.06 65);
-  --chart-4: oklch(0.65 0.015 85);
-  --chart-5: oklch(0.85 0.010 85);
+  --chart-2: oklch(0.62 0.10 75);
+  --chart-3: oklch(0.50 0.05 65);
+  --chart-4: oklch(0.40 0.020 265);
+  --chart-5: oklch(0.28 0.015 265);
 }
 
 @layer base {
@@ -166,7 +166,7 @@
     flex: 1;
     height: 1px;
     background: var(--ctp-crimson);
-    opacity: 0.4;
+    opacity: 0.3;
   }
 
   .ctp-section-label {
@@ -176,6 +176,9 @@
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--ctp-crimson);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   .ctp-btn-primary {
@@ -196,7 +199,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%);
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.12) 50%, transparent 100%);
     transform: translateX(-100%);
     transition: transform 0.4s ease;
   }
@@ -207,16 +210,17 @@
     transform: translateX(100%);
   }
 
+  /* Outline button — dark on light backgrounds */
   .ctp-btn-outline {
     background: transparent;
-    color: var(--ctp-parchment);
+    color: var(--ctp-ink);
     font-family: 'Montserrat', sans-serif;
     font-size: 0.8rem;
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     padding: 0.75rem 2rem;
-    border: 1px solid rgba(245, 240, 232, 0.4);
+    border: 1.5px solid rgba(26, 26, 46, 0.35);
     transition: border-color 0.2s ease, color 0.2s ease;
   }
   .ctp-btn-outline:hover {
@@ -224,20 +228,44 @@
     color: var(--ctp-crimson);
   }
 
+  /* Outline button variant for dark/image backgrounds */
+  .ctp-btn-outline-light {
+    background: transparent;
+    color: #F7F3ED;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.75rem 2rem;
+    border: 1.5px solid rgba(247, 243, 237, 0.5);
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  .ctp-btn-outline-light:hover {
+    border-color: #F7F3ED;
+    color: #F7F3ED;
+  }
+
   .book-card {
-    background: var(--ctp-ink-mid);
-    border: 1px solid var(--ctp-ink-light);
+    background: #ffffff;
+    border: 1px solid oklch(0.88 0.010 85);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
     overflow: hidden;
   }
   .book-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(196, 30, 58, 0.15), 0 4px 12px rgba(0,0,0,0.4);
+    box-shadow: 0 12px 40px rgba(196, 30, 58, 0.10), 0 4px 16px rgba(26, 26, 46, 0.08);
   }
 
   .parchment-panel {
-    background: var(--ctp-parchment);
-    color: oklch(0.15 0.015 65);
+    background: var(--ctp-parchment-dark);
+    color: var(--ctp-ink);
+  }
+
+  /* Dark ink section — for hero overlays and footer */
+  .ink-section {
+    background: var(--ctp-ink);
+    color: var(--ctp-parchment);
   }
 }
 
