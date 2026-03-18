@@ -101,7 +101,7 @@ export default function About() {
                   },
                   {
                     title: 'Accessible to All',
-                    desc: 'Through our print-on-demand fulfillment network, our books are available to readers in over 150 countries. Great literature should not be limited by geography.',
+                    desc: 'Our books are available to readers in over 150 countries. Great literature should not be limited by geography.',
                   },
                   {
                     title: 'Authors We Believe In',
@@ -148,9 +148,9 @@ export default function About() {
               color: '#F5F0E8',
             }}
           >
-            Print on Demand,
+            Order Today,
             <br />
-            <span style={{ color: '#C41E3A' }}>Worldwide</span>
+            <span style={{ color: '#C41E3A' }}>Delivered Worldwide</span>
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -164,8 +164,8 @@ export default function About() {
               {
                 icon: Package,
                 step: '02',
-                title: 'Printed & Shipped',
-                desc: 'Your order is sent to our fulfillment partner. Your book is printed fresh and shipped directly to your door within 3–5 business days. Shipping rates are calculated at checkout.',
+                title: 'Processed & Shipped',
+                desc: 'Your order is processed and your book ships directly to your door within 3–5 business days. Shipping rates are calculated at checkout.',
               },
               {
                 icon: Globe,

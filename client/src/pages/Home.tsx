@@ -162,8 +162,8 @@ export default function Home() {
               {
                 icon: Package,
                 title: 'Print Books',
-                desc: 'Printed fresh and shipped directly to your door. Available to readers in over 150 countries within 3–5 business days.',
-                label: 'Print on Demand',
+                desc: 'High-quality paperback and hardcover editions shipped directly to your door. Available to readers in over 150 countries.',
+                label: 'Physical Books',
               },
               {
                 icon: Download,
@@ -174,7 +174,7 @@ export default function Home() {
               {
                 icon: BookOpen,
                 title: 'Worldwide Delivery',
-                desc: 'No inventory, no waste. Every book is printed fresh and shipped directly to your door. Standard shipping rates apply.',
+                desc: 'We ship to readers in over 150 countries. Whether you’re in the USA or overseas, your order arrives with the same quality and care.',
                 label: 'Global Shipping',
               },
             ].map(item => (

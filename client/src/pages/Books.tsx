@@ -129,19 +129,19 @@ export default function Books() {
         </div>
       </section>
 
-      {/* Print Fulfillment Note */}
+      {/* Shipping Note */}
       <section
         className="py-12"
         style={{ background: 'oklch(0.08 0.015 265)', borderTop: '1px solid rgba(255,255,255,0.05)' }}
       >
         <div className="container">
           <div className="max-w-2xl mx-auto text-center">
-            <div className="ctp-section-label mb-3 justify-center">◆ How We Fulfill Print Orders</div>
+            <div className="ctp-section-label mb-3 justify-center">◆ Shipping & Delivery</div>
             <p
               className="text-sm leading-relaxed"
               style={{ fontFamily: 'Lora, serif', color: 'rgba(245,240,232,0.5)' }}
             >
-              All print books are fulfilled through our <strong style={{ color: 'rgba(245,240,232,0.75)' }}>print-on-demand fulfillment partner</strong>. Your book is printed fresh and shipped directly to you — no inventory, no waste. Orders ship to over 150 countries within 3–5 business days. Shipping rates are calculated at checkout.
+              All print orders ship directly to your door. We deliver to over 150 countries within 3–5 business days. Shipping rates are calculated at checkout.
             </p>
           </div>
         </div>

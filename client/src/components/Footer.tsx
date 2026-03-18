@@ -133,12 +133,12 @@ export default function Footer() {
             </ul>
 
             <div className="mt-8">
-              <h4 className="ctp-section-label mb-4">Print Fulfilled By</h4>
+              <h4 className="ctp-section-label mb-4">Shipping & Delivery</h4>
               <p
                 className="text-xs leading-relaxed"
                 style={{ fontFamily: 'Lora, serif', color: 'rgba(245,240,232,0.4)' }}
               >
-                Print editions are fulfilled through our print-on-demand partner and shipped directly to your door — available in 150+ countries within 3–5 business days.
+                Print editions ship directly to your door, available in 150+ countries within 3–5 business days. Shipping rates calculated at checkout.
               </p>
             </div>
           </div>
