@@ -2,6 +2,9 @@
  * DESIGN: Dark Academic Editorial — Book Card
  * Dark ink card with cover image, lift on hover, crimson badge
  * Used in catalog grid and featured sections
+ *
+ * FIX: The outer wrapper is a <div> (not a <Link>) to avoid nested <a> elements.
+ * The cover image area is wrapped in a <Link>, and the Buy button is a separate <a>.
  */
 
 import { Link } from 'wouter';
@@ -18,9 +21,9 @@ export default function BookCard({ book, size = 'default' }: BookCardProps) {
   const authorNames = authors.map(a => a.name).join(' & ');
 
   return (
-    <Link href={`/books/${book.slug}`} className="block group">
-      <div className="book-card h-full flex flex-col">
-        {/* Cover Image */}
+    <div className="book-card h-full flex flex-col group">
+      {/* Cover Image — wrapped in Link for navigation */}
+      <Link href={`/books/${book.slug}`} className="block">
         <div
           className="relative overflow-hidden"
           style={{ aspectRatio: '2/3', background: 'oklch(0.12 0.015 265)' }}
@@ -30,7 +33,6 @@ export default function BookCard({ book, size = 'default' }: BookCardProps) {
             alt={book.title}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             onError={(e) => {
-              // Fallback to a placeholder if cover image fails
               const target = e.currentTarget;
               target.style.display = 'none';
               const parent = target.parentElement;
@@ -77,93 +79,101 @@ export default function BookCard({ book, size = 'default' }: BookCardProps) {
             </div>
           </div>
         </div>
+      </Link>
 
-        {/* Book Info */}
-        <div className="flex flex-col flex-1 p-4">
-          {/* Series label */}
-          {book.series && (
-            <div
-              className="text-xs mb-1"
-              style={{
-                fontFamily: 'Montserrat, sans-serif',
-                color: 'rgba(196, 30, 58, 0.8)',
-                letterSpacing: '0.08em',
-              }}
-            >
-              {book.series} {book.seriesNumber ? `· Book ${book.seriesNumber}` : ''}
-            </div>
-          )}
+      {/* Book Info — plain div, no anchor wrapper */}
+      <div className="flex flex-col flex-1 p-4">
+        {/* Series label */}
+        {book.series && (
+          <div
+            className="text-xs mb-1"
+            style={{
+              fontFamily: 'Montserrat, sans-serif',
+              color: 'rgba(196, 30, 58, 0.8)',
+              letterSpacing: '0.08em',
+            }}
+          >
+            {book.series} {book.seriesNumber ? `· Book ${book.seriesNumber}` : ''}
+          </div>
+        )}
 
+        {/* Title links to detail page */}
+        <Link href={`/books/${book.slug}`}>
           <h3
-            className="font-bold leading-snug mb-1 line-clamp-2"
+            className="font-bold leading-snug mb-1 line-clamp-2 cursor-pointer transition-colors duration-200"
             style={{
               fontFamily: 'Playfair Display, serif',
               fontSize: size === 'large' ? '1.1rem' : '0.95rem',
               color: '#F5F0E8',
             }}
+            onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = '#C41E3A')}
+            onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = '#F5F0E8')}
           >
             {book.title}
           </h3>
+        </Link>
 
-          {book.subtitle && (
-            <p
-              className="text-xs mb-2 line-clamp-1"
-              style={{
-                fontFamily: 'Lora, serif',
-                fontStyle: 'italic',
-                color: 'rgba(245,240,232,0.5)',
-              }}
-            >
-              {book.subtitle}
-            </p>
-          )}
-
+        {book.subtitle && (
           <p
-            className="text-xs mb-3"
+            className="text-xs mb-2 line-clamp-1"
             style={{
-              fontFamily: 'Montserrat, sans-serif',
-              color: 'rgba(245,240,232,0.45)',
-              letterSpacing: '0.05em',
+              fontFamily: 'Lora, serif',
+              fontStyle: 'italic',
+              color: 'rgba(245,240,232,0.5)',
             }}
           >
-            {authorNames}
+            {book.subtitle}
           </p>
+        )}
 
-          {/* Price & CTA */}
-          <div className="flex items-center justify-between mt-auto pt-3" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-            <span
-              className="font-bold"
-              style={{
-                fontFamily: 'Montserrat, sans-serif',
-                fontSize: '1rem',
-                color: '#F5F0E8',
-              }}
-            >
-              ${book.price.toFixed(2)}
-            </span>
-            <a
-              href={book.shopifyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={e => e.stopPropagation()}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-white transition-colors duration-200"
-              style={{
-                background: '#C41E3A',
-                fontFamily: 'Montserrat, sans-serif',
-                fontSize: '0.65rem',
-                fontWeight: 600,
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
-              }}
-              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = '#a01830')}
-              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = '#C41E3A')}
-            >
-              <ShoppingCart size={11} />
-              Buy
-            </a>
-          </div>
+        <p
+          className="text-xs mb-3"
+          style={{
+            fontFamily: 'Montserrat, sans-serif',
+            color: 'rgba(245,240,232,0.45)',
+            letterSpacing: '0.05em',
+          }}
+        >
+          {authorNames}
+        </p>
+
+        {/* Price & CTA */}
+        <div
+          className="flex items-center justify-between mt-auto pt-3"
+          style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}
+        >
+          <span
+            className="font-bold"
+            style={{
+              fontFamily: 'Montserrat, sans-serif',
+              fontSize: '1rem',
+              color: '#F5F0E8',
+            }}
+          >
+            ${book.price.toFixed(2)}
+          </span>
+          {/* Standalone <a> — NOT inside any other <a> */}
+          <a
+            href={book.shopifyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-white transition-colors duration-200"
+            style={{
+              background: '#C41E3A',
+              fontFamily: 'Montserrat, sans-serif',
+              fontSize: '0.65rem',
+              fontWeight: 600,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+            }}
+            onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = '#a01830')}
+            onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = '#C41E3A')}
+          >
+            <ShoppingCart size={11} />
+            Buy
+          </a>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
