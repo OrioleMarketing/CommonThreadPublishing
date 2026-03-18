@@ -16,6 +16,7 @@ export interface Author {
 }
 
 export interface Book {
+  shopifyVariantId?: string; // Shopify variant ID for Buy SDK
   id: string;
   slug: string;
   title: string;
@@ -78,6 +79,7 @@ export const books: Book[] = [
     genre: ['fiction'],
     coverImage: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/DividedNation_10dbd00f.webp',
     shopifyUrl: 'https://store.commonthreadpublishing.com/products/divided-nation',
+    shopifyVariantId: '48189834330367',
     featured: true,
     badge: 'NOVEL',
     publishedYear: 2022,
@@ -94,6 +96,7 @@ export const books: Book[] = [
     genre: ['fiction'],
     coverImage: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/DividedTogether_b4149c9c.webp',
     shopifyUrl: 'https://store.commonthreadpublishing.com/products/divided-together',
+    shopifyVariantId: '48189835477247',
     featured: true,
     badge: 'NOVEL',
     publishedYear: 2023,
@@ -110,6 +113,7 @@ export const books: Book[] = [
     genre: ['nonfiction', 'historical'],
     coverImage: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/PowerfromonHigh_757543e5.webp',
     shopifyUrl: 'https://store.commonthreadpublishing.com/products/power-from-on-high',
+    shopifyVariantId: '48189836034303',
     badge: 'HISTORY',
     publishedYear: 2023,
   },
@@ -127,6 +131,7 @@ export const books: Book[] = [
     genre: ['biblical', 'nonfiction'],
     coverImage: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/TheBibleFinallyMakesSense_194ae03f.webp',
     shopifyUrl: 'https://store.commonthreadpublishing.com/products/the-bible-finally-makes-sense',
+    shopifyVariantId: '48188559491327',
     featured: true,
     badge: 'SERIES',
     publishedYear: 2024,
@@ -143,6 +148,7 @@ export const books: Book[] = [
     genre: ['historical', 'nonfiction'],
     coverImage: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/TheJohnstownTragedy_c7f61357.jpg',
     shopifyUrl: 'https://store.commonthreadpublishing.com/products/the-johnstown-tragedy',
+    shopifyVariantId: '48189836001535',
     badge: 'HISTORY',
     publishedYear: 2022,
   },
@@ -160,6 +166,7 @@ export const books: Book[] = [
     genre: ['fiction'],
     coverImage: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/ThePrayers-3_a2b926d0.webp',
     shopifyUrl: 'https://store.commonthreadpublishing.com/products/the-pray-ers-books-3',
+    shopifyVariantId: '48189832954111',
     badge: 'SERIES',
     publishedYear: 2023,
   },
@@ -175,6 +182,7 @@ export const books: Book[] = [
     genre: ['devotional'],
     coverImage: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/ThinkingAboutPrayer_a02b07c5.webp',
     shopifyUrl: 'https://store.commonthreadpublishing.com/products/thinking-about-prayer',
+    shopifyVariantId: '48189833511167',
     badge: 'DEVOTIONAL',
     publishedYear: 2021,
   },

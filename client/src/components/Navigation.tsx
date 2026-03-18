@@ -2,11 +2,13 @@
  * DESIGN: Light Editorial — Navigation
  * White/parchment top bar with logo left, links right
  * Deep navy text, crimson active/hover state, crimson CTA button
+ * Cart icon with live item count badge from Shopify Buy SDK
  */
 
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
 import { Menu, X, ShoppingBag } from 'lucide-react';
+import { useShopifyCart } from '@/contexts/ShopifyCartContext';
 
 const NAV_LINKS = [
   { href: '/', label: 'Home' },
@@ -20,6 +22,7 @@ export default function Navigation() {
   const [location] = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { cartCount, openCart } = useShopifyCart();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -45,7 +48,7 @@ export default function Navigation() {
     >
       <div className="container">
         <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo — use the red/black version on light background */}
+          {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
             <img
               src="https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/CTPLogo_5f9b1de2.png"
@@ -96,26 +99,60 @@ export default function Navigation() {
                 />
               </Link>
             ))}
-            <a
-              href="https://store.commonthreadpublishing.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ctp-btn-primary flex items-center gap-2 text-xs"
+
+            {/* Cart Button */}
+            <button
+              onClick={openCart}
+              className="relative flex items-center gap-1.5 px-4 py-2 text-xs font-bold tracking-widest uppercase transition-all duration-200"
+              style={{
+                fontFamily: 'Montserrat, sans-serif',
+                background: '#C41E3A',
+                color: '#ffffff',
+              }}
+              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = '#a01830')}
+              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = '#C41E3A')}
+              aria-label="Open cart"
             >
               <ShoppingBag size={14} />
-              Shop Now
-            </a>
+              Cart
+              {cartCount > 0 && (
+                <span
+                  className="absolute -top-1.5 -right-1.5 w-5 h-5 flex items-center justify-center text-xs font-bold rounded-full"
+                  style={{ background: '#1A1A2E', color: '#ffffff', fontSize: '0.65rem' }}
+                >
+                  {cartCount}
+                </span>
+              )}
+            </button>
           </nav>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-            style={{ color: '#1A1A2E' }}
-          >
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          {/* Mobile: Cart icon + hamburger */}
+          <div className="md:hidden flex items-center gap-3">
+            <button
+              onClick={openCart}
+              className="relative p-2"
+              aria-label="Open cart"
+              style={{ color: '#1A1A2E' }}
+            >
+              <ShoppingBag size={20} />
+              {cartCount > 0 && (
+                <span
+                  className="absolute top-0 right-0 w-4 h-4 flex items-center justify-center text-xs font-bold rounded-full"
+                  style={{ background: '#C41E3A', color: '#ffffff', fontSize: '0.6rem' }}
+                >
+                  {cartCount}
+                </span>
+              )}
+            </button>
+            <button
+              className="p-2"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Toggle menu"
+              style={{ color: '#1A1A2E' }}
+            >
+              {menuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -143,15 +180,13 @@ export default function Navigation() {
                 {link.label}
               </Link>
             ))}
-            <a
-              href="https://store.commonthreadpublishing.com"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => { openCart(); setMenuOpen(false); }}
               className="ctp-btn-primary mt-3 text-center flex items-center justify-center gap-2"
             >
               <ShoppingBag size={14} />
-              Shop Now
-            </a>
+              View Cart {cartCount > 0 && `(${cartCount})`}
+            </button>
           </div>
         </div>
       )}

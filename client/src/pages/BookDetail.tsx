@@ -4,9 +4,10 @@
  */
 
 import { useParams, Link } from 'wouter';
-import { ArrowLeft, ShoppingCart, Download, Package, ExternalLink } from 'lucide-react';
+import { ArrowLeft, ShoppingCart, Download, Package, ExternalLink, Loader2 } from 'lucide-react';
 import { getBookBySlug, getAuthorsByIds, books } from '@/lib/products';
 import BookCard from '@/components/BookCard';
+import { useShopifyCart } from '@/contexts/ShopifyCartContext';
 
 export default function BookDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -31,6 +32,14 @@ export default function BookDetail() {
   }
 
   const authors = getAuthorsByIds(book.authorIds);
+  const { addToCart, addingId } = useShopifyCart();
+  const isAdding = addingId === book.shopifyVariantId;
+
+  const handleAddToCart = () => {
+    if (!book.shopifyVariantId) return;
+    addToCart(book.shopifyVariantId, book.title, book.price, book.coverImage);
+  };
+
   const relatedBooks = books
     .filter(b => b.id !== book.id && b.genre.some(g => book.genre.includes(g)))
     .slice(0, 4);
@@ -194,15 +203,26 @@ export default function BookDetail() {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <a
-                    href={book.shopifyUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="ctp-btn-primary flex items-center justify-center gap-2 flex-1"
-                  >
-                    <ShoppingCart size={16} />
-                    Buy Print Edition
-                  </a>
+                  {book.shopifyVariantId ? (
+                    <button
+                      onClick={handleAddToCart}
+                      disabled={isAdding}
+                      className="ctp-btn-primary flex items-center justify-center gap-2 flex-1 disabled:opacity-70"
+                    >
+                      {isAdding ? <Loader2 size={16} className="animate-spin" /> : <ShoppingCart size={16} />}
+                      {isAdding ? 'Adding to Cart…' : 'Add to Cart'}
+                    </button>
+                  ) : (
+                    <a
+                      href={book.shopifyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="ctp-btn-primary flex items-center justify-center gap-2 flex-1"
+                    >
+                      <ShoppingCart size={16} />
+                      Buy Print Edition
+                    </a>
+                  )}
                   {book.format === 'ebook' || book.format === 'both' ? (
                     <a
                       href={book.shopifyUrl}

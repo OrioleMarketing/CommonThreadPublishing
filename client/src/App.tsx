@@ -1,6 +1,7 @@
 /*
- * DESIGN: Dark Academic Editorial — App Router
- * Global layout with Navigation + Footer wrapping all pages
+ * DESIGN: Light Editorial — App Router
+ * Global layout with Navigation + Footer wrapping all pages.
+ * ShopifyCartProvider wraps the entire app for cart state.
  */
 
 import { Toaster } from "@/components/ui/sonner";
@@ -9,8 +10,10 @@ import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { ShopifyCartProvider } from "./contexts/ShopifyCartContext";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
+import CartDrawer from "./components/CartDrawer";
 import Home from "./pages/Home";
 import Books from "./pages/Books";
 import BookDetail from "./pages/BookDetail";
@@ -22,6 +25,7 @@ function Router() {
   return (
     <div className="flex flex-col min-h-screen">
       <Navigation />
+      <CartDrawer />
       <main className="flex-1">
         <Switch>
           <Route path="/" component={Home} />
@@ -42,10 +46,12 @@ function Router() {
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="dark">
+      <ThemeProvider defaultTheme="light">
         <TooltipProvider>
-          <Toaster />
-          <Router />
+          <ShopifyCartProvider>
+            <Toaster />
+            <Router />
+          </ShopifyCartProvider>
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

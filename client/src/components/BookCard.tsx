@@ -2,14 +2,13 @@
  * DESIGN: Light Editorial — Book Card
  * White card with cover image, lift on hover, crimson badge.
  * Dark navy text, crimson accents, clean border.
- *
- * FIX: The outer wrapper is a <div> (not a <Link>) to avoid nested <a> elements.
- * The cover image area is wrapped in a <Link>, and the Buy button is a separate <a>.
+ * Add to Cart uses Shopify Buy SDK — no redirect to store.
  */
 
 import { Link } from 'wouter';
 import { Book, getAuthorsByIds } from '@/lib/products';
-import { BookOpen, ShoppingCart } from 'lucide-react';
+import { BookOpen, ShoppingCart, Loader2 } from 'lucide-react';
+import { useShopifyCart } from '@/contexts/ShopifyCartContext';
 
 interface BookCardProps {
   book: Book;
@@ -19,6 +18,13 @@ interface BookCardProps {
 export default function BookCard({ book, size = 'default' }: BookCardProps) {
   const authors = getAuthorsByIds(book.authorIds);
   const authorNames = authors.map(a => a.name).join(' & ');
+  const { addToCart, addingId } = useShopifyCart();
+  const isAdding = addingId === book.shopifyVariantId;
+
+  const handleAddToCart = () => {
+    if (!book.shopifyVariantId) return;
+    addToCart(book.shopifyVariantId, book.title, book.price, book.coverImage);
+  };
 
   return (
     <div className="book-card h-full flex flex-col group">
@@ -81,7 +87,7 @@ export default function BookCard({ book, size = 'default' }: BookCardProps) {
         </div>
       </Link>
 
-      {/* Book Info — plain div, no anchor wrapper */}
+      {/* Book Info */}
       <div className="flex flex-col flex-1 p-4">
         {/* Series label */}
         {book.series && (
@@ -137,7 +143,7 @@ export default function BookCard({ book, size = 'default' }: BookCardProps) {
           {authorNames}
         </p>
 
-        {/* Price & CTA */}
+        {/* Price & Add to Cart */}
         <div
           className="flex items-center justify-between mt-auto pt-3"
           style={{ borderTop: '1px solid rgba(26,26,46,0.08)' }}
@@ -152,26 +158,48 @@ export default function BookCard({ book, size = 'default' }: BookCardProps) {
           >
             ${book.price.toFixed(2)}
           </span>
-          {/* Standalone <a> — NOT inside any other <a> */}
-          <a
-            href={book.shopifyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 px-3 py-1.5 text-white transition-colors duration-200"
-            style={{
-              background: '#C41E3A',
-              fontFamily: 'Montserrat, sans-serif',
-              fontSize: '0.65rem',
-              fontWeight: 600,
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-            }}
-            onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = '#a01830')}
-            onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = '#C41E3A')}
-          >
-            <ShoppingCart size={11} />
-            Buy
-          </a>
+
+          {/* Add to Cart button — standalone, NOT inside any <a> */}
+          {book.shopifyVariantId ? (
+            <button
+              onClick={handleAddToCart}
+              disabled={isAdding}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-white transition-colors duration-200 disabled:opacity-70"
+              style={{
+                background: '#C41E3A',
+                fontFamily: 'Montserrat, sans-serif',
+                fontSize: '0.65rem',
+                fontWeight: 600,
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+              }}
+              onMouseEnter={e => { if (!isAdding) (e.currentTarget as HTMLElement).style.background = '#a01830'; }}
+              onMouseLeave={e => { if (!isAdding) (e.currentTarget as HTMLElement).style.background = '#C41E3A'; }}
+            >
+              {isAdding ? <Loader2 size={11} className="animate-spin" /> : <ShoppingCart size={11} />}
+              {isAdding ? 'Adding…' : 'Add to Cart'}
+            </button>
+          ) : (
+            <a
+              href={book.shopifyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-white transition-colors duration-200"
+              style={{
+                background: '#C41E3A',
+                fontFamily: 'Montserrat, sans-serif',
+                fontSize: '0.65rem',
+                fontWeight: 600,
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+              }}
+              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = '#a01830')}
+              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = '#C41E3A')}
+            >
+              <ShoppingCart size={11} />
+              Buy
+            </a>
+          )}
         </div>
       </div>
     </div>
