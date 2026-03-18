@@ -140,7 +140,7 @@ export default function CartDrawer() {
                     {/* Quantity controls */}
                     <div className="flex items-center gap-2">
                       <button
-                        onClick={() => updateQuantity(item.variantId, item.quantity - 1)}
+                        onClick={() => updateQuantity(item.lineItemId, item.quantity - 1)}
                         disabled={loading}
                         className="w-7 h-7 flex items-center justify-center border transition-colors duration-200"
                         style={{ borderColor: 'rgba(26,26,46,0.2)', color: 'rgba(26,26,46,0.6)' }}
@@ -162,7 +162,7 @@ export default function CartDrawer() {
                         {item.quantity}
                       </span>
                       <button
-                        onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
+                        onClick={() => updateQuantity(item.lineItemId, item.quantity + 1)}
                         disabled={loading}
                         className="w-7 h-7 flex items-center justify-center border transition-colors duration-200"
                         style={{ borderColor: 'rgba(26,26,46,0.2)', color: 'rgba(26,26,46,0.6)' }}
@@ -179,7 +179,7 @@ export default function CartDrawer() {
                       </button>
 
                       <button
-                        onClick={() => removeFromCart(item.variantId)}
+                        onClick={() => removeFromCart(item.lineItemId)}
                         disabled={loading}
                         className="ml-auto p-1 transition-colors duration-200"
                         style={{ color: 'rgba(26,26,46,0.3)' }}
