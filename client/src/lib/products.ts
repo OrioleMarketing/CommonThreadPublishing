@@ -44,25 +44,25 @@ export const authors: Author[] = [
     id: 'mark-mirza',
     name: 'Mark S. Mirza',
     bio: 'Mark S. Mirza is a compelling author whose works explore the intersection of faith, politics, and American society. His novels challenge readers to examine their own convictions in the face of cultural and spiritual conflict.',
-    photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face',
+    photo: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/MarkMirza_d886115c.jpg',
   },
   {
     id: 'bruce-mayo',
     name: 'Bruce A. Mayo, MTh',
     bio: 'Bruce A. Mayo holds a Master of Theology and brings decades of biblical scholarship to his writing. His work in The Kingdom Continuum Series is designed to help new and seasoned believers see Scripture as one unified, connected story.',
-    photo: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
+    photo: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/BruceMayo_4c08e9b4.jpeg',
   },
   {
     id: 'john-greenfield',
     name: 'John Greenfield',
     bio: 'John Greenfield was a renowned Moravian historian and evangelist whose original account of the Great Moravian Revival has inspired generations of believers.',
-    photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face',
+    photo: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/JohnGreenfield_61b19951.jpeg',
   },
   {
     id: 'darrel-suderman',
     name: 'Dr. Darrel R. Suderman',
     bio: 'Dr. Darrel R. Suderman is an international ministry leader and author whose devotional work has reached believers across the globe, offering daily guidance for a life of prayer.',
-    photo: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=face',
+    photo: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/DarrelSuderman_37e221f7.jpg',
   },
 ];
 
