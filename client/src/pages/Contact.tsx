@@ -1,36 +1,28 @@
 /*
  * DESIGN: Light Editorial — Contact Page
  * White/parchment backgrounds, dark navy text, crimson accents.
+ * Form: GoHighLevel iframe embed (api.oriolemarketing.com)
  */
 
-import { useState } from 'react';
-import { Mail, Send, CheckCircle } from 'lucide-react';
+import { useEffect } from 'react';
+import { Mail } from 'lucide-react';
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // In production, connect to a form service or GoHighLevel webhook
-    setSubmitted(true);
-  };
-
-  const inputStyle: React.CSSProperties = {
-    background: '#ffffff',
-    border: '1px solid rgba(26,26,46,0.18)',
-    color: '#1A1A2E',
-    fontFamily: 'Lora, serif',
-    fontSize: '0.9rem',
-    padding: '0.75rem 1rem',
-    outline: 'none',
-    width: '100%',
-    transition: 'border-color 0.2s ease',
-  };
+  // Inject the GHL form embed script once on mount
+  useEffect(() => {
+    const scriptId = 'ghl-form-embed-script';
+    if (!document.getElementById(scriptId)) {
+      const script = document.createElement('script');
+      script.id = scriptId;
+      script.src = 'https://api.oriolemarketing.com/js/form_embed.js';
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  }, []);
 
   return (
     <div className="min-h-screen" style={{ background: '#ffffff' }}>
-      {/* Header */}
+      {/* Page Header */}
       <section
         className="pt-32 pb-16"
         style={{ background: '#F7F3ED', borderBottom: '1px solid rgba(196,30,58,0.12)' }}
@@ -56,7 +48,8 @@ export default function Contact() {
       <section className="py-16" style={{ background: '#ffffff' }}>
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">
-            {/* Contact Info */}
+
+            {/* Left: Contact Info */}
             <div className="lg:col-span-2">
               <div className="ctp-section-label mb-6">◆ Reach Out</div>
               <div className="space-y-6">
@@ -117,117 +110,33 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Contact Form */}
+            {/* Right: GoHighLevel Embedded Form */}
             <div className="lg:col-span-3">
-              {submitted ? (
-                <div
-                  className="flex flex-col items-center justify-center py-16 text-center"
-                  style={{ border: '1px solid rgba(196,30,58,0.25)', background: 'rgba(196,30,58,0.04)' }}
-                >
-                  <CheckCircle size={48} style={{ color: '#C41E3A', marginBottom: '1rem' }} />
-                  <h3
-                    className="font-black mb-2"
-                    style={{ fontFamily: 'Playfair Display, serif', color: '#1A1A2E', fontSize: '1.5rem' }}
-                  >
-                    Message Sent
-                  </h3>
-                  <p
-                    className="text-sm"
-                    style={{ fontFamily: 'Lora, serif', color: 'rgba(26,26,46,0.6)' }}
-                  >
-                    Thank you for reaching out. We'll respond within 1–2 business days.
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div>
-                      <label
-                        className="block text-xs mb-2"
-                        style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.45)', letterSpacing: '0.1em', textTransform: 'uppercase' }}
-                      >
-                        Your Name *
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        value={form.name}
-                        onChange={e => setForm({ ...form, name: e.target.value })}
-                        style={inputStyle}
-                        onFocus={e => ((e.target as HTMLElement).style.borderColor = 'rgba(196,30,58,0.5)')}
-                        onBlur={e => ((e.target as HTMLElement).style.borderColor = 'rgba(26,26,46,0.18)')}
-                      />
-                    </div>
-                    <div>
-                      <label
-                        className="block text-xs mb-2"
-                        style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.45)', letterSpacing: '0.1em', textTransform: 'uppercase' }}
-                      >
-                        Email Address *
-                      </label>
-                      <input
-                        type="email"
-                        required
-                        value={form.email}
-                        onChange={e => setForm({ ...form, email: e.target.value })}
-                        style={inputStyle}
-                        onFocus={e => ((e.target as HTMLElement).style.borderColor = 'rgba(196,30,58,0.5)')}
-                        onBlur={e => ((e.target as HTMLElement).style.borderColor = 'rgba(26,26,46,0.18)')}
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label
-                      className="block text-xs mb-2"
-                      style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.45)', letterSpacing: '0.1em', textTransform: 'uppercase' }}
-                    >
-                      Subject
-                    </label>
-                    <select
-                      value={form.subject}
-                      onChange={e => setForm({ ...form, subject: e.target.value })}
-                      style={{ ...inputStyle, cursor: 'pointer' }}
-                      onFocus={e => ((e.target as HTMLElement).style.borderColor = 'rgba(196,30,58,0.5)')}
-                      onBlur={e => ((e.target as HTMLElement).style.borderColor = 'rgba(26,26,46,0.18)')}
-                    >
-                      <option value="">Select a subject…</option>
-                      <option value="general">General Inquiry</option>
-                      <option value="order">Order Support</option>
-                      <option value="author">Author Submission</option>
-                      <option value="media">Media / Press</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label
-                      className="block text-xs mb-2"
-                      style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.45)', letterSpacing: '0.1em', textTransform: 'uppercase' }}
-                    >
-                      Message *
-                    </label>
-                    <textarea
-                      required
-                      rows={6}
-                      value={form.message}
-                      onChange={e => setForm({ ...form, message: e.target.value })}
-                      style={{ ...inputStyle, resize: 'vertical' }}
-                      onFocus={e => ((e.target as HTMLElement).style.borderColor = 'rgba(196,30,58,0.5)')}
-                      onBlur={e => ((e.target as HTMLElement).style.borderColor = 'rgba(26,26,46,0.18)')}
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="ctp-btn-primary flex items-center gap-2"
-                  >
-                    <Send size={14} />
-                    Send Message
-                  </button>
-                </form>
-              )}
+              <iframe
+                src="https://api.oriolemarketing.com/widget/form/KZTEzpeYhpAPgrdSLnho"
+                style={{
+                  width: '100%',
+                  height: '706px',
+                  border: 'none',
+                  borderRadius: '0',
+                  display: 'block',
+                }}
+                id="inline-KZTEzpeYhpAPgrdSLnho"
+                data-layout='{"id":"INLINE"}'
+                data-trigger-type="alwaysShow"
+                data-trigger-value=""
+                data-activation-type="alwaysActivated"
+                data-activation-value=""
+                data-deactivation-type="neverDeactivate"
+                data-deactivation-value=""
+                data-form-name="Contact Us"
+                data-height="706"
+                data-layout-iframe-id="inline-KZTEzpeYhpAPgrdSLnho"
+                data-form-id="KZTEzpeYhpAPgrdSLnho"
+                title="Contact Us"
+              />
             </div>
+
           </div>
         </div>
       </section>
