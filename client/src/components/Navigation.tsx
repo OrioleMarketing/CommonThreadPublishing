@@ -47,14 +47,13 @@ export default function Navigation() {
       }}
     >
       <div className="container">
-        <div className="flex items-center justify-between h-28">
+        <div className="flex items-center justify-between h-20 md:h-24">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
             <img
               src="https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/CommonThread1_a7f668c9.png"
               alt="Common Thread Publishing LLC"
-              style={{ height: '100px' }}
-              className="w-auto object-contain"
+              className="w-auto object-contain h-12 md:h-[72px]"
             />
           </Link>
 
