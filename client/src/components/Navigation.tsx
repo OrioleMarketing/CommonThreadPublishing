@@ -51,24 +51,10 @@ export default function Navigation() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
             <img
-              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/CTPLogo_5f9b1de2.png"
-              alt="Common Thread Publishing"
-              className="h-10 md:h-12 w-auto object-contain"
+              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/CommonThread1_a7f668c9.png"
+              alt="Common Thread Publishing LLC"
+              className="h-12 md:h-14 w-auto object-contain"
             />
-            <div className="hidden sm:block">
-              <div
-                className="text-xs font-semibold tracking-widest uppercase"
-                style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.45)' }}
-              >
-                Common Thread
-              </div>
-              <div
-                className="text-sm font-bold tracking-wide"
-                style={{ fontFamily: 'Playfair Display, serif', color: '#1A1A2E' }}
-              >
-                Publishing LLC
-              </div>
-            </div>
           </Link>
 
           {/* Desktop Nav */}

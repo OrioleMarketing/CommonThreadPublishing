@@ -22,7 +22,7 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="md:col-span-2">
             <img
-              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/CTPRedandWhite_f08ff46d.png"
+              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/CommonThread1_a7f668c9.png"
               alt="Common Thread Publishing"
               className="h-16 w-auto object-contain mb-4"
             />
