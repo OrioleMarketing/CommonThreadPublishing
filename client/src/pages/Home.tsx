@@ -5,17 +5,223 @@
  */
 
 import { Link } from 'wouter';
-import { ArrowRight, BookOpen, Package, Download } from 'lucide-react';
-import { getFeaturedBooks, books } from '@/lib/products';
+import { ArrowRight, BookOpen, Package, Download, BookText, ShoppingBag } from 'lucide-react';
+import { books } from '@/lib/products';
 import BookCard from '@/components/BookCard';
 import { useState } from 'react';
+import { useShopifyCart } from '@/contexts/ShopifyCartContext';
 
 const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/hero_bg_b8112d9c.jpg';
 const ABOUT_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/about_bg_665970ee.jpg';
 const NEWSLETTER_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/newsletter_bg_afae4d46.jpg';
 
+// ── Featured Spotlight ──────────────────────────────────────────────────────
+
+const BIBLE_BOOK = books.find(b => b.id === 'the-bible-finally-makes-sense')!;
+// TODO: Replace BIBLE_EBOOK_VARIANT_ID with the real Shopify variant ID once the eBook
+// product is created in the Shopify admin. For now the eBook button links to the store.
+const BIBLE_EBOOK_VARIANT_ID = ''; // placeholder — update after adding eBook to Shopify
+
+function FeaturedSpotlight() {
+  const { addToCart, addingId } = useShopifyCart();
+  const book = BIBLE_BOOK;
+  const isAddingPrint = addingId === book.shopifyVariantId;
+  const isAddingEbook = addingId === BIBLE_EBOOK_VARIANT_ID;
+
+  return (
+    <section className="py-20" style={{ background: '#ffffff' }}>
+      <div className="container">
+        <div className="ctp-section-label mb-3">◆ Featured Title</div>
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center mt-8"
+        >
+          {/* Cover — left column */}
+          <div className="flex justify-center md:justify-end">
+            <Link href={`/books/${book.slug}`}>
+              <div
+                className="relative group cursor-pointer"
+                style={{ maxWidth: '320px' }}
+              >
+                <img
+                  src={book.coverImage}
+                  alt={book.title}
+                  className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  style={{
+                    boxShadow: '8px 12px 40px rgba(26,26,46,0.22)',
+                  }}
+                />
+                {/* Series badge */}
+                <div
+                  className="absolute top-3 left-3 px-2 py-1 text-xs font-bold tracking-widest uppercase"
+                  style={{
+                    fontFamily: 'Montserrat, sans-serif',
+                    background: '#C41E3A',
+                    color: '#ffffff',
+                  }}
+                >
+                  {book.series} · Book {book.seriesNumber}
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          {/* Info — right column */}
+          <div className="flex flex-col gap-5">
+            <div>
+              <div
+                className="text-xs font-bold tracking-widest uppercase mb-2"
+                style={{ fontFamily: 'Montserrat, sans-serif', color: '#C41E3A' }}
+              >
+                Featured Release
+              </div>
+              <h2
+                className="font-black mb-2"
+                style={{
+                  fontFamily: 'Playfair Display, serif',
+                  fontSize: 'clamp(1.6rem, 3.5vw, 2.6rem)',
+                  color: '#1A1A2E',
+                  lineHeight: 1.15,
+                }}
+              >
+                {book.title}
+              </h2>
+              {book.subtitle && (
+                <p
+                  className="text-base italic mb-1"
+                  style={{ fontFamily: 'Lora, serif', color: 'rgba(26,26,46,0.55)' }}
+                >
+                  {book.subtitle}
+                </p>
+              )}
+              <p
+                className="text-sm"
+                style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.4)', letterSpacing: '0.05em' }}
+              >
+                By Bruce A. Mayo, MTh
+              </p>
+            </div>
+
+            <p
+              className="text-base leading-relaxed"
+              style={{ fontFamily: 'Lora, serif', color: 'rgba(26,26,46,0.72)', maxWidth: '480px' }}
+            >
+              Many new believers open the Bible with hunger — only to close it discouraged. The stories feel disconnected. The timeline feels confusing. The meaning feels distant. <em>The Bible Finally Makes Sense</em> is a summons to recover the unified story of Scripture through The Kingdom Continuum — revealing Jesus as the reigning center of all 66 books.
+            </p>
+
+            {/* Buy options */}
+            <div
+              className="flex flex-col gap-3 pt-2"
+              style={{ borderTop: '1px solid rgba(26,26,46,0.08)' }}
+            >
+              <div
+                className="text-xs font-bold tracking-widest uppercase pt-3"
+                style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.4)' }}
+              >
+                Available In
+              </div>
+
+              <div className="flex flex-wrap gap-3">
+                {/* Paperback — Shopify cart */}
+                <button
+                  onClick={() => addToCart(
+                    book.shopifyVariantId!,
+                    book.title + ' (Paperback)',
+                    book.price,
+                    book.coverImage
+                  )}
+                  disabled={isAddingPrint}
+                  className="flex items-center gap-2 px-5 py-3 text-sm font-bold tracking-wide transition-all duration-200"
+                  style={{
+                    fontFamily: 'Montserrat, sans-serif',
+                    background: isAddingPrint ? '#a01830' : '#C41E3A',
+                    color: '#ffffff',
+                    opacity: isAddingPrint ? 0.8 : 1,
+                    cursor: isAddingPrint ? 'wait' : 'pointer',
+                  }}
+                  onMouseEnter={e => { if (!isAddingPrint) (e.currentTarget as HTMLElement).style.background = '#a01830'; }}
+                  onMouseLeave={e => { if (!isAddingPrint) (e.currentTarget as HTMLElement).style.background = '#C41E3A'; }}
+                >
+                  <ShoppingBag size={15} />
+                  {isAddingPrint ? 'Adding…' : `Paperback — $${book.price.toFixed(2)}`}
+                </button>
+
+                {/* eBook — links to Shopify store (variant ID to be added) */}
+                {BIBLE_EBOOK_VARIANT_ID ? (
+                  <button
+                    onClick={() => addToCart(
+                      BIBLE_EBOOK_VARIANT_ID,
+                      book.title + ' (eBook)',
+                      book.ebookPrice ?? 9.99,
+                      book.coverImage
+                    )}
+                    disabled={isAddingEbook}
+                    className="flex items-center gap-2 px-5 py-3 text-sm font-bold tracking-wide transition-all duration-200"
+                    style={{
+                      fontFamily: 'Montserrat, sans-serif',
+                      background: 'transparent',
+                      color: '#1A1A2E',
+                      border: '2px solid #1A1A2E',
+                      opacity: isAddingEbook ? 0.6 : 1,
+                    }}
+                    onMouseEnter={e => {
+                      (e.currentTarget as HTMLElement).style.background = '#1A1A2E';
+                      (e.currentTarget as HTMLElement).style.color = '#ffffff';
+                    }}
+                    onMouseLeave={e => {
+                      (e.currentTarget as HTMLElement).style.background = 'transparent';
+                      (e.currentTarget as HTMLElement).style.color = '#1A1A2E';
+                    }}
+                  >
+                    <BookText size={15} />
+                    {isAddingEbook ? 'Adding…' : `eBook — $${(book.ebookPrice ?? 9.99).toFixed(2)}`}
+                  </button>
+                ) : (
+                  <a
+                    href={book.shopifyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-5 py-3 text-sm font-bold tracking-wide transition-all duration-200"
+                    style={{
+                      fontFamily: 'Montserrat, sans-serif',
+                      background: 'transparent',
+                      color: '#1A1A2E',
+                      border: '2px solid #1A1A2E',
+                    }}
+                    onMouseEnter={e => {
+                      (e.currentTarget as HTMLElement).style.background = '#1A1A2E';
+                      (e.currentTarget as HTMLElement).style.color = '#ffffff';
+                    }}
+                    onMouseLeave={e => {
+                      (e.currentTarget as HTMLElement).style.background = 'transparent';
+                      (e.currentTarget as HTMLElement).style.color = '#1A1A2E';
+                    }}
+                  >
+                    <BookText size={15} />
+                    eBook — Coming Soon
+                  </a>
+                )}
+              </div>
+            </div>
+
+            <Link
+              href={`/books/${book.slug}`}
+              className="inline-flex items-center gap-1.5 text-sm transition-colors duration-200"
+              style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.45)' }}
+              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = '#C41E3A')}
+              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = 'rgba(26,26,46,0.45)')}
+            >
+              View full details <ArrowRight size={14} />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── Home Page ────────────────────────────────────────────────────────────────
+
 export default function Home() {
-  const featuredBooks = getFeaturedBooks();
   const allBooks = books;
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
@@ -203,53 +409,9 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════
-          FEATURED BOOKS — white background
+          FEATURED BOOK SPOTLIGHT — white background
       ═══════════════════════════════════════════════════ */}
-      <section className="py-20" style={{ background: '#ffffff' }}>
-        <div className="container">
-          <div className="flex items-end justify-between mb-12">
-            <div>
-              <div className="ctp-section-label mb-3">◆ Featured Titles</div>
-              <h2
-                className="font-black"
-                style={{
-                  fontFamily: 'Playfair Display, serif',
-                  fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
-                  color: '#1A1A2E',
-                  lineHeight: 1.1,
-                }}
-              >
-                Stories Worth
-                <br />
-                <span style={{ color: '#C41E3A' }}>Reading</span>
-              </h2>
-            </div>
-            <Link
-              href="/books"
-              className="hidden md:flex items-center gap-2 text-sm font-medium transition-colors duration-200"
-              style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.45)' }}
-              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = '#C41E3A')}
-              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = 'rgba(26,26,46,0.45)')}
-            >
-              View All Books <ArrowRight size={16} />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5">
-            {featuredBooks.map((book, i) => (
-              <div key={book.id} className={i === 0 ? 'md:col-span-1 lg:col-span-1' : ''}>
-                <BookCard book={book} size={i === 0 ? 'large' : 'default'} />
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-8 text-center md:hidden">
-            <Link href="/books" className="ctp-btn-outline inline-flex items-center gap-2">
-              View All Books <ArrowRight size={14} />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <FeaturedSpotlight />
 
       {/* ═══════════════════════════════════════════════════
           ALL BOOKS — warm parchment background
