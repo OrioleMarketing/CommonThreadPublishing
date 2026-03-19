@@ -20,7 +20,8 @@ const NEWSLETTER_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/
 const BIBLE_BOOK = books.find(b => b.id === 'the-bible-finally-makes-sense')!;
 // TODO: Replace BIBLE_EBOOK_VARIANT_ID with the real Shopify variant ID once the eBook
 // product is created in the Shopify admin. For now the eBook button links to the store.
-const BIBLE_EBOOK_VARIANT_ID = ''; // placeholder — update after adding eBook to Shopify
+const BIBLE_EBOOK_VARIANT_ID = 'gid://shopify/ProductVariant/48304285548799'; // The Bible Finally Makes Sense (eBook)
+const BIBLE_EBOOK_PRICE = 27.00;
 
 function FeaturedSpotlight() {
   const { addToCart, addingId } = useShopifyCart();
@@ -140,8 +141,8 @@ function FeaturedSpotlight() {
                   <button
                     onClick={() => addToCart(
                       BIBLE_EBOOK_VARIANT_ID,
-                      book.title + ' (eBook)',
-                      book.ebookPrice ?? 9.99,
+                    book.title + ' (eBook)',
+                    BIBLE_EBOOK_PRICE,
                       book.coverImage
                     )}
                     disabled={isAddingEbook}
@@ -163,7 +164,7 @@ function FeaturedSpotlight() {
                     }}
                   >
                     <BookText size={15} />
-                    {isAddingEbook ? 'Adding…' : `eBook — $${(book.ebookPrice ?? 9.99).toFixed(2)}`}
+                    {isAddingEbook ? 'Adding…' : `eBook — $${BIBLE_EBOOK_PRICE.toFixed(2)}`}
                   </button>
                 ) : (
                   <a
