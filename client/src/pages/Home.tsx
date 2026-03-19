@@ -209,6 +209,160 @@ function FeaturedSpotlight() {
   );
 }
 
+// ── Series Gallery ──────────────────────────────────────────────────────────
+
+const SERIES_BOOKS = books.filter(
+  b => b.series === BIBLE_BOOK.series && b.id !== BIBLE_BOOK.id
+);
+
+function SeriesGallery() {
+  const { addToCart, addingId } = useShopifyCart();
+
+  return (
+    <section
+      className="py-16"
+      style={{
+        background: '#F0EBE3',
+        borderTop: '1px solid rgba(196,30,58,0.10)',
+        borderBottom: '1px solid rgba(196,30,58,0.10)',
+      }}
+    >
+      <div className="container">
+        <div className="flex items-end justify-between mb-8">
+          <div>
+            <div className="ctp-section-label mb-2">◆ The Kingdom Continuum Series</div>
+            <h3
+              className="font-black"
+              style={{
+                fontFamily: 'Playfair Display, serif',
+                fontSize: 'clamp(1.3rem, 2.5vw, 1.9rem)',
+                color: '#1A1A2E',
+                lineHeight: 1.2,
+              }}
+            >
+              More from the Series
+            </h3>
+          </div>
+          <Link
+            href="/books"
+            className="hidden md:flex items-center gap-1.5 text-sm font-medium transition-colors duration-200"
+            style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.4)' }}
+            onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = '#C41E3A')}
+            onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = 'rgba(26,26,46,0.4)')}
+          >
+            View All Books <ArrowRight size={14} />
+          </Link>
+        </div>
+
+        {SERIES_BOOKS.length > 0 ? (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
+            {SERIES_BOOKS.map(book => (
+              <div key={book.id} className="flex flex-col gap-3">
+                <Link href={`/books/${book.slug}`}>
+                  <div className="group cursor-pointer">
+                    <img
+                      src={book.coverImage}
+                      alt={book.title}
+                      className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                      style={{ boxShadow: '4px 6px 20px rgba(26,26,46,0.15)' }}
+                    />
+                  </div>
+                </Link>
+                <div>
+                  {book.seriesNumber && (
+                    <div
+                      className="text-xs font-bold tracking-widest uppercase mb-1"
+                      style={{ fontFamily: 'Montserrat, sans-serif', color: '#C41E3A' }}
+                    >
+                      Book {book.seriesNumber}
+                    </div>
+                  )}
+                  <Link href={`/books/${book.slug}`}>
+                    <h4
+                      className="font-bold leading-snug mb-1 hover:underline cursor-pointer"
+                      style={{ fontFamily: 'Playfair Display, serif', color: '#1A1A2E', fontSize: '0.9rem' }}
+                    >
+                      {book.title}
+                    </h4>
+                  </Link>
+                  <div
+                    className="text-xs mb-2"
+                    style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.45)' }}
+                  >
+                    ${book.price.toFixed(2)}
+                  </div>
+                  <button
+                    onClick={() => addToCart(
+                      book.shopifyVariantId!,
+                      book.title,
+                      book.price,
+                      book.coverImage
+                    )}
+                    disabled={addingId === book.shopifyVariantId}
+                    className="w-full py-2 text-xs font-bold tracking-widest uppercase transition-all duration-200"
+                    style={{
+                      fontFamily: 'Montserrat, sans-serif',
+                      background: addingId === book.shopifyVariantId ? '#a01830' : '#C41E3A',
+                      color: '#ffffff',
+                      opacity: addingId === book.shopifyVariantId ? 0.8 : 1,
+                    }}
+                    onMouseEnter={e => { if (addingId !== book.shopifyVariantId) (e.currentTarget as HTMLElement).style.background = '#a01830'; }}
+                    onMouseLeave={e => { if (addingId !== book.shopifyVariantId) (e.currentTarget as HTMLElement).style.background = '#C41E3A'; }}
+                  >
+                    {addingId === book.shopifyVariantId ? 'Adding…' : 'Add to Cart'}
+                  </button>
+                </div>
+              </div>
+            ))}
+
+            {/* Coming soon placeholder for future series books */}
+            <div className="flex flex-col gap-3">
+              <div
+                className="w-full aspect-[2/3] flex flex-col items-center justify-center gap-3"
+                style={{
+                  background: 'rgba(26,26,46,0.04)',
+                  border: '2px dashed rgba(26,26,46,0.12)',
+                }}
+              >
+                <BookOpen size={28} style={{ color: 'rgba(26,26,46,0.2)' }} />
+                <span
+                  className="text-xs text-center px-3"
+                  style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.3)', lineHeight: 1.4 }}
+                >
+                  More titles<br />coming soon
+                </span>
+              </div>
+            </div>
+          </div>
+        ) : (
+          /* No other series books yet — show placeholders */
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
+            {[2, 3, 4].map(n => (
+              <div key={n} className="flex flex-col gap-3">
+                <div
+                  className="w-full aspect-[2/3] flex flex-col items-center justify-center gap-3"
+                  style={{
+                    background: 'rgba(26,26,46,0.04)',
+                    border: '2px dashed rgba(26,26,46,0.12)',
+                  }}
+                >
+                  <BookOpen size={28} style={{ color: 'rgba(26,26,46,0.2)' }} />
+                  <span
+                    className="text-xs text-center px-3"
+                    style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.3)', lineHeight: 1.4 }}
+                  >
+                    Book {n}<br />Coming Soon
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
 // ── Home Page ────────────────────────────────────────────────────────────────
 
 export default function Home() {
@@ -402,6 +556,7 @@ export default function Home() {
           FEATURED BOOK SPOTLIGHT — white background
       ═══════════════════════════════════════════════════ */}
       <FeaturedSpotlight />
+      <SeriesGallery />
 
       {/* ═══════════════════════════════════════════════════
           ALL BOOKS — warm parchment background
