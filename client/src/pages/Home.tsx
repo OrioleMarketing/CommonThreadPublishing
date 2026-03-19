@@ -50,17 +50,7 @@ function FeaturedSpotlight() {
                     boxShadow: '8px 12px 40px rgba(26,26,46,0.22)',
                   }}
                 />
-                {/* Series badge */}
-                <div
-                  className="absolute top-3 left-3 px-2 py-1 text-xs font-bold tracking-widest uppercase"
-                  style={{
-                    fontFamily: 'Montserrat, sans-serif',
-                    background: '#C41E3A',
-                    color: '#ffffff',
-                  }}
-                >
-                  {book.series} · Book {book.seriesNumber}
-                </div>
+
               </div>
             </Link>
           </div>
