@@ -93,15 +93,7 @@ export default function Home() {
                 <BookOpen size={16} />
                 Browse All Books
               </Link>
-              <a
-                href="https://store.commonthreadpublishing.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ctp-btn-outline-light flex items-center gap-2"
-              >
-                <Package size={16} />
-                Visit Our Store
-              </a>
+
             </div>
 
             <div className="flex gap-10 mt-12 animate-fade-up-delay-4">
