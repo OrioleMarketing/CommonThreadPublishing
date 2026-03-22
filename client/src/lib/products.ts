@@ -5,7 +5,7 @@
  */
 
 export type BookFormat = 'print' | 'ebook' | 'both';
-export type BookGenre = 'fiction' | 'nonfiction' | 'devotional' | 'historical' | 'biblical';
+export type BookGenre = 'fiction' | 'nonfiction' | 'devotional' | 'historical' | 'biblical' | 'practical';
 
 export interface Author {
   id: string;
@@ -169,6 +169,23 @@ export const books: Book[] = [
     shopifyVariantId: 'gid://shopify/ProductVariant/48189832954111',
     badge: 'SERIES',
     publishedYear: 2023,
+  },
+  {
+    id: 'when-im-gone',
+    slug: 'when-im-gone',
+    title: "When I'm Gone",
+    subtitle: 'The Guide Our Family Will Thank Us For',
+    authorIds: ['bruce-mayo'],
+    description: "What happens to your digital life when you're gone? Your family shouldn't have to play detective with your passwords, accounts, and important documents during their most difficult moments. Yet every day, grieving families struggle to access bank accounts, cancel subscriptions, find insurance policies, and unlock phones — all while dealing with loss. \"When I'm Gone\" solves this problem with a simple, caring approach to digital preparedness. A practical, compassionate guide that gives your loved ones the gift of clarity when they need it most.",
+    price: 27.00,
+    format: 'ebook',
+    genre: ['nonfiction', 'practical'],
+    coverImage: 'https://cdn.shopify.com/s/files/1/0790/8596/1471/files/Screenshot2026-03-21at7.56.04PM.png?v=1774137385',
+    shopifyUrl: 'https://store.commonthreadpublishing.com/products/when-im-gone-the-guide-our-family-will-thank-us-for',
+    shopifyVariantId: 'gid://shopify/ProductVariant/48310041444607',
+    featured: true,
+    badge: 'EBOOK',
+    publishedYear: 2026,
   },
   {
     id: 'thinking-about-prayer',
