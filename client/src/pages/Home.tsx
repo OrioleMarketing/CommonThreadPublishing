@@ -6,7 +6,7 @@
 
 import { Link } from 'wouter';
 import { ArrowRight, BookOpen, Package, Download, BookText, ShoppingBag } from 'lucide-react';
-import { books } from '@/lib/products';
+import { books, authors } from '@/lib/products';
 import BookCard from '@/components/BookCard';
 import { useState } from 'react';
 import { useShopifyCart } from '@/contexts/ShopifyCartContext';
@@ -364,6 +364,154 @@ function SeriesGallery() {
   );
 }
 
+// ── By Author Section ──────────────────────────────────────────────────────────
+
+// Author display order: Mark Mirza first, Bruce Mayo second, then others
+const AUTHOR_ORDER = ['mark-mirza', 'bruce-mayo', 'john-greenfield', 'darrel-suderman'];
+
+function AuthorBookRow({ authorId }: { authorId: string }) {
+  const { addToCart, addingId } = useShopifyCart();
+  const getAuthorById = (id: string) => authors.find(a => a.id === id);
+  const getBooksByAuthor = (id: string) => books.filter(b => b.authorIds.includes(id));
+
+  const author = getAuthorById(authorId);
+  const authorBooks = getBooksByAuthor(authorId);
+  if (!author || authorBooks.length === 0) return null;
+
+  return (
+    <div className="mb-14 last:mb-0">
+      {/* Author header */}
+      <div className="flex items-center gap-4 mb-6">
+        {author.photo && (
+          <img
+            src={author.photo}
+            alt={author.name}
+            className="w-12 h-12 object-cover"
+            style={{ borderRadius: 0, boxShadow: '2px 3px 10px rgba(26,26,46,0.15)' }}
+          />
+        )}
+        <div>
+          <h3
+            className="font-black leading-tight"
+            style={{
+              fontFamily: 'Playfair Display, serif',
+              fontSize: 'clamp(1.1rem, 2vw, 1.5rem)',
+              color: '#1A1A2E',
+            }}
+          >
+            {author.name}
+          </h3>
+          <div
+            className="text-xs tracking-widest uppercase mt-0.5"
+            style={{ fontFamily: 'Montserrat, sans-serif', color: '#C41E3A' }}
+          >
+            {authorBooks.length} {authorBooks.length === 1 ? 'Title' : 'Titles'}
+          </div>
+        </div>
+      </div>
+
+      {/* Books grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
+        {authorBooks.map(book => (
+          <div key={book.id} className="flex flex-col gap-3">
+            <Link href={`/books/${book.slug}`}>
+              <div className="group cursor-pointer">
+                <img
+                  src={book.coverImage}
+                  alt={book.title}
+                  className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  style={{ boxShadow: '4px 6px 20px rgba(26,26,46,0.15)' }}
+                />
+              </div>
+            </Link>
+            <div>
+              {book.badge && (
+                <div
+                  className="text-xs font-bold tracking-widest uppercase mb-1"
+                  style={{ fontFamily: 'Montserrat, sans-serif', color: '#C41E3A' }}
+                >
+                  {book.badge}
+                </div>
+              )}
+              <Link href={`/books/${book.slug}`}>
+                <h4
+                  className="font-bold leading-snug mb-1 hover:underline cursor-pointer"
+                  style={{ fontFamily: 'Playfair Display, serif', color: '#1A1A2E', fontSize: '0.9rem' }}
+                >
+                  {book.title}
+                </h4>
+              </Link>
+              <div
+                className="text-xs mb-2"
+                style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.45)' }}
+              >
+                ${book.price.toFixed(2)}
+              </div>
+              <button
+                onClick={() => addToCart(
+                  book.shopifyVariantId!,
+                  book.title,
+                  book.price,
+                  book.coverImage
+                )}
+                disabled={addingId === book.shopifyVariantId}
+                className="w-full py-2 text-xs font-bold tracking-widest uppercase transition-all duration-200"
+                style={{
+                  fontFamily: 'Montserrat, sans-serif',
+                  background: addingId === book.shopifyVariantId ? '#a01830' : '#C41E3A',
+                  color: '#ffffff',
+                  opacity: addingId === book.shopifyVariantId ? 0.8 : 1,
+                  cursor: addingId === book.shopifyVariantId ? 'wait' : 'pointer',
+                }}
+                onMouseEnter={e => { if (addingId !== book.shopifyVariantId) (e.currentTarget as HTMLElement).style.background = '#a01830'; }}
+                onMouseLeave={e => { if (addingId !== book.shopifyVariantId) (e.currentTarget as HTMLElement).style.background = '#C41E3A'; }}
+              >
+                {addingId === book.shopifyVariantId ? 'Adding…' : 'Add to Cart'}
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ByAuthorSection() {
+  // Collect any author IDs not in the explicit order list
+  const extraAuthorIds = authors
+    .map(a => a.id)
+    .filter(id => !AUTHOR_ORDER.includes(id));
+  const orderedIds = [...AUTHOR_ORDER, ...extraAuthorIds];
+
+  return (
+    <section
+      className="py-16"
+      style={{
+        background: '#F0EBE3',
+        borderTop: '1px solid rgba(196,30,58,0.10)',
+      }}
+    >
+      <div className="container">
+        <div className="ctp-section-label mb-3">◆ Our Authors</div>
+        <h2
+          className="font-black mb-10"
+          style={{
+            fontFamily: 'Playfair Display, serif',
+            fontSize: 'clamp(1.5rem, 3vw, 2.2rem)',
+            color: '#1A1A2E',
+            lineHeight: 1.15,
+          }}
+        >
+          Books by Author
+        </h2>
+        {orderedIds.map(id => (
+          <AuthorBookRow key={id} authorId={id} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
 // ── Home Page ────────────────────────────────────────────────────────────────
 
 export default function Home() {
@@ -557,7 +705,8 @@ export default function Home() {
           FEATURED BOOK SPOTLIGHT — white background
       ═══════════════════════════════════════════════════ */}
       <FeaturedSpotlight />
-      <SeriesGallery />
+      {/* <SeriesGallery /> — hidden for now, re-enable when series has more titles */}
+      <ByAuthorSection />
 
       {/* ═══════════════════════════════════════════════════
           ALL BOOKS — warm parchment background
