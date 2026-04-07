@@ -480,6 +480,7 @@ function AuthorBookRow({ authorId }: { authorId: string }) {
 
 const PRAYERS_BOOK_1 = books.find(b => b.id === 'the-pray-ers-book-1')!;
 const PRAYERS_BOOK_2 = books.find(b => b.id === 'the-pray-ers-book-2') ?? null;
+const PRAYERS_BOOK_3 = books.find(b => b.id === 'the-pray-ers-book-3') ?? null;
 
 function PrayersSeriesSection() {
   const { addToCart, addingId } = useShopifyCart();
@@ -647,10 +648,11 @@ function PrayersSeriesSection() {
           style={{ width: '60px', height: '2px', background: '#C41E3A' }}
         />
 
-        {/* Side-by-side books */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 max-w-2xl mx-auto">
+        {/* Three books side-by-side */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 max-w-4xl mx-auto">
           <BookPanel book={PRAYERS_BOOK_1} bookNum={1} />
           <BookPanel book={PRAYERS_BOOK_2} bookNum={2} />
+          <BookPanel book={PRAYERS_BOOK_3} bookNum={3} />
         </div>
 
         {/* View all link */}
