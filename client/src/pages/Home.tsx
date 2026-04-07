@@ -476,6 +476,200 @@ function AuthorBookRow({ authorId }: { authorId: string }) {
   );
 }
 
+// ── The Pray-ers Series Section ──────────────────────────────────────────────────────────
+
+const PRAYERS_BOOK_1 = books.find(b => b.id === 'the-pray-ers-book-1')!;
+const PRAYERS_BOOK_2 = books.find(b => b.id === 'the-pray-ers-book-2') ?? null;
+
+function PrayersSeriesSection() {
+  const { addToCart, addingId } = useShopifyCart();
+
+  const BookPanel = ({ book, bookNum }: { book: typeof PRAYERS_BOOK_1 | null; bookNum: number }) => {
+    if (!book) {
+      return (
+        <div
+          className="flex flex-col items-center gap-6"
+          style={{ opacity: 0.55 }}
+        >
+          {/* Placeholder cover */}
+          <div
+            className="w-full max-w-[240px] aspect-[2/3] flex flex-col items-center justify-center gap-3"
+            style={{
+              background: 'rgba(26,26,46,0.06)',
+              border: '2px dashed rgba(247,243,237,0.2)',
+            }}
+          >
+            <BookOpen size={36} style={{ color: 'rgba(247,243,237,0.25)' }} />
+            <span
+              className="text-sm font-bold text-center px-4"
+              style={{ fontFamily: 'Playfair Display, serif', color: 'rgba(247,243,237,0.4)', lineHeight: 1.4 }}
+            >
+              Book {bookNum}<br />Coming Soon
+            </span>
+          </div>
+          <div className="text-center">
+            <div
+              className="text-xs font-bold tracking-widest uppercase mb-1"
+              style={{ fontFamily: 'Montserrat, sans-serif', color: '#C41E3A' }}
+            >
+              SERIES • BOOK {bookNum}
+            </div>
+            <p
+              className="text-sm"
+              style={{ fontFamily: 'Lora, serif', color: 'rgba(247,243,237,0.4)', fontStyle: 'italic' }}
+            >
+              Coming soon
+            </p>
+          </div>
+        </div>
+      );
+    }
+
+    const isAdding = addingId === book.shopifyVariantId;
+
+    return (
+      <div className="flex flex-col items-center gap-6">
+        {/* Cover with hover lift */}
+        <Link href={`/books/${book.slug}`}>
+          <div
+            className="group cursor-pointer transition-transform duration-300 hover:-translate-y-2"
+            style={{ maxWidth: '240px', width: '100%' }}
+          >
+            <img
+              src={book.coverImage}
+              alt={book.title}
+              className="w-full h-auto object-cover"
+              style={{ boxShadow: '6px 10px 32px rgba(26,26,46,0.22)' }}
+            />
+          </div>
+        </Link>
+
+        {/* Info */}
+        <div className="text-center">
+          <div
+            className="text-xs font-bold tracking-widest uppercase mb-2"
+            style={{ fontFamily: 'Montserrat, sans-serif', color: '#C41E3A' }}
+          >
+            SERIES • BOOK {bookNum}
+          </div>
+          <Link href={`/books/${book.slug}`}>
+            <h3
+              className="font-black mb-1 hover:underline cursor-pointer"
+              style={{
+                fontFamily: 'Playfair Display, serif',
+                fontSize: 'clamp(1.1rem, 2vw, 1.4rem)',
+                color: '#F7F3ED',
+                lineHeight: 1.2,
+              }}
+            >
+              {book.title}
+            </h3>
+          </Link>
+          {book.subtitle && (
+            <p
+              className="text-sm mb-3"
+              style={{ fontFamily: 'Lora, serif', color: 'rgba(247,243,237,0.55)', fontStyle: 'italic' }}
+            >
+              “{book.subtitle}”
+            </p>
+          )}
+          <div
+            className="text-sm font-bold mb-4"
+            style={{ fontFamily: 'Montserrat, sans-serif', color: '#F7F3ED' }}
+          >
+            ${book.price.toFixed(2)}
+          </div>
+          <button
+            onClick={() => addToCart(book.shopifyVariantId!, book.title, book.price, book.coverImage)}
+            disabled={isAdding}
+            className="px-6 py-2.5 text-xs font-bold tracking-widest uppercase transition-all duration-200"
+            style={{
+              fontFamily: 'Montserrat, sans-serif',
+              background: isAdding ? '#a01830' : '#C41E3A',
+              color: '#ffffff',
+              opacity: isAdding ? 0.8 : 1,
+              cursor: isAdding ? 'wait' : 'pointer',
+            }}
+            onMouseEnter={e => { if (!isAdding) (e.currentTarget as HTMLElement).style.background = '#a01830'; }}
+            onMouseLeave={e => { if (!isAdding) (e.currentTarget as HTMLElement).style.background = '#C41E3A'; }}
+          >
+            {isAdding ? 'Adding…' : 'Add to Cart'}
+          </button>
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <section
+      className="py-16"
+      style={{
+        background: '#1A1A2E',
+        borderTop: '3px solid #C41E3A',
+      }}
+    >
+      <div className="container">
+        {/* Section header */}
+        <div className="text-center mb-12">
+          <div
+            className="text-xs font-bold tracking-widest uppercase mb-3"
+            style={{ fontFamily: 'Montserrat, sans-serif', color: '#C41E3A' }}
+          >
+            ◆ A Three-Book Series
+          </div>
+          <h2
+            className="font-black mb-4"
+            style={{
+              fontFamily: 'Playfair Display, serif',
+              fontSize: 'clamp(1.8rem, 4vw, 3rem)',
+              color: '#F7F3ED',
+              lineHeight: 1.1,
+            }}
+          >
+            The Pray-ers Series
+          </h2>
+          <p
+            className="text-sm leading-relaxed mx-auto"
+            style={{
+              fontFamily: 'Lora, serif',
+              color: 'rgba(247,243,237,0.6)',
+              maxWidth: '520px',
+              fontStyle: 'italic',
+            }}
+          >
+            Mark S. Mirza’s trilogy exploring the natural and supernatural world of prayer — linking 1st, 19th, and 20th century characters in a story that will fascinate, inspire, and bless.
+          </p>
+        </div>
+
+        {/* Crimson divider line */}
+        <div
+          className="mx-auto mb-12"
+          style={{ width: '60px', height: '2px', background: '#C41E3A' }}
+        />
+
+        {/* Side-by-side books */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 max-w-2xl mx-auto">
+          <BookPanel book={PRAYERS_BOOK_1} bookNum={1} />
+          <BookPanel book={PRAYERS_BOOK_2} bookNum={2} />
+        </div>
+
+        {/* View all link */}
+        <div className="text-center mt-12">
+          <Link
+            href="/books"
+            className="inline-flex items-center gap-2 text-sm font-bold tracking-wide transition-colors duration-200"
+            style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(247,243,237,0.5)' }}
+            onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = '#C41E3A')}
+            onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = 'rgba(247,243,237,0.5)')}
+          >
+            View all books <ArrowRight size={14} />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ByAuthorSection() {
   // Collect any author IDs not in the explicit order list
   const extraAuthorIds = authors
@@ -706,6 +900,7 @@ export default function Home() {
       ═══════════════════════════════════════════════════ */}
       <FeaturedSpotlight />
       {/* <SeriesGallery /> — hidden for now, re-enable when series has more titles */}
+      <PrayersSeriesSection />
       <ByAuthorSection />
 
       {/* ═══════════════════════════════════════════════════
