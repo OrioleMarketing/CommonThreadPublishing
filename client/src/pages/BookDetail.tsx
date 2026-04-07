@@ -187,19 +187,37 @@ export default function BookDetail() {
                   border: '1px solid rgba(196,30,58,0.18)',
                 }}
               >
-                <div className="flex items-baseline gap-3 mb-4">
-                  <span
-                    className="text-3xl font-black"
-                    style={{ fontFamily: 'Playfair Display, serif', color: '#1A1A2E' }}
-                  >
-                    ${book.price.toFixed(2)}
-                  </span>
-                  <span
-                    className="text-xs"
-                    style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.4)', textTransform: 'uppercase', letterSpacing: '0.08em' }}
-                  >
-                    USD · Print Edition
-                  </span>
+                <div className="flex flex-wrap items-baseline gap-4 mb-4">
+                  <div className="flex items-baseline gap-2">
+                    <span
+                      className="text-3xl font-black"
+                      style={{ fontFamily: 'Playfair Display, serif', color: '#1A1A2E' }}
+                    >
+                      ${book.price.toFixed(2)}
+                    </span>
+                    <span
+                      className="text-xs"
+                      style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.4)', textTransform: 'uppercase', letterSpacing: '0.08em' }}
+                    >
+                      USD · Print
+                    </span>
+                  </div>
+                  {book.ebookPrice && (
+                    <div className="flex items-baseline gap-2">
+                      <span
+                        className="text-2xl font-black"
+                        style={{ fontFamily: 'Playfair Display, serif', color: '#C41E3A' }}
+                      >
+                        ${book.ebookPrice.toFixed(2)}
+                      </span>
+                      <span
+                        className="text-xs"
+                        style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.4)', textTransform: 'uppercase', letterSpacing: '0.08em' }}
+                      >
+                        USD · eBook
+                      </span>
+                    </div>
+                  )}
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-3">
@@ -225,13 +243,13 @@ export default function BookDetail() {
                   )}
                   {book.format === 'ebook' || book.format === 'both' ? (
                     <a
-                      href={book.shopifyUrl}
+                      href={book.fulfillmentUrl || book.shopifyUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="ctp-btn-outline flex items-center justify-center gap-2 flex-1"
                     >
                       <Download size={16} />
-                      Buy eBook
+                      Buy eBook{book.ebookPrice ? ` — $${book.ebookPrice.toFixed(2)}` : ''}
                     </a>
                   ) : (
                     <a
