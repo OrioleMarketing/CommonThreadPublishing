@@ -375,7 +375,26 @@ function AuthorBookRow({ authorId }: { authorId: string }) {
   const getBooksByAuthor = (id: string) => books.filter(b => b.authorIds.includes(id));
 
   const author = getAuthorById(authorId);
-  const authorBooks = getBooksByAuthor(authorId);
+  const rawBooks = getBooksByAuthor(authorId);
+
+  // Custom display order for Mark Mirza:
+  // Pray-ers series (1, 2, 3) → Divided series → Power From On High → Johnstown Tragedy
+  const MIRZA_ORDER = [
+    'the-pray-ers-book-1',
+    'the-pray-ers-book-2',
+    'the-pray-ers-book-3',
+    'divided-nation',
+    'divided-together',
+    'power-from-on-high',
+    'the-johnstown-tragedy',
+  ];
+  const authorBooks = authorId === 'mark-mirza'
+    ? [
+        ...MIRZA_ORDER.map(id => rawBooks.find(b => b.id === id)).filter(Boolean) as typeof rawBooks,
+        ...rawBooks.filter(b => !MIRZA_ORDER.includes(b.id)),
+      ]
+    : rawBooks;
+
   if (!author || authorBooks.length === 0) return null;
 
   return (
