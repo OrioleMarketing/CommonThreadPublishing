@@ -812,7 +812,7 @@ export default function Home() {
 
             <div className="flex gap-10 mt-12 animate-fade-up-delay-4">
               {[
-                { value: '7+', label: 'Titles Published' },
+                { value: '10+', label: 'Titles Published' },
                 { value: '4', label: 'Authors' },
                 { value: '150+', label: 'Countries Shipped' },
               ].map(stat => (
