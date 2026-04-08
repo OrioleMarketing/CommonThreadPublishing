@@ -863,7 +863,7 @@ export default function Home() {
               {
                 icon: Package,
                 title: 'Print Books',
-                desc: 'High-quality paperback and hardcover editions shipped directly to your door. Available to readers in over 150 countries.',
+                desc: 'We use Print On Demand — every book is printed and shipped within 3–5 business days, delivered directly to your door in over 150 countries.',
                 label: 'Physical Books',
               },
               {
