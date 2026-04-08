@@ -271,7 +271,7 @@ export default function BookDetail() {
                     className="text-xs leading-relaxed"
                     style={{ fontFamily: 'Lora, serif', color: 'rgba(26,26,46,0.45)' }}
                   >
-                    Print editions ship directly to your door. We deliver to 150+ countries within 3–5 business days. Shipping rates are calculated at checkout.
+                    Print editions ship to 150+ countries and are normally printed within 3–5 business days. Shipping rates are calculated at checkout. eBook editions are available for immediate download.
                   </p>
                 </div>
               </div>
