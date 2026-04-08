@@ -40,9 +40,21 @@ export default function BookDetail() {
     addToCart(book.shopifyVariantId, book.title, book.price, book.coverImage);
   };
 
-  const relatedBooks = books
-    .filter(b => b.id !== book.id && b.genre.some(g => book.genre.includes(g)))
-    .slice(0, 4);
+  // Related books: same series first, then same genre — but never mix books from different named series
+  const sameSeries = book.series
+    ? books.filter(b => b.id !== book.id && b.series === book.series)
+    : [];
+  const sameGenreOtherSeries = books.filter(
+    b =>
+      b.id !== book.id &&
+      b.genre.some(g => book.genre.includes(g)) &&
+      // exclude books that belong to a different named series
+      (!b.series || !book.series || b.series === book.series)
+  );
+  const relatedBooks = [
+    ...sameSeries,
+    ...sameGenreOtherSeries.filter(b => !sameSeries.find(s => s.id === b.id)),
+  ].slice(0, 4);
 
   return (
     <div className="min-h-screen" style={{ background: '#ffffff' }}>
