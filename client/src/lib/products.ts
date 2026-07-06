@@ -32,6 +32,7 @@ export interface Book {
   coverImage: string;
   shopifyUrl: string;
   fulfillmentUrl?: string;
+  ebookShopifyVariantId?: string;
   featured?: boolean;
   comingSoon?: boolean;
   badge?: string;
@@ -149,7 +150,8 @@ export const books: Book[] = [
     price: 27.00,
     ebookPrice: 27.00,
     format: 'both',
-    fulfillmentUrl: 'https://www.lulu.com/shop/bruce-a-mayo/the-christian-life-finally-makes-sense/ebook/product-yvegjj8.html?page=1&pageSize=4',
+    ebookShopifyVariantId: 'gid://shopify/ProductVariant/48797801677055',
+    fulfillmentUrl: undefined,
     genre: ['biblical', 'nonfiction'],
     coverImage: 'https://store.commonthreadpublishing.com/cdn/shop/files/je2d5p5-front-shortedge-384.jpg?v=1783295120',
     shopifyUrl: 'https://store.commonthreadpublishing.com/products/the-christian-life-finally-makes-sense',

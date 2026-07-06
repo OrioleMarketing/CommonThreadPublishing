@@ -254,6 +254,15 @@ export default function BookDetail() {
                     </a>
                   )}
                   {book.format === 'ebook' || book.format === 'both' ? (
+                    book.ebookShopifyVariantId ? (
+                      <button
+                        onClick={() => addToCart(book.ebookShopifyVariantId!, `${book.title} (eBook)`, book.ebookPrice ?? book.price, book.coverImage)}
+                        className="ctp-btn-outline flex items-center justify-center gap-2 flex-1"
+                      >
+                        <Download size={16} />
+                        Add eBook to Cart{book.ebookPrice ? ` — $${book.ebookPrice.toFixed(2)}` : ''}
+                      </button>
+                    ) : (
                     <a
                       href={book.fulfillmentUrl || book.shopifyUrl}
                       target="_blank"
@@ -263,6 +272,7 @@ export default function BookDetail() {
                       <Download size={16} />
                       Buy eBook{book.ebookPrice ? ` — $${book.ebookPrice.toFixed(2)}` : ''}
                     </a>
+                    )
                   ) : (
                     <a
                       href={book.shopifyUrl}
