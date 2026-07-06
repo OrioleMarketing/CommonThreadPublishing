@@ -127,6 +127,18 @@ function KingdomContinuumSection() {
 
   const books3 = [BIBLE_BOOK, CHRISTIAN_LIFE_BOOK, WORLD_BOOK];
 
+  // Helper: get the eBook variant ID for a book (Shopify-based eBooks only)
+  const getEbookVariantId = (book: typeof BIBLE_BOOK) => {
+    if (book.id === BIBLE_BOOK.id) return BIBLE_EBOOK_VARIANT_ID;
+    if (book.ebookShopifyVariantId) return book.ebookShopifyVariantId;
+    return null;
+  };
+
+  const getEbookPrice = (book: typeof BIBLE_BOOK) => {
+    if (book.id === BIBLE_BOOK.id) return BIBLE_EBOOK_PRICE;
+    return book.ebookPrice ?? book.price;
+  };
+
   return (
     <section className="py-20" style={{ background: '#ffffff' }}>
       <div className="container">
@@ -141,7 +153,8 @@ function KingdomContinuumSection() {
           {books3.map((book) => {
             const isComingSoon = book.comingSoon;
             const isAddingPrint = addingId === book.shopifyVariantId;
-            const isAddingEbook = addingId === BIBLE_EBOOK_VARIANT_ID && book.id === BIBLE_BOOK.id;
+            const ebookVariantId = getEbookVariantId(book);
+            const isAddingEbook = !!ebookVariantId && addingId === ebookVariantId;
             return (
               <div key={book.id} className="flex flex-col gap-5">
                 {/* Cover */}
@@ -215,10 +228,10 @@ function KingdomContinuumSection() {
                           {isAddingPrint ? 'Adding…' : `Paperback — $${book.price.toFixed(2)}`}
                         </button>
                       )}
-                      {/* eBook — only Bible book has it on the spotlight */}
-                      {book.id === BIBLE_BOOK.id && (
+                      {/* eBook — shown for any book with a Shopify eBook variant */}
+                      {ebookVariantId && (
                         <button
-                          onClick={() => addToCart(BIBLE_EBOOK_VARIANT_ID, book.title + ' (eBook)', BIBLE_EBOOK_PRICE, book.coverImage)}
+                          onClick={() => addToCart(ebookVariantId, book.title + ' (eBook)', getEbookPrice(book), book.coverImage)}
                           disabled={isAddingEbook}
                           className="flex items-center gap-2 px-4 py-2 text-xs font-bold tracking-wide transition-all duration-200"
                           style={{
@@ -232,7 +245,7 @@ function KingdomContinuumSection() {
                           onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'transparent'; (e.currentTarget as HTMLElement).style.color = '#1A1A2E'; }}
                         >
                           <BookText size={13} />
-                          {isAddingEbook ? 'Adding…' : `eBook — $${BIBLE_EBOOK_PRICE.toFixed(2)}`}
+                          {isAddingEbook ? 'Adding…' : `eBook — $${getEbookPrice(book).toFixed(2)}`}
                         </button>
                       )}
                       {/* View details link */}
