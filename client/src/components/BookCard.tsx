@@ -148,57 +148,81 @@ export default function BookCard({ book, size = 'default' }: BookCardProps) {
           className="flex items-center justify-between mt-auto pt-3"
           style={{ borderTop: '1px solid rgba(26,26,46,0.08)' }}
         >
-          <span
-            className="font-bold"
-            style={{
-              fontFamily: 'Montserrat, sans-serif',
-              fontSize: '1rem',
-              color: '#1A1A2E',
-            }}
-          >
-            ${book.price.toFixed(2)}
-          </span>
-
-          {/* Add to Cart button — standalone, NOT inside any <a> */}
-          {book.shopifyVariantId ? (
-            <button
-              onClick={handleAddToCart}
-              disabled={isAdding}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-white transition-colors duration-200 disabled:opacity-70"
-              style={{
-                background: '#C41E3A',
-                fontFamily: 'Montserrat, sans-serif',
-                fontSize: '0.65rem',
-                fontWeight: 600,
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
-              }}
-              onMouseEnter={e => { if (!isAdding) (e.currentTarget as HTMLElement).style.background = '#a01830'; }}
-              onMouseLeave={e => { if (!isAdding) (e.currentTarget as HTMLElement).style.background = '#C41E3A'; }}
-            >
-              {isAdding ? <Loader2 size={11} className="animate-spin" /> : <ShoppingCart size={11} />}
-              {isAdding ? 'Adding…' : 'Add to Cart'}
-            </button>
+          {book.comingSoon ? (
+            <>
+              <span
+                className="font-bold"
+                style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '0.85rem', color: 'rgba(26,26,46,0.35)' }}
+              >
+                Coming Soon
+              </span>
+              <span
+                className="px-2 py-1 text-xs font-bold tracking-widest uppercase"
+                style={{
+                  fontFamily: 'Montserrat, sans-serif',
+                  border: '1px dashed rgba(196,30,58,0.3)',
+                  color: 'rgba(196,30,58,0.5)',
+                  fontSize: '0.6rem',
+                }}
+              >
+                Notify Me
+              </span>
+            </>
           ) : (
-            <a
-              href={book.shopifyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 text-white transition-colors duration-200"
-              style={{
-                background: '#C41E3A',
-                fontFamily: 'Montserrat, sans-serif',
-                fontSize: '0.65rem',
-                fontWeight: 600,
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
-              }}
-              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = '#a01830')}
-              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = '#C41E3A')}
-            >
-              <ShoppingCart size={11} />
-              Buy
-            </a>
+            <>
+              <span
+                className="font-bold"
+                style={{
+                  fontFamily: 'Montserrat, sans-serif',
+                  fontSize: '1rem',
+                  color: '#1A1A2E',
+                }}
+              >
+                ${book.price.toFixed(2)}
+              </span>
+
+              {/* Add to Cart button — standalone, NOT inside any <a> */}
+              {book.shopifyVariantId ? (
+                <button
+                  onClick={handleAddToCart}
+                  disabled={isAdding}
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-white transition-colors duration-200 disabled:opacity-70"
+                  style={{
+                    background: '#C41E3A',
+                    fontFamily: 'Montserrat, sans-serif',
+                    fontSize: '0.65rem',
+                    fontWeight: 600,
+                    letterSpacing: '0.1em',
+                    textTransform: 'uppercase',
+                  }}
+                  onMouseEnter={e => { if (!isAdding) (e.currentTarget as HTMLElement).style.background = '#a01830'; }}
+                  onMouseLeave={e => { if (!isAdding) (e.currentTarget as HTMLElement).style.background = '#C41E3A'; }}
+                >
+                  {isAdding ? <Loader2 size={11} className="animate-spin" /> : <ShoppingCart size={11} />}
+                  {isAdding ? 'Adding…' : 'Add to Cart'}
+                </button>
+              ) : (
+                <a
+                  href={book.shopifyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-white transition-colors duration-200"
+                  style={{
+                    background: '#C41E3A',
+                    fontFamily: 'Montserrat, sans-serif',
+                    fontSize: '0.65rem',
+                    fontWeight: 600,
+                    letterSpacing: '0.1em',
+                    textTransform: 'uppercase',
+                  }}
+                  onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = '#a01830')}
+                  onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = '#C41E3A')}
+                >
+                  <ShoppingCart size={11} />
+                  Buy
+                </a>
+              )}
+            </>
           )}
         </div>
       </div>

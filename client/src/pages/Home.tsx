@@ -18,10 +18,154 @@ const NEWSLETTER_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/
 // ── Featured Spotlight ──────────────────────────────────────────────────────
 
 const BIBLE_BOOK = books.find(b => b.id === 'the-bible-finally-makes-sense')!;
-// TODO: Replace BIBLE_EBOOK_VARIANT_ID with the real Shopify variant ID once the eBook
-// product is created in the Shopify admin. For now the eBook button links to the store.
 const BIBLE_EBOOK_VARIANT_ID = 'gid://shopify/ProductVariant/48304285548799'; // The Bible Finally Makes Sense (eBook)
 const BIBLE_EBOOK_PRICE = 27.00;
+const CHRISTIAN_LIFE_BOOK = books.find(b => b.id === 'the-christian-life-finally-makes-sense')!;
+const WORLD_BOOK = books.find(b => b.id === 'the-world-finally-makes-sense')!;
+
+function KingdomContinuumSection() {
+  const { addToCart, addingId } = useShopifyCart();
+
+  const books3 = [BIBLE_BOOK, CHRISTIAN_LIFE_BOOK, WORLD_BOOK];
+
+  return (
+    <section className="py-20" style={{ background: '#ffffff' }}>
+      <div className="container">
+        <div className="ctp-section-label mb-3">◆ The Kingdom Continuum Series</div>
+        <p
+          className="text-base italic mb-12"
+          style={{ fontFamily: 'Lora, serif', color: 'rgba(26,26,46,0.55)', maxWidth: '560px' }}
+        >
+          Bruce A. Mayo's three-volume journey through Scripture — from understanding the Bible's unified story, to living under the reign of the King, to going out as His ambassador to the world.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          {books3.map((book) => {
+            const isComingSoon = book.comingSoon;
+            const isAddingPrint = addingId === book.shopifyVariantId;
+            const isAddingEbook = addingId === BIBLE_EBOOK_VARIANT_ID && book.id === BIBLE_BOOK.id;
+            return (
+              <div key={book.id} className="flex flex-col gap-5">
+                {/* Cover */}
+                <Link href={isComingSoon ? '#' : `/books/${book.slug}`}>
+                  <div
+                    className="relative group cursor-pointer overflow-hidden"
+                    style={{ maxWidth: '100%', aspectRatio: '2/3' }}
+                  >
+                    <img
+                      src={book.coverImage}
+                      alt={book.title}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                      style={{ boxShadow: '6px 10px 32px rgba(26,26,46,0.18)' }}
+                    />
+                    {isComingSoon && (
+                      <div
+                        className="absolute inset-0 flex items-center justify-center"
+                        style={{ background: 'rgba(26,26,46,0.55)' }}
+                      >
+                        <div
+                          className="px-4 py-2 text-xs font-bold tracking-widest uppercase"
+                          style={{ fontFamily: 'Montserrat, sans-serif', background: '#C41E3A', color: '#ffffff' }}
+                        >
+                          Coming Soon
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </Link>
+
+                {/* Info */}
+                <div className="flex flex-col gap-2">
+                  <div
+                    className="text-xs font-bold tracking-widest uppercase"
+                    style={{ fontFamily: 'Montserrat, sans-serif', color: '#C41E3A' }}
+                  >
+                    Book {book.seriesNumber}
+                  </div>
+                  <h3
+                    className="font-black leading-tight"
+                    style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.15rem', color: '#1A1A2E' }}
+                  >
+                    {book.title}
+                  </h3>
+                  {book.subtitle && (
+                    <p className="text-sm italic" style={{ fontFamily: 'Lora, serif', color: 'rgba(26,26,46,0.55)' }}>
+                      {book.subtitle}
+                    </p>
+                  )}
+
+                  {isComingSoon ? (
+                    <div
+                      className="mt-2 px-4 py-2 text-xs font-bold tracking-widest uppercase text-center"
+                      style={{
+                        fontFamily: 'Montserrat, sans-serif',
+                        border: '2px dashed rgba(196,30,58,0.35)',
+                        color: 'rgba(26,26,46,0.4)',
+                      }}
+                    >
+                      Coming Soon
+                    </div>
+                  ) : (
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {/* Paperback */}
+                      {book.shopifyVariantId && (
+                        <button
+                          onClick={() => addToCart(book.shopifyVariantId!, book.title + ' (Paperback)', book.price, book.coverImage)}
+                          disabled={isAddingPrint}
+                          className="flex items-center gap-2 px-4 py-2 text-xs font-bold tracking-wide transition-all duration-200"
+                          style={{
+                            fontFamily: 'Montserrat, sans-serif',
+                            background: isAddingPrint ? '#a01830' : '#C41E3A',
+                            color: '#ffffff',
+                            opacity: isAddingPrint ? 0.8 : 1,
+                          }}
+                          onMouseEnter={e => { if (!isAddingPrint) (e.currentTarget as HTMLElement).style.background = '#a01830'; }}
+                          onMouseLeave={e => { if (!isAddingPrint) (e.currentTarget as HTMLElement).style.background = '#C41E3A'; }}
+                        >
+                          <ShoppingBag size={13} />
+                          {isAddingPrint ? 'Adding…' : `Paperback — $${book.price.toFixed(2)}`}
+                        </button>
+                      )}
+                      {/* eBook — only Bible book has it on the spotlight */}
+                      {book.id === BIBLE_BOOK.id && (
+                        <button
+                          onClick={() => addToCart(BIBLE_EBOOK_VARIANT_ID, book.title + ' (eBook)', BIBLE_EBOOK_PRICE, book.coverImage)}
+                          disabled={isAddingEbook}
+                          className="flex items-center gap-2 px-4 py-2 text-xs font-bold tracking-wide transition-all duration-200"
+                          style={{
+                            fontFamily: 'Montserrat, sans-serif',
+                            background: 'transparent',
+                            color: '#1A1A2E',
+                            border: '2px solid #1A1A2E',
+                            opacity: isAddingEbook ? 0.6 : 1,
+                          }}
+                          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#1A1A2E'; (e.currentTarget as HTMLElement).style.color = '#ffffff'; }}
+                          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'transparent'; (e.currentTarget as HTMLElement).style.color = '#1A1A2E'; }}
+                        >
+                          <BookText size={13} />
+                          {isAddingEbook ? 'Adding…' : `eBook — $${BIBLE_EBOOK_PRICE.toFixed(2)}`}
+                        </button>
+                      )}
+                      {/* View details link */}
+                      <Link
+                        href={`/books/${book.slug}`}
+                        className="inline-flex items-center gap-1 text-xs transition-colors duration-200"
+                        style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.4)' }}
+                        onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = '#C41E3A')}
+                        onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = 'rgba(26,26,46,0.4)')}
+                      >
+                        View details <ArrowRight size={12} />
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function FeaturedSpotlight() {
   const { addToCart, addingId } = useShopifyCart();
@@ -30,7 +174,7 @@ function FeaturedSpotlight() {
   const isAddingEbook = addingId === BIBLE_EBOOK_VARIANT_ID;
 
   return (
-    <section className="py-20" style={{ background: '#ffffff' }}>
+    <section className="py-20" style={{ background: '#ffffff', display: 'none' }}>
       <div className="container">
         <div className="ctp-section-label mb-3">◆ Featured Title</div>
         <div
@@ -812,7 +956,7 @@ export default function Home() {
 
             <div className="flex gap-10 mt-12 animate-fade-up-delay-4">
               {[
-                { value: '10+', label: 'Titles Published' },
+                { value: '11+', label: 'Titles Published' },
                 { value: '4', label: 'Authors' },
                 { value: '150+', label: 'Countries Shipped' },
               ].map(stat => (
@@ -917,10 +1061,12 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════
-          FEATURED BOOK SPOTLIGHT — white background
+          KINGDOM CONTINUUM SERIES — white background
       ═══════════════════════════════════════════════════ */}
-      <FeaturedSpotlight />
-      {/* <SeriesGallery /> — hidden for now, re-enable when series has more titles */}
+      <KingdomContinuumSection />
+      {/* ═══════════════════════════════════════════════════
+          PRAY-ERS SERIES — dark navy background
+      ═══════════════════════════════════════════════════ */}
       <PrayersSeriesSection />
       <ByAuthorSection />
 

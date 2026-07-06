@@ -33,6 +33,7 @@ export interface Book {
   shopifyUrl: string;
   fulfillmentUrl?: string;
   featured?: boolean;
+  comingSoon?: boolean;
   badge?: string;
   isbn?: string;
   pages?: number;
@@ -154,6 +155,25 @@ export const books: Book[] = [
     featured: true,
     badge: 'SERIES',
     publishedYear: 2025,
+  },
+  {
+    id: 'the-world-finally-makes-sense',
+    slug: 'the-world-finally-makes-sense',
+    title: 'The World Finally Makes Sense',
+    subtitle: 'A Kingdom Citizen\'s Guide to Living as an Ambassador of the King',
+    series: 'The Kingdom Continuum Series',
+    seriesNumber: 3,
+    authorIds: ['bruce-mayo'],
+    description: 'The third and final volume of The Kingdom Continuum Series. Having discovered the story of Scripture and learned what it means to live under the reign of the King, readers are now called outward — to live as ambassadors of Christ in a world that desperately needs the Kingdom. Bruce A. Mayo guides readers through the themes of King, Church, Ambassador, Mission, and Restoration, showing how every believer is sent into the world with a purpose that transcends culture, politics, and circumstance.',
+    price: 27.00,
+    format: 'print',
+    genre: ['biblical', 'nonfiction'],
+    coverImage: '/manus-storage/kingdom-continuum-book3-cover_3efcd891.png',
+    shopifyUrl: 'https://store.commonthreadpublishing.com',
+    comingSoon: true,
+    featured: true,
+    badge: 'COMING SOON',
+    publishedYear: 2026,
   },
   {
     id: 'the-johnstown-tragedy',
