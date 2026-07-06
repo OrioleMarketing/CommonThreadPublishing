@@ -152,21 +152,26 @@ export default function BookCard({ book, size = 'default' }: BookCardProps) {
             <>
               <span
                 className="font-bold"
-                style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '0.85rem', color: 'rgba(26,26,46,0.35)' }}
+                style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '0.85rem', color: '#C41E3A' }}
               >
                 Coming Soon
               </span>
-              <span
-                className="px-2 py-1 text-xs font-bold tracking-widest uppercase"
+              <Link
+                href={`/books/${book.slug}`}
+                className="flex items-center gap-1.5 px-3 py-1.5 text-white transition-colors duration-200"
                 style={{
+                  background: '#C41E3A',
                   fontFamily: 'Montserrat, sans-serif',
-                  border: '1px dashed rgba(196,30,58,0.3)',
-                  color: 'rgba(196,30,58,0.5)',
-                  fontSize: '0.6rem',
+                  fontSize: '0.65rem',
+                  fontWeight: 600,
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
                 }}
+                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = '#a01830')}
+                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = '#C41E3A')}
               >
                 Notify Me
-              </span>
+              </Link>
             </>
           ) : (
             <>

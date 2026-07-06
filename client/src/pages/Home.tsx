@@ -40,10 +40,10 @@ function NotifyMeForm() {
   }, []);
 
   return (
-    <div className="mt-3" style={{ width: '100%', minHeight: '220px' }}>
+    <div className="mt-2" style={{ width: '100%' }}>
       <iframe
         src={`https://api.oriolemarketing.com/widget/form/${GHL_FORM_ID}`}
-        style={{ width: '100%', height: '220px', border: 'none', borderRadius: '4px', display: 'block' }}
+        style={{ width: '100%', height: '418px', border: 'none', borderRadius: '4px', display: 'block' }}
         id={`inline-${GHL_FORM_ID}`}
         data-layout="{'id':'INLINE'}"
         data-trigger-type="alwaysShow"
@@ -53,7 +53,7 @@ function NotifyMeForm() {
         data-deactivation-type="neverDeactivate"
         data-deactivation-value=""
         data-form-name="Book 3 Sign up"
-        data-height="220"
+        data-height="418"
         data-layout-iframe-id={`inline-${GHL_FORM_ID}`}
         data-form-id={GHL_FORM_ID}
         title="Book 3 Sign up"
@@ -89,7 +89,7 @@ function KingdomContinuumSection() {
         >
           Bruce A. Mayo's three-volume journey through Scripture — from understanding the Bible's unified story, to living under the reign of the King, to going out as His ambassador to the world.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
           {books3.map((book) => {
             const isComingSoon = book.comingSoon;
             const isAddingPrint = addingId === book.shopifyVariantId;
@@ -146,7 +146,20 @@ function KingdomContinuumSection() {
                   )}
 
                   {isComingSoon ? (
-                    <NotifyMeForm />
+                    <div className="flex flex-col gap-2 mt-2">
+                      <div className="flex items-center gap-2">
+                        <span
+                          className="inline-block px-3 py-1 text-xs font-bold tracking-widest uppercase"
+                          style={{ fontFamily: 'Montserrat, sans-serif', background: 'rgba(196,30,58,0.08)', color: '#C41E3A', border: '1.5px solid rgba(196,30,58,0.25)' }}
+                        >
+                          Coming Soon
+                        </span>
+                      </div>
+                      <p className="text-xs italic" style={{ fontFamily: 'Lora, serif', color: 'rgba(26,26,46,0.5)' }}>
+                        Be the first to know — sign up below:
+                      </p>
+                      <NotifyMeForm />
+                    </div>
                   ) : (
                     <div className="flex flex-wrap gap-2 mt-2">
                       {/* Paperback */}
