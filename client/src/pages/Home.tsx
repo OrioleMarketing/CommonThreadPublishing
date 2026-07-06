@@ -5,10 +5,10 @@
  */
 
 import { Link } from 'wouter';
-import { ArrowRight, BookOpen, Package, Download, BookText, ShoppingBag, Bell, CheckCircle } from 'lucide-react';
+import { ArrowRight, BookOpen, Package, Download, BookText, ShoppingBag } from 'lucide-react';
 import { books, authors } from '@/lib/products';
 import BookCard from '@/components/BookCard';
-import { useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useShopifyCart } from '@/contexts/ShopifyCartContext';
 
 const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/hero_bg_b8112d9c.jpg';
@@ -23,102 +23,42 @@ const BIBLE_EBOOK_PRICE = 27.00;
 const CHRISTIAN_LIFE_BOOK = books.find(b => b.id === 'the-christian-life-finally-makes-sense')!;
 const WORLD_BOOK = books.find(b => b.id === 'the-world-finally-makes-sense')!;
 
-// ── Notify Me Form (Book 3 Coming Soon) ─────────────────────────────────────
-// To activate: create a free account at https://formspree.io, create a new form,
-// and replace FORMSPREE_FORM_ID below with your form's ID (e.g. 'xpwzgkqr').
-const FORMSPREE_FORM_ID = 'YOUR_FORMSPREE_FORM_ID';
+// ── Notify Me Form (Book 3 Coming Soon) — GoHighLevel embed ─────────────────
+const GHL_FORM_ID = 'JykOOZfXSDRwViTWmPrY';
 
 function NotifyMeForm() {
-  const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email || status === 'submitting') return;
-    setStatus('submitting');
-    try {
-      const res = await fetch(`https://formspree.io/f/${FORMSPREE_FORM_ID}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ email, book: 'The World Finally Makes Sense' }),
-      });
-      if (res.ok) {
-        setStatus('success');
-        setEmail('');
-      } else {
-        setStatus('error');
-      }
-    } catch {
-      setStatus('error');
+  useEffect(() => {
+    // Load the GHL form embed script if not already present
+    const scriptId = 'ghl-form-embed-script';
+    if (!document.getElementById(scriptId)) {
+      const script = document.createElement('script');
+      script.id = scriptId;
+      script.src = 'https://api.oriolemarketing.com/js/form_embed.js';
+      script.async = true;
+      document.body.appendChild(script);
     }
-  };
-
-  if (status === 'success') {
-    return (
-      <div
-        className="mt-3 flex items-center gap-2 px-4 py-3"
-        style={{ background: 'rgba(196,30,58,0.06)', border: '1.5px solid rgba(196,30,58,0.25)' }}
-      >
-        <CheckCircle size={15} style={{ color: '#C41E3A', flexShrink: 0 }} />
-        <span
-          className="text-xs font-semibold"
-          style={{ fontFamily: 'Montserrat, sans-serif', color: '#1A1A2E' }}
-        >
-          You're on the list! We'll notify you at launch.
-        </span>
-      </div>
-    );
-  }
+  }, []);
 
   return (
-    <form onSubmit={handleSubmit} className="mt-3 flex flex-col gap-2">
-      <label
-        className="text-xs font-bold tracking-widest uppercase"
-        style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.5)' }}
-      >
-        Notify me at launch
-      </label>
-      <div className="flex gap-0">
-        <input
-          ref={inputRef}
-          type="email"
-          required
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          placeholder="your@email.com"
-          className="flex-1 px-3 py-2 text-sm outline-none"
-          style={{
-            fontFamily: 'Lora, serif',
-            background: '#f8f5f0',
-            border: '1.5px solid rgba(26,26,46,0.18)',
-            borderRight: 'none',
-            color: '#1A1A2E',
-          }}
-        />
-        <button
-          type="submit"
-          disabled={status === 'submitting'}
-          className="flex items-center gap-1.5 px-4 py-2 text-xs font-bold tracking-wide transition-all duration-200"
-          style={{
-            fontFamily: 'Montserrat, sans-serif',
-            background: status === 'submitting' ? '#a01830' : '#C41E3A',
-            color: '#ffffff',
-            flexShrink: 0,
-          }}
-          onMouseEnter={e => { if (status !== 'submitting') (e.currentTarget as HTMLElement).style.background = '#a01830'; }}
-          onMouseLeave={e => { if (status !== 'submitting') (e.currentTarget as HTMLElement).style.background = '#C41E3A'; }}
-        >
-          <Bell size={12} />
-          {status === 'submitting' ? '…' : 'Notify Me'}
-        </button>
-      </div>
-      {status === 'error' && (
-        <p className="text-xs" style={{ color: '#C41E3A', fontFamily: 'Lora, serif' }}>
-          Something went wrong. Please try again.
-        </p>
-      )}
-    </form>
+    <div className="mt-3" style={{ width: '100%', minHeight: '220px' }}>
+      <iframe
+        src={`https://api.oriolemarketing.com/widget/form/${GHL_FORM_ID}`}
+        style={{ width: '100%', height: '220px', border: 'none', borderRadius: '4px', display: 'block' }}
+        id={`inline-${GHL_FORM_ID}`}
+        data-layout="{'id':'INLINE'}"
+        data-trigger-type="alwaysShow"
+        data-trigger-value=""
+        data-activation-type="alwaysActivated"
+        data-activation-value=""
+        data-deactivation-type="neverDeactivate"
+        data-deactivation-value=""
+        data-form-name="Book 3 Sign up"
+        data-height="220"
+        data-layout-iframe-id={`inline-${GHL_FORM_ID}`}
+        data-form-id={GHL_FORM_ID}
+        title="Book 3 Sign up"
+      />
+    </div>
   );
 }
 
