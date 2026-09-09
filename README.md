@@ -10,13 +10,13 @@ Install dependencies with `pnpm install`, then run `pnpm dev`. Use `pnpm check` 
 
 The repository is prepared for the existing Vercel `common-thread` project. Vercel must build with `pnpm build:web`, publish `dist/public`, and preserve the rewrites in `vercel.json` so direct visits to routes such as `/books/the-bible-finally-makes-sense` load correctly.
 
-Set this public environment variable in Vercel before the production deployment:
+The application defaults to the verified S3 regional asset base below. You may optionally set this public environment variable in Vercel to override it later with a CloudFront HTTPS domain:
 
 ```bash
-VITE_ASSET_BASE_URL=https://common-thread-publishing.s3.us-east-2.amazonaws.com
+VITE_ASSET_BASE_URL=https://cdn.example.com
 ```
 
-If a CloudFront distribution is introduced later, replace the value with that HTTPS domain and redeploy; no source code changes will be needed.
+If a CloudFront distribution is introduced later, use its HTTPS domain for the variable above and redeploy; no source code changes will be needed.
 
 ## Amazon S3 asset migration
 

@@ -19,8 +19,25 @@ Visible prices now load from the Shopify Storefront API when each site session o
 
 ## External Hosting Migration
 
-- [ ] Prepare Vercel-compatible static deployment and single-page routing configuration for the existing `common-thread` project.
-- [ ] Transfer the current source to `OrioleMarketing/CommonThreadPublishing`.
-- [ ] Inventory externally hosted images and define the Amazon S3 `common-thread-publishing` bucket target path structure in `us-east-2`.
-- [ ] Move Manus-hosted image assets to the provided S3 bucket and update source URLs.
+- [x] Prepare Vercel-compatible static deployment and single-page routing configuration for the existing `common-thread` project.
+- [x] Transfer the current source to `OrioleMarketing/CommonThreadPublishing`.
+- [x] Inventory externally hosted images and define the Amazon S3 `common-thread-publishing` bucket target path structure in `us-east-2`.
+- [x] Move Manus-hosted image assets to the provided S3 bucket and update source URLs.
 - [ ] Deploy through Vercel and verify the custom-domain transition plan.
+
+## Migration Status
+
+The complete source has been pushed to the requested GitHub repository. Nineteen site-owned image assets have been staged locally under the final S3 object-key structure. The actual S3 upload is pending authorized AWS access. The existing Vercel `common-thread` project is presently linked to `OrioleMarketing/Common-Thread`, so its Git connection must be changed to `OrioleMarketing/CommonThreadPublishing` before automatic Git-based deployment can begin.
+
+## Vercel Deployment Result
+
+Vercel connected `OrioleMarketing/CommonThreadPublishing` to the existing `commonthreadpublishing` project (`prj_jV4DijtoGLfEbEIVgiFQryKqF7Qf`) in the Oriole Marketing team and created a verified preview deployment. The current preview is available at `https://commonthreadpublishing-k2e5kcjr7-oriole-marketing-projects.vercel.app`; its production branch is `main`.
+
+## AWS Access Setup
+
+- [x] Create a temporary IAM user or access key with upload-only access to `common-thread-publishing/assets/*`.
+- [x] Confirm that uploaded images can be publicly retrieved from the production asset base URL.
+
+## S3 Transfer Result
+
+Nineteen site-owned assets (25.7 MiB) now reside under `s3://common-thread-publishing/assets/` and resolve publicly from `https://common-thread-publishing.s3.us-east-2.amazonaws.com`. The production code now defaults to that S3 base, so Vercel has no dependency on Manus asset hosting. A future CloudFront domain can be substituted through `VITE_ASSET_BASE_URL` without changing the source.
