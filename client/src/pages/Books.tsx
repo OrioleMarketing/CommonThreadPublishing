@@ -5,6 +5,7 @@
  */
 
 import { useState } from 'react';
+import { Link } from 'wouter';
 import { books, BookGenre } from '@/lib/products';
 import BookCard from '@/components/BookCard';
 import { siteAsset } from '@/lib/assets';
@@ -19,6 +20,10 @@ const GENRE_FILTERS: { value: 'all' | BookGenre; label: string }[] = [
   { value: 'historical', label: 'Historical' },
   { value: 'devotional', label: 'Devotional' },
 ];
+
+const FEATURED_SERIES = books
+  .filter(book => book.series === 'The Kingdom Continuum Series')
+  .sort((first, second) => (first.seriesNumber ?? 0) - (second.seriesNumber ?? 0));
 
 export default function Books() {
   const [activeFilter, setActiveFilter] = useState<'all' | BookGenre>('all');
@@ -110,8 +115,86 @@ export default function Books() {
         </div>
       </div>
 
+      {/* Compact Feature — Dark Academic Editorial: a curated series moment before the equal-scale catalog */}
+      <section
+        className="py-7 md:py-9"
+        style={{ background: '#F0EBE3', borderBottom: '1px solid rgba(26,26,46,0.10)' }}
+      >
+        <div className="container">
+          <div
+            className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_auto] gap-6 lg:gap-10 items-center px-5 py-5 md:px-7 md:py-6"
+            style={{ background: '#1A1A2E', borderLeft: '4px solid #C41E3A', boxShadow: '0 10px 24px rgba(26,26,46,0.10)' }}
+          >
+            <div className="min-w-0">
+              <div
+                className="text-[0.65rem] font-bold tracking-[0.18em] uppercase mb-2"
+                style={{ fontFamily: 'Montserrat, sans-serif', color: '#C41E3A' }}
+              >
+                ◆ Featured Series
+              </div>
+              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <h2
+                  className="font-black"
+                  style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.35rem, 2.5vw, 1.9rem)', color: '#F7F3ED', lineHeight: 1.1 }}
+                >
+                  The Kingdom Continuum
+                </h2>
+                <span
+                  className="text-[0.65rem] font-semibold tracking-[0.14em] uppercase"
+                  style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(247,243,237,0.52)' }}
+                >
+                  Three-volume series
+                </span>
+              </div>
+              <p
+                className="mt-3 max-w-2xl text-sm leading-relaxed"
+                style={{ fontFamily: 'Lora, serif', color: 'rgba(247,243,237,0.70)' }}
+              >
+                Follow Scripture’s unified story, discover life under the reign of the King, and step into the world as His ambassador.
+              </p>
+            </div>
+
+            <div className="flex items-end gap-3 md:gap-4 lg:justify-end">
+              {FEATURED_SERIES.map(book => (
+                <Link
+                  key={book.id}
+                  href={`/books/${book.slug}`}
+                  className="group flex flex-col items-center gap-2 min-w-0"
+                  aria-label={`View ${book.title}`}
+                >
+                  <div
+                    className="relative overflow-hidden w-16 sm:w-20 md:w-24"
+                    style={{ aspectRatio: '2 / 3', boxShadow: '4px 7px 16px rgba(0,0,0,0.30)' }}
+                  >
+                    <img
+                      src={book.coverImage}
+                      alt=""
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.04]"
+                    />
+                    {book.comingSoon && (
+                      <span
+                        className="absolute inset-x-0 bottom-0 py-1 text-center text-[0.5rem] font-bold tracking-[0.12em] uppercase"
+                        style={{ fontFamily: 'Montserrat, sans-serif', background: '#C41E3A', color: '#ffffff' }}
+                      >
+                        Soon
+                      </span>
+                    )}
+                  </div>
+                  <span
+                    className="text-[0.6rem] font-semibold tracking-[0.12em] uppercase transition-colors duration-200 group-hover:text-[#F7F3ED]"
+                    style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(247,243,237,0.58)' }}
+                  >
+                    Book {book.seriesNumber}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Books Grid */}
-      <section className="py-16" style={{ background: '#F0EBE3', borderTop: '1px solid rgba(184,150,12,0.22)' }}>
+      <section id="catalog-grid" className="py-16" style={{ background: '#F0EBE3', borderTop: '1px solid rgba(184,150,12,0.22)' }}>
         <div className="container">
           {filteredBooks.length === 0 ? (
             <div className="text-center py-20">

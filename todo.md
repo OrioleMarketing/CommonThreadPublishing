@@ -57,6 +57,15 @@ The Books-page grid now gives every title a single, equal-width grid cell with n
 
 The correction was deployed automatically to the Vercel production environment from Git commit `61fb04c` and Vercel reported a ready deployment.
 
+## Featured Series Enhancement
+
+- [x] Add a compact Kingdom Continuum Featured Series section above the uniform Books-page catalog grid.
+- [x] Verify that the new series spotlight remains distinct from, and does not alter, the equal-scale catalog cards.
+
+## Featured Series Result
+
+The compact Kingdom Continuum spotlight now sits between the filters and catalog. It presents all three volume covers with direct detail-page links while the main catalog below retains its uniform, equal-scale book cards on desktop and mobile.
+
 ## AWS Access Setup
 
 - [x] Create a temporary IAM user or access key with upload-only access to `common-thread-publishing/assets/*`.
