@@ -10,10 +10,13 @@ import { Link } from 'wouter';
 import { ShoppingCart, BookOpen } from 'lucide-react';
 import { authors, getBooksByAuthor, type Book } from '@/lib/products';
 import { useShopifyCart } from '@/contexts/ShopifyCartContext';
+import { useShopifyPricing } from '@/contexts/ShopifyPricingContext';
 import { toast } from 'sonner';
 
 function AuthorBookRow({ book }: { book: Book }) {
   const { addToCart } = useShopifyCart();
+  const { getPrice } = useShopifyPricing();
+  const livePrice = getPrice(book.shopifyVariantId, book.price);
 
   const handleAddToCart = async () => {
     if (!book.shopifyVariantId) {
@@ -21,7 +24,7 @@ function AuthorBookRow({ book }: { book: Book }) {
       return;
     }
     try {
-      await addToCart(book.shopifyVariantId, book.title, book.price, book.coverImage);
+      await addToCart(book.shopifyVariantId, book.title, livePrice, book.coverImage);
       toast.success(`"${book.title}" added to cart`);
     } catch {
       toast.error('Could not add to cart. Please try again.');
@@ -120,7 +123,7 @@ function AuthorBookRow({ book }: { book: Book }) {
               color: '#1A1A2E',
             }}
           >
-            ${book.price.toFixed(2)}
+            ${livePrice.toFixed(2)}
           </span>
 
           <button
@@ -166,13 +169,13 @@ function AuthorBookRow({ book }: { book: Book }) {
 
 export default function Authors() {
   return (
-    <div className="min-h-screen" style={{ background: '#ffffff' }}>
+    <div className="min-h-screen" style={{ background: '#F0EBE3' }}>
       {/* Page Header */}
       <section
         className="pt-32 pb-16"
         style={{
-          background: '#F7F3ED',
-          borderBottom: '1px solid rgba(196,30,58,0.12)',
+          background: '#1A1A2E',
+          borderBottom: '3px solid #C41E3A',
         }}
       >
         <div className="container">
@@ -182,7 +185,7 @@ export default function Authors() {
             style={{
               fontFamily: 'Playfair Display, serif',
               fontSize: 'clamp(2.5rem, 6vw, 4rem)',
-              color: '#1A1A2E',
+              color: '#F7F3ED',
               lineHeight: 1.05,
             }}
           >
@@ -194,7 +197,7 @@ export default function Authors() {
       </section>
 
       {/* Authors list */}
-      <section className="py-16" style={{ background: '#ffffff' }}>
+      <section className="py-16" style={{ background: '#F7F3ED' }}>
         <div className="container">
           <div className="space-y-24">
             {authors.map((author, idx) => {

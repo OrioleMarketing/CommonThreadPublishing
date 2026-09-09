@@ -10,6 +10,7 @@ import { books, authors } from '@/lib/products';
 import BookCard from '@/components/BookCard';
 import { useEffect, useState } from 'react';
 import { useShopifyCart } from '@/contexts/ShopifyCartContext';
+import { useShopifyPricing } from '@/contexts/ShopifyPricingContext';
 
 const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/hero_bg_b8112d9c.jpg';
 const ABOUT_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/about_bg_665970ee.jpg';
@@ -18,8 +19,6 @@ const NEWSLETTER_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/
 // ── Featured Spotlight ──────────────────────────────────────────────────────
 
 const BIBLE_BOOK = books.find(b => b.id === 'the-bible-finally-makes-sense')!;
-const BIBLE_EBOOK_VARIANT_ID = 'gid://shopify/ProductVariant/48304285548799'; // The Bible Finally Makes Sense (eBook)
-const BIBLE_EBOOK_PRICE = 27.00;
 const CHRISTIAN_LIFE_BOOK = books.find(b => b.id === 'the-christian-life-finally-makes-sense')!;
 const WORLD_BOOK = books.find(b => b.id === 'the-world-finally-makes-sense')!;
 
@@ -64,23 +63,21 @@ function NotifyMeForm() {
 
 function KingdomContinuumSection() {
   const { addToCart, addingId } = useShopifyCart();
+  const { getPrice } = useShopifyPricing();
 
   const books3 = [BIBLE_BOOK, CHRISTIAN_LIFE_BOOK, WORLD_BOOK];
 
   // Helper: get the eBook variant ID for a book (Shopify-based eBooks only)
   const getEbookVariantId = (book: typeof BIBLE_BOOK) => {
-    if (book.id === BIBLE_BOOK.id) return BIBLE_EBOOK_VARIANT_ID;
-    if (book.ebookShopifyVariantId) return book.ebookShopifyVariantId;
-    return null;
+    return book.ebookShopifyVariantId ?? null;
   };
 
   const getEbookPrice = (book: typeof BIBLE_BOOK) => {
-    if (book.id === BIBLE_BOOK.id) return BIBLE_EBOOK_PRICE;
-    return book.ebookPrice ?? book.price;
+    return getPrice(book.ebookShopifyVariantId, book.ebookPrice ?? book.price);
   };
 
   return (
-    <section className="py-20" style={{ background: '#ffffff' }}>
+    <section id="kingdom-continuum" className="py-20" style={{ background: '#ffffff' }}>
       <div className="container">
         <div className="ctp-section-label mb-3">◆ The Kingdom Continuum Series</div>
         <p
@@ -165,7 +162,7 @@ function KingdomContinuumSection() {
                       {/* Paperback */}
                       {book.shopifyVariantId && (
                         <button
-                          onClick={() => addToCart(book.shopifyVariantId!, book.title + ' (Paperback)', book.price, book.coverImage)}
+                          onClick={() => addToCart(book.shopifyVariantId!, book.title + ' (Paperback)', getPrice(book.shopifyVariantId, book.price), book.coverImage)}
                           disabled={isAddingPrint}
                           className="flex items-center gap-2 px-4 py-2 text-xs font-bold tracking-wide transition-all duration-200"
                           style={{
@@ -178,7 +175,7 @@ function KingdomContinuumSection() {
                           onMouseLeave={e => { if (!isAddingPrint) (e.currentTarget as HTMLElement).style.background = '#C41E3A'; }}
                         >
                           <ShoppingBag size={13} />
-                          {isAddingPrint ? 'Adding…' : `Paperback — $${book.price.toFixed(2)}`}
+                          {isAddingPrint ? 'Adding…' : `Paperback — $${getPrice(book.shopifyVariantId, book.price).toFixed(2)}`}
                         </button>
                       )}
                       {/* eBook — shown for any book with a Shopify eBook variant */}
@@ -225,9 +222,13 @@ function KingdomContinuumSection() {
 
 function FeaturedSpotlight() {
   const { addToCart, addingId } = useShopifyCart();
+  const { getPrice } = useShopifyPricing();
   const book = BIBLE_BOOK;
+  const printPrice = getPrice(book.shopifyVariantId, book.price);
+  const ebookVariantId = book.ebookShopifyVariantId;
+  const ebookPrice = getPrice(ebookVariantId, book.ebookPrice ?? book.price);
   const isAddingPrint = addingId === book.shopifyVariantId;
-  const isAddingEbook = addingId === BIBLE_EBOOK_VARIANT_ID;
+  const isAddingEbook = addingId === ebookVariantId;
 
   return (
     <section className="py-20" style={{ background: '#ffffff', display: 'none' }}>
@@ -317,7 +318,7 @@ function FeaturedSpotlight() {
                   onClick={() => addToCart(
                     book.shopifyVariantId!,
                     book.title + ' (Paperback)',
-                    book.price,
+                    printPrice,
                     book.coverImage
                   )}
                   disabled={isAddingPrint}
@@ -333,16 +334,16 @@ function FeaturedSpotlight() {
                   onMouseLeave={e => { if (!isAddingPrint) (e.currentTarget as HTMLElement).style.background = '#C41E3A'; }}
                 >
                   <ShoppingBag size={15} />
-                  {isAddingPrint ? 'Adding…' : `Paperback — $${book.price.toFixed(2)}`}
+                  {isAddingPrint ? 'Adding…' : `Paperback — $${printPrice.toFixed(2)}`}
                 </button>
 
                 {/* eBook — links to Shopify store (variant ID to be added) */}
-                {BIBLE_EBOOK_VARIANT_ID ? (
+                {ebookVariantId ? (
                   <button
                     onClick={() => addToCart(
-                      BIBLE_EBOOK_VARIANT_ID,
+                      ebookVariantId,
                     book.title + ' (eBook)',
-                    BIBLE_EBOOK_PRICE,
+                    ebookPrice,
                       book.coverImage
                     )}
                     disabled={isAddingEbook}
@@ -364,7 +365,7 @@ function FeaturedSpotlight() {
                     }}
                   >
                     <BookText size={15} />
-                    {isAddingEbook ? 'Adding…' : `eBook — $${BIBLE_EBOOK_PRICE.toFixed(2)}`}
+                    {isAddingEbook ? 'Adding…' : `eBook — $${ebookPrice.toFixed(2)}`}
                   </button>
                 ) : (
                   <a
@@ -418,6 +419,7 @@ const SERIES_BOOKS = books.filter(
 
 function SeriesGallery() {
   const { addToCart, addingId } = useShopifyCart();
+  const { getPrice } = useShopifyPricing();
 
   return (
     <section
@@ -490,13 +492,13 @@ function SeriesGallery() {
                     className="text-xs mb-2"
                     style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.45)' }}
                   >
-                    ${book.price.toFixed(2)}
+                    ${getPrice(book.shopifyVariantId, book.price).toFixed(2)}
                   </div>
                   <button
                     onClick={() => addToCart(
                       book.shopifyVariantId!,
                       book.title,
-                      book.price,
+                      getPrice(book.shopifyVariantId, book.price),
                       book.coverImage
                     )}
                     disabled={addingId === book.shopifyVariantId}
@@ -571,6 +573,7 @@ const AUTHOR_ORDER = ['mark-mirza', 'bruce-mayo', 'john-greenfield', 'darrel-sud
 
 function AuthorBookRow({ authorId }: { authorId: string }) {
   const { addToCart, addingId } = useShopifyCart();
+  const { getPrice } = useShopifyPricing();
   const getAuthorById = (id: string) => authors.find(a => a.id === id);
   const getBooksByAuthor = (id: string) => books.filter(b => b.authorIds.includes(id));
 
@@ -664,13 +667,13 @@ function AuthorBookRow({ authorId }: { authorId: string }) {
                 className="text-xs mb-2"
                 style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.45)' }}
               >
-                ${book.price.toFixed(2)}
+                ${getPrice(book.shopifyVariantId, book.price).toFixed(2)}
               </div>
               <button
                 onClick={() => addToCart(
                   book.shopifyVariantId!,
                   book.title,
-                  book.price,
+                  getPrice(book.shopifyVariantId, book.price),
                   book.coverImage
                 )}
                 disabled={addingId === book.shopifyVariantId}
@@ -703,6 +706,7 @@ const PRAYERS_BOOK_3 = books.find(b => b.id === 'the-pray-ers-book-3') ?? null;
 
 function PrayersSeriesSection() {
   const { addToCart, addingId } = useShopifyCart();
+  const { getPrice } = useShopifyPricing();
 
   const BookPanel = ({ book, bookNum }: { book: typeof PRAYERS_BOOK_1 | null; bookNum: number }) => {
     if (!book) {
@@ -797,10 +801,10 @@ function PrayersSeriesSection() {
             className="text-sm font-bold mb-4"
             style={{ fontFamily: 'Montserrat, sans-serif', color: '#F7F3ED' }}
           >
-            ${book.price.toFixed(2)}
+            ${getPrice(book.shopifyVariantId, book.price).toFixed(2)}
           </div>
           <button
-            onClick={() => addToCart(book.shopifyVariantId!, book.title, book.price, book.coverImage)}
+            onClick={() => addToCart(book.shopifyVariantId!, book.title, getPrice(book.shopifyVariantId, book.price), book.coverImage)}
             disabled={isAdding}
             className="px-6 py-2.5 text-xs font-bold tracking-widest uppercase transition-all duration-200"
             style={{
@@ -1151,9 +1155,11 @@ export default function Home() {
             </span>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4">
-            {allBooks.map(book => (
-              <BookCard key={book.id} book={book} />
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4 md:gap-6">
+            {allBooks.map((book, index) => (
+              <div key={book.id} className={index === 0 ? 'md:col-span-2' : index === 6 ? 'md:mt-8' : ''}>
+                <BookCard book={book} />
+              </div>
             ))}
           </div>
         </div>

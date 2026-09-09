@@ -8,6 +8,7 @@ import { ArrowLeft, ShoppingCart, Download, Package, ExternalLink, Loader2 } fro
 import { getBookBySlug, getAuthorsByIds, books } from '@/lib/products';
 import BookCard from '@/components/BookCard';
 import { useShopifyCart } from '@/contexts/ShopifyCartContext';
+import { useShopifyPricing } from '@/contexts/ShopifyPricingContext';
 
 export default function BookDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -33,11 +34,14 @@ export default function BookDetail() {
 
   const authors = getAuthorsByIds(book.authorIds);
   const { addToCart, addingId } = useShopifyCart();
+  const { getPrice } = useShopifyPricing();
   const isAdding = addingId === book.shopifyVariantId;
+  const livePrintPrice = getPrice(book.shopifyVariantId, book.price);
+  const liveEbookPrice = getPrice(book.ebookShopifyVariantId, book.ebookPrice ?? book.price);
 
   const handleAddToCart = () => {
     if (!book.shopifyVariantId) return;
-    addToCart(book.shopifyVariantId, book.title, book.price, book.coverImage);
+    addToCart(book.shopifyVariantId, book.title, livePrintPrice, book.coverImage);
   };
 
   // Related books: same series first, then same genre — but never mix books from different named series
@@ -59,14 +63,14 @@ export default function BookDetail() {
   return (
     <div className="min-h-screen" style={{ background: '#ffffff' }}>
       {/* Back Navigation */}
-      <div className="pt-24 pb-4" style={{ background: '#F7F3ED', borderBottom: '1px solid rgba(26,26,46,0.07)' }}>
+      <div className="pt-24 pb-4" style={{ background: '#1A1A2E', borderBottom: '3px solid #C41E3A' }}>
         <div className="container">
           <Link
             href="/books"
             className="inline-flex items-center gap-2 text-sm transition-colors duration-200"
-            style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(26,26,46,0.45)' }}
-            onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = '#C41E3A')}
-            onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = 'rgba(26,26,46,0.45)')}
+            style={{ fontFamily: 'Montserrat, sans-serif', color: 'rgba(247,243,237,0.62)' }}
+            onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = '#ffffff')}
+            onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = 'rgba(247,243,237,0.62)')}
           >
             <ArrowLeft size={14} /> Back to Catalog
           </Link>
@@ -199,13 +203,30 @@ export default function BookDetail() {
                   border: '1px solid rgba(196,30,58,0.18)',
                 }}
               >
+                {book.comingSoon ? (
+                  <div className="flex flex-col items-start gap-3">
+                    <span
+                      className="inline-block px-3 py-1 text-xs font-bold tracking-widest uppercase"
+                      style={{ fontFamily: 'Montserrat, sans-serif', background: 'rgba(196,30,58,0.08)', color: '#C41E3A', border: '1.5px solid rgba(196,30,58,0.25)' }}
+                    >
+                      Coming Soon
+                    </span>
+                    <p className="text-sm" style={{ fontFamily: 'Lora, serif', color: 'rgba(26,26,46,0.62)' }}>
+                      Join the launch list to receive release news and availability updates.
+                    </p>
+                    <Link href="/#kingdom-continuum" className="ctp-btn-primary inline-flex items-center gap-2">
+                      Get Launch Updates
+                    </Link>
+                  </div>
+                ) : (
+                  <>
                 <div className="flex flex-wrap items-baseline gap-4 mb-4">
                   <div className="flex items-baseline gap-2">
                     <span
                       className="text-3xl font-black"
                       style={{ fontFamily: 'Playfair Display, serif', color: '#1A1A2E' }}
                     >
-                      ${book.price.toFixed(2)}
+                      ${livePrintPrice.toFixed(2)}
                     </span>
                     <span
                       className="text-xs"
@@ -220,7 +241,7 @@ export default function BookDetail() {
                         className="text-2xl font-black"
                         style={{ fontFamily: 'Playfair Display, serif', color: '#C41E3A' }}
                       >
-                        ${book.ebookPrice.toFixed(2)}
+                        ${liveEbookPrice.toFixed(2)}
                       </span>
                       <span
                         className="text-xs"
@@ -256,11 +277,11 @@ export default function BookDetail() {
                   {book.format === 'ebook' || book.format === 'both' ? (
                     book.ebookShopifyVariantId ? (
                       <button
-                        onClick={() => addToCart(book.ebookShopifyVariantId!, `${book.title} (eBook)`, book.ebookPrice ?? book.price, book.coverImage)}
+                        onClick={() => addToCart(book.ebookShopifyVariantId!, `${book.title} (eBook)`, liveEbookPrice, book.coverImage)}
                         className="ctp-btn-outline flex items-center justify-center gap-2 flex-1"
                       >
                         <Download size={16} />
-                        Add eBook to Cart{book.ebookPrice ? ` — $${book.ebookPrice.toFixed(2)}` : ''}
+                        Add eBook to Cart{book.ebookPrice ? ` — $${liveEbookPrice.toFixed(2)}` : ''}
                       </button>
                     ) : (
                     <a
@@ -270,7 +291,7 @@ export default function BookDetail() {
                       className="ctp-btn-outline flex items-center justify-center gap-2 flex-1"
                     >
                       <Download size={16} />
-                      Buy eBook{book.ebookPrice ? ` — $${book.ebookPrice.toFixed(2)}` : ''}
+                      Buy eBook{book.ebookPrice ? ` — $${liveEbookPrice.toFixed(2)}` : ''}
                     </a>
                     )
                   ) : (
@@ -285,6 +306,8 @@ export default function BookDetail() {
                     </a>
                   )}
                 </div>
+                  </>
+                )}
 
                 {/* Shipping note */}
                 <div className="flex items-start gap-2 mt-4 pt-4" style={{ borderTop: '1px solid rgba(26,26,46,0.08)' }}>

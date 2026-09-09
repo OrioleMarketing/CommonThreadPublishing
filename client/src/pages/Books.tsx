@@ -110,7 +110,7 @@ export default function Books() {
       </div>
 
       {/* Books Grid */}
-      <section className="py-16" style={{ background: '#ffffff' }}>
+      <section className="py-16" style={{ background: '#F0EBE3', borderTop: '1px solid rgba(184,150,12,0.22)' }}>
         <div className="container">
           {filteredBooks.length === 0 ? (
             <div className="text-center py-20">
@@ -122,9 +122,14 @@ export default function Books() {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-5">
-              {filteredBooks.map(book => (
-                <BookCard key={book.id} book={book} />
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-5 md:gap-6">
+              {filteredBooks.map((book, index) => (
+                <div
+                  key={book.id}
+                  className={index === 0 ? 'md:col-span-2' : index === 5 ? 'md:mt-10' : index === 8 ? 'md:-mt-6' : ''}
+                >
+                  <BookCard book={book} />
+                </div>
               ))}
             </div>
           )}

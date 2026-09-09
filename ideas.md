@@ -159,3 +159,10 @@
 The **Dark Academic Editorial** approach was chosen because it best honors the brand's identity — a serious, faith-grounded publishing house producing books of weight and meaning. The deep ink-dark backgrounds evoke premium book design, the crimson accent carries the brand's signature color with restraint, and the serif typography system (Playfair Display + Lora) positions Common Thread Publishing as a literary authority rather than a generic retail store.
 
 The asymmetric editorial layouts and staggered book grids will make the catalog feel curated and hand-selected, while the parchment-toned text panels provide comfortable reading contrast. This design philosophy answers the core question: "Does this choice reinforce or dilute our identity as a serious, faith-based literary publisher?" — and the answer is yes, it reinforces it at every level.
+
+## Style Decisions
+
+- Inner pages use an ink-navy editorial field or a parchment composition framed by ink and crimson rules; plain white retail surfaces are avoided.
+- Catalog presentation uses staggered, featured scale shifts so the collection reads as curated rather than as a uniform retailer grid.
+- Shared book cards use parchment surfaces, restrained manuscript-style rules, and crimson only for decisive actions.
+- Headings, metadata, and purchase controls preserve a serious, faith-grounded, literary voice; functional commerce language remains present but visually secondary.

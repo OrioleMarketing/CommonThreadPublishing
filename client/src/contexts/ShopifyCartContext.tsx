@@ -11,7 +11,7 @@ const SHOPIFY_DOMAIN = 'store.commonthreadpublishing.com';
 const STOREFRONT_TOKEN = 'b85c44e613178a0e4ea11da7edbcfbe8';
 const API_URL = `https://${SHOPIFY_DOMAIN}/api/2024-01/graphql.json`;
 
-async function shopifyFetch(query: string, variables: Record<string, unknown> = {}) {
+export async function shopifyFetch(query: string, variables: Record<string, unknown> = {}) {
   const res = await fetch(API_URL, {
     method: 'POST',
     headers: {

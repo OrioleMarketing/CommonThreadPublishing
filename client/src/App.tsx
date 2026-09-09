@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { ShopifyCartProvider } from "./contexts/ShopifyCartContext";
+import { ShopifyPricingProvider } from "./contexts/ShopifyPricingContext";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import CartDrawer from "./components/CartDrawer";
@@ -59,8 +60,10 @@ function App() {
       <ThemeProvider defaultTheme="light">
         <TooltipProvider>
           <ShopifyCartProvider>
-            <Toaster />
-            <Router />
+            <ShopifyPricingProvider>
+              <Toaster />
+              <Router />
+            </ShopifyPricingProvider>
           </ShopifyCartProvider>
         </TooltipProvider>
       </ThemeProvider>

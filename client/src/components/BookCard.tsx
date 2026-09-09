@@ -9,6 +9,7 @@ import { Link } from 'wouter';
 import { Book, getAuthorsByIds } from '@/lib/products';
 import { BookOpen, ShoppingCart, Loader2 } from 'lucide-react';
 import { useShopifyCart } from '@/contexts/ShopifyCartContext';
+import { useShopifyPricing } from '@/contexts/ShopifyPricingContext';
 
 interface BookCardProps {
   book: Book;
@@ -19,11 +20,13 @@ export default function BookCard({ book, size = 'default' }: BookCardProps) {
   const authors = getAuthorsByIds(book.authorIds);
   const authorNames = authors.map(a => a.name).join(' & ');
   const { addToCart, addingId } = useShopifyCart();
+  const { getPrice } = useShopifyPricing();
   const isAdding = addingId === book.shopifyVariantId;
+  const livePrice = getPrice(book.shopifyVariantId, book.price);
 
   const handleAddToCart = () => {
     if (!book.shopifyVariantId) return;
-    addToCart(book.shopifyVariantId, book.title, book.price, book.coverImage);
+    addToCart(book.shopifyVariantId, book.title, livePrice, book.coverImage);
   };
 
   return (
@@ -183,7 +186,7 @@ export default function BookCard({ book, size = 'default' }: BookCardProps) {
                   color: '#1A1A2E',
                 }}
               >
-                ${book.price.toFixed(2)}
+                ${livePrice.toFixed(2)}
               </span>
 
               {/* Add to Cart button — standalone, NOT inside any <a> */}
