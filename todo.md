@@ -55,6 +55,8 @@ Vercel confirmed valid configuration and issued SSL certificates for both custom
 
 The Books-page grid now gives every title a single, equal-width grid cell with no featured col-span or staggered vertical offsets. Desktop and mobile checks confirmed that the first title now uses the same 2:3 cover treatment and card scale as every other catalog item.
 
+The correction was deployed automatically to the Vercel production environment from Git commit `61fb04c` and Vercel reported a ready deployment.
+
 ## AWS Access Setup
 
 - [x] Create a temporary IAM user or access key with upload-only access to `common-thread-publishing/assets/*`.
