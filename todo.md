@@ -66,6 +66,16 @@ The correction was deployed automatically to the Vercel production environment f
 
 The compact Kingdom Continuum spotlight now sits between the filters and catalog. It presents all three volume covers with direct detail-page links while the main catalog below retains its uniform, equal-scale book cards on desktop and mobile.
 
+## External Publishing Workflow Verification
+
+- [x] Confirm `main` in `OrioleMarketing/CommonThreadPublishing` is linked to Vercel production.
+- [x] Confirm the latest Git commit is deployed at `www.commonthreadpublishing.com`.
+- [x] Confirm whether the Manus Publish control is no longer needed for production updates.
+
+The GitHub `main` branch and `origin/github` remote both resolve to commit `ac93e6b`, the Featured Series update. Vercel’s `commonthreadpublishing` project recorded the same commit as a ready production deployment and is configured with both custom domains.
+
+The Vercel production alias and `www.commonthreadpublishing.com` returned identical HTML response hashes, confirming the public custom domain serves the same current Vercel release. The Manus Publish control affects only the legacy Manus-hosted copy; it is not required for the Vercel-hosted production website.
+
 ## AWS Access Setup
 
 - [x] Create a temporary IAM user or access key with upload-only access to `common-thread-publishing/assets/*`.
