@@ -123,12 +123,9 @@ export default function Books() {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-5 md:gap-6">
-              {filteredBooks.map((book, index) => (
-                <div
-                  key={book.id}
-                  className={index === 0 ? 'md:col-span-2' : index === 5 ? 'md:mt-10' : index === 8 ? 'md:-mt-6' : ''}
-                >
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 md:gap-6 items-stretch">
+              {filteredBooks.map(book => (
+                <div key={book.id} className="min-w-0">
                   <BookCard book={book} />
                 </div>
               ))}

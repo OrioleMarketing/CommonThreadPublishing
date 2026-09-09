@@ -35,6 +35,26 @@ Vercel connected `OrioleMarketing/CommonThreadPublishing` to the existing `commo
 
 The Vercel production deployment for commit `31ee234` is ready at `https://commonthreadpublishing-knahmwnvk-oriole-marketing-projects.vercel.app`. Direct verification confirmed that the homepage, direct book-detail routing, Shopify pricing/cart controls, and S3-hosted site images load correctly. Vercel SSO protection applies to Vercel-generated URLs but is configured to exclude custom domains, so `commonthreadpublishing.com` will be public after the domain is assigned in Vercel and its DNS records are changed at the domain provider.
 
+## Custom Domain Cutover
+
+- [x] Add `commonthreadpublishing.com` to the Vercel `commonthreadpublishing` project.
+- [x] Add `www.commonthreadpublishing.com` to the Vercel `commonthreadpublishing` project.
+- [x] Apply Vercel’s required apex and `www` DNS records at the current DNS provider.
+- [x] Verify that both domains resolve publicly to the Vercel production deployment.
+
+## Cutover Result
+
+Vercel confirmed valid configuration and issued SSL certificates for both custom domains. The apex domain resolves to `216.150.1.1` and uses Vercel’s configured 308 redirect to `www.commonthreadpublishing.com`; the `www` CNAME resolves to `c6048d3b42375aa8.vercel-dns-016.com` and is attached to the production environment. HTTPS validation returned `200` for both domains.
+
+## Catalog Layout Correction
+
+- [x] Restore a consistent cover scale and card height for every title on the Books page.
+- [x] Verify the corrected catalog layout at desktop and mobile widths before deployment.
+
+## Catalog Layout Result
+
+The Books-page grid now gives every title a single, equal-width grid cell with no featured col-span or staggered vertical offsets. Desktop and mobile checks confirmed that the first title now uses the same 2:3 cover treatment and card scale as every other catalog item.
+
 ## AWS Access Setup
 
 - [x] Create a temporary IAM user or access key with upload-only access to `common-thread-publishing/assets/*`.
