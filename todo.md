@@ -76,6 +76,13 @@ The GitHub `main` branch and `origin/github` remote both resolve to commit `ac93
 
 The Vercel production alias and `www.commonthreadpublishing.com` returned identical HTML response hashes, confirming the public custom domain serves the same current Vercel release. The Manus Publish control affects only the legacy Manus-hosted copy; it is not required for the Vercel-hosted production website.
 
+## Repository and Deployment Currency Check
+
+- [x] Confirm there are no uncommitted local changes or unpushed commits.
+- [x] Confirm the latest Vercel production deployment is ready and aliases both custom domains.
+
+At the start of this check, the only local modification was this verification checklist entry; there were no unpushed or remote-only commits. The latest committed application release (`f75a592`) is a ready, Git-sourced Vercel production deployment with no alias errors and both custom domains assigned.
+
 ## AWS Access Setup
 
 - [x] Create a temporary IAM user or access key with upload-only access to `common-thread-publishing/assets/*`.
