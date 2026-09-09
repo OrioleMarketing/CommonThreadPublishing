@@ -7,8 +7,9 @@
 import { useState } from 'react';
 import { books, BookGenre } from '@/lib/products';
 import BookCard from '@/components/BookCard';
+import { siteAsset } from '@/lib/assets';
 
-const BOOKSTORE_BANNER = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/bookstore_banner_5242e5fa.jpg';
+const BOOKSTORE_BANNER = siteAsset('assets/backgrounds/bookstore-banner.jpg', 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/bookstore_banner_5242e5fa.jpg');
 
 const GENRE_FILTERS: { value: 'all' | BookGenre; label: string }[] = [
   { value: 'all', label: 'All Books' },

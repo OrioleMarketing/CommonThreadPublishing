@@ -16,3 +16,11 @@ The website maintains its displayed catalog prices in `client/src/lib/products.t
 ## Implementation Result
 
 Visible prices now load from the Shopify Storefront API when each site session opens. The local catalog values remain as resilient fallbacks if Shopify is temporarily unavailable. The Bible eBook now displays Shopify’s current $19.00 price and is available through the Shopify cart alongside its paperback format.
+
+## External Hosting Migration
+
+- [ ] Prepare Vercel-compatible static deployment and single-page routing configuration for the existing `common-thread` project.
+- [ ] Transfer the current source to `OrioleMarketing/CommonThreadPublishing`.
+- [ ] Inventory externally hosted images and define the Amazon S3 `common-thread-publishing` bucket target path structure in `us-east-2`.
+- [ ] Move Manus-hosted image assets to the provided S3 bucket and update source URLs.
+- [ ] Deploy through Vercel and verify the custom-domain transition plan.

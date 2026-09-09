@@ -196,7 +196,16 @@ function vitePluginStorageProxy(): Plugin {
   };
 }
 
-const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector(), vitePluginStorageProxy()];
+// Manus-only plugins are used for the managed preview environment. Vercel builds
+// the same React/Vite application with only framework plugins, keeping the output portable.
+const isManusPreview = Boolean(process.env.BUILT_IN_FORGE_API_URL);
+const plugins = [
+  react(),
+  tailwindcss(),
+  ...(isManusPreview
+    ? [jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector(), vitePluginStorageProxy()]
+    : []),
+];
 
 export default defineConfig({
   plugins,

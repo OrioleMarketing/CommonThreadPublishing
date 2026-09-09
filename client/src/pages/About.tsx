@@ -6,8 +6,9 @@
 
 import { Link } from 'wouter';
 import { ArrowRight, Package, BookOpen, Globe } from 'lucide-react';
+import { siteAsset } from '@/lib/assets';
 
-const ABOUT_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/about_bg_665970ee.jpg';
+const ABOUT_BG = siteAsset('assets/backgrounds/about-bg.jpg', 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/about_bg_665970ee.jpg');
 
 export default function About() {
   return (

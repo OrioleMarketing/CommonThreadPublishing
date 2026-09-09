@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
 import { Menu, X, ShoppingBag } from 'lucide-react';
 import { useShopifyCart } from '@/contexts/ShopifyCartContext';
+import { siteAsset } from '@/lib/assets';
 
 const NAV_LINKS = [
   { href: '/', label: 'Home' },
@@ -51,7 +52,7 @@ export default function Navigation() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
             <img
-              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/CommonThread1_a7f668c9.png"
+              src={siteAsset('assets/brand/common-thread-logo.png', 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/CommonThread1_a7f668c9.png')}
               alt="Common Thread Publishing LLC"
               className="w-auto object-contain h-12 md:h-[72px]"
             />

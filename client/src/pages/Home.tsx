@@ -11,10 +11,11 @@ import BookCard from '@/components/BookCard';
 import { useEffect, useState } from 'react';
 import { useShopifyCart } from '@/contexts/ShopifyCartContext';
 import { useShopifyPricing } from '@/contexts/ShopifyPricingContext';
+import { siteAsset } from '@/lib/assets';
 
-const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/hero_bg_b8112d9c.jpg';
-const ABOUT_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/about_bg_665970ee.jpg';
-const NEWSLETTER_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/newsletter_bg_afae4d46.jpg';
+const HERO_BG = siteAsset('assets/backgrounds/hero-bg.jpg', 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/hero_bg_b8112d9c.jpg');
+const ABOUT_BG = siteAsset('assets/backgrounds/about-bg.jpg', 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/about_bg_665970ee.jpg');
+const NEWSLETTER_BG = siteAsset('assets/backgrounds/newsletter-bg.jpg', 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/newsletter_bg_afae4d46.jpg');
 
 // ── Featured Spotlight ──────────────────────────────────────────────────────
 

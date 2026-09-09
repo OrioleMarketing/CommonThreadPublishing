@@ -4,6 +4,8 @@
  * Shopify store links used for checkout (print books via POD fulfillment, ebooks direct)
  */
 
+import { siteAsset } from './assets';
+
 export type BookFormat = 'print' | 'ebook' | 'both';
 export type BookGenre = 'fiction' | 'nonfiction' | 'devotional' | 'historical' | 'biblical' | 'practical';
 
@@ -46,25 +48,25 @@ export const authors: Author[] = [
     id: 'mark-mirza',
     name: 'Mark S. Mirza',
     bio: 'Mark S. Mirza is a compelling author whose works explore the intersection of faith, politics, and American society. His novels challenge readers to examine their own convictions in the face of cultural and spiritual conflict.',
-    photo: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/MarkMirza_d886115c.jpg',
+    photo: siteAsset('assets/authors/mark-mirza.jpg', 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/MarkMirza_d886115c.jpg'),
   },
   {
     id: 'bruce-mayo',
     name: 'Bruce A. Mayo, MTh',
     bio: 'Bruce A. Mayo holds a Master of Theology and brings decades of biblical scholarship to his writing. His work in The Kingdom Continuum Series is designed to help new and seasoned believers see Scripture as one unified, connected story.',
-    photo: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/BruceMayo_4c08e9b4.jpeg',
+    photo: siteAsset('assets/authors/bruce-mayo.jpeg', 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/BruceMayo_4c08e9b4.jpeg'),
   },
   {
     id: 'john-greenfield',
     name: 'John Greenfield',
     bio: 'John Greenfield was a renowned Moravian historian and evangelist whose original account of the Great Moravian Revival has inspired generations of believers.',
-    photo: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/JohnGreenfield_61b19951.jpeg',
+    photo: siteAsset('assets/authors/john-greenfield.jpeg', 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/JohnGreenfield_61b19951.jpeg'),
   },
   {
     id: 'darrel-suderman',
     name: 'Dr. Darrel R. Suderman',
     bio: 'Dr. Darrel R. Suderman is an international ministry leader and author whose devotional work has reached believers across the globe, offering daily guidance for a life of prayer.',
-    photo: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/DarrelSuderman_37e221f7.jpg',
+    photo: siteAsset('assets/authors/darrel-suderman.jpg', 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/DarrelSuderman_37e221f7.jpg'),
   },
 ];
 
@@ -79,7 +81,7 @@ export const books: Book[] = [
     price: 25.00,
     format: 'print',
     genre: ['fiction'],
-    coverImage: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/DividedNation_10dbd00f.webp',
+    coverImage: siteAsset('assets/books/divided-nation.webp', 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/DividedNation_10dbd00f.webp'),
     shopifyUrl: 'https://store.commonthreadpublishing.com/products/divided-nation',
     shopifyVariantId: 'gid://shopify/ProductVariant/48189834330367',
     featured: true,
@@ -96,7 +98,7 @@ export const books: Book[] = [
     price: 25.00,
     format: 'print',
     genre: ['fiction'],
-    coverImage: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/DividedTogether_b4149c9c.webp',
+    coverImage: siteAsset('assets/books/divided-together.webp', 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/DividedTogether_b4149c9c.webp'),
     shopifyUrl: 'https://store.commonthreadpublishing.com/products/divided-together',
     shopifyVariantId: 'gid://shopify/ProductVariant/48189835477247',
     featured: true,
@@ -113,7 +115,7 @@ export const books: Book[] = [
     price: 25.00,
     format: 'print',
     genre: ['nonfiction', 'historical'],
-    coverImage: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/PowerfromonHigh_757543e5.webp',
+    coverImage: siteAsset('assets/books/power-from-on-high.webp', 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/PowerfromonHigh_757543e5.webp'),
     shopifyUrl: 'https://store.commonthreadpublishing.com/products/power-from-on-high',
     shopifyVariantId: 'gid://shopify/ProductVariant/48189836034303',
     badge: 'HISTORY',
@@ -131,7 +133,7 @@ export const books: Book[] = [
     price: 27.00,
     format: 'both',
     genre: ['biblical', 'nonfiction'],
-    coverImage: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/TheBibleFinallyMakesSense_194ae03f.webp',
+    coverImage: siteAsset('assets/books/bible-finally-makes-sense.webp', 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/TheBibleFinallyMakesSense_194ae03f.webp'),
     shopifyUrl: 'https://store.commonthreadpublishing.com/products/the-bible-finally-makes-sense',
     shopifyVariantId: 'gid://shopify/ProductVariant/48188559491327',
     ebookShopifyVariantId: 'gid://shopify/ProductVariant/48304285548799',
@@ -174,7 +176,7 @@ export const books: Book[] = [
     price: 27.00,
     format: 'print',
     genre: ['biblical', 'nonfiction'],
-    coverImage: '/manus-storage/kingdom-continuum-book3-cover_3efcd891.png',
+    coverImage: siteAsset('assets/books/world-finally-makes-sense.png', '/manus-storage/kingdom-continuum-book3-cover_3efcd891.png'),
     shopifyUrl: 'https://store.commonthreadpublishing.com',
     comingSoon: true,
     featured: true,
@@ -192,7 +194,7 @@ export const books: Book[] = [
     ebookPrice: 15.00,
     format: 'both',
     genre: ['historical', 'nonfiction'],
-    coverImage: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/TheJohnstownTragedy_c7f61357.jpg',
+    coverImage: siteAsset('assets/books/johnstown-tragedy.jpg', 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/TheJohnstownTragedy_c7f61357.jpg'),
     shopifyUrl: 'https://store.commonthreadpublishing.com/products/the-johnstown-tragedy',
     shopifyVariantId: 'gid://shopify/ProductVariant/48189836001535',
     fulfillmentUrl: 'https://www.lulu.com/shop/mark-s-mirza/the-johnstown-tragedy-god-in-its-midst/ebook/product-1jq4w9yn.html',
@@ -232,7 +234,7 @@ export const books: Book[] = [
     ebookPrice: 15.00,
     format: 'both',
     genre: ['fiction'],
-    coverImage: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/ThePrayers-Book2-Cover_7ed26141.jpg',
+    coverImage: siteAsset('assets/books/pray-ers-book-2.jpg', 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/ThePrayers-Book2-Cover_7ed26141.jpg'),
     shopifyUrl: 'https://store.commonthreadpublishing.com/products/the-pray-ers-book-2',
     shopifyVariantId: 'gid://shopify/ProductVariant/48379343864063',
     fulfillmentUrl: 'https://www.lulu.com/shop/mark-s-mirza/the-pray-ers-book-2/ebook/product-m2gmk5v.html',
@@ -252,7 +254,7 @@ export const books: Book[] = [
     ebookPrice: 15.00,
     format: 'both',
     genre: ['fiction'],
-    coverImage: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/ThePrayers-3_a2b926d0.webp',
+    coverImage: siteAsset('assets/books/pray-ers-book-3.webp', 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/ThePrayers-3_a2b926d0.webp'),
     shopifyUrl: 'https://store.commonthreadpublishing.com/products/the-pray-ers-books-3',
     shopifyVariantId: 'gid://shopify/ProductVariant/48189832954111',
     fulfillmentUrl: 'https://www.lulu.com/shop/mark-s-mirza/the-pray-ers-book-3/ebook/product-2md4qg8.html',
@@ -286,7 +288,7 @@ export const books: Book[] = [
     price: 9.95,
     format: 'print',
     genre: ['devotional'],
-    coverImage: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/ThinkingAboutPrayer_a02b07c5.webp',
+    coverImage: siteAsset('assets/books/thinking-about-prayer.webp', 'https://d2xsxph8kpxj0f.cloudfront.net/310519663047046836/ESDa3SDVSomV86kahyKkmF/ThinkingAboutPrayer_a02b07c5.webp'),
     shopifyUrl: 'https://store.commonthreadpublishing.com/products/thinking-about-prayer',
     shopifyVariantId: 'gid://shopify/ProductVariant/48189833511167',
     badge: 'DEVOTIONAL',
