@@ -23,7 +23,7 @@ Visible prices now load from the Shopify Storefront API when each site session o
 - [x] Transfer the current source to `OrioleMarketing/CommonThreadPublishing`.
 - [x] Inventory externally hosted images and define the Amazon S3 `common-thread-publishing` bucket target path structure in `us-east-2`.
 - [x] Move Manus-hosted image assets to the provided S3 bucket and update source URLs.
-- [ ] Deploy through Vercel and verify the custom-domain transition plan.
+- [x] Deploy through Vercel and verify the custom-domain transition plan.
 
 ## Migration Status
 
@@ -32,6 +32,8 @@ The complete source has been pushed to the requested GitHub repository. Nineteen
 ## Vercel Deployment Result
 
 Vercel connected `OrioleMarketing/CommonThreadPublishing` to the existing `commonthreadpublishing` project (`prj_jV4DijtoGLfEbEIVgiFQryKqF7Qf`) in the Oriole Marketing team and created a verified preview deployment. The current preview is available at `https://commonthreadpublishing-k2e5kcjr7-oriole-marketing-projects.vercel.app`; its production branch is `main`.
+
+The Vercel production deployment for commit `31ee234` is ready at `https://commonthreadpublishing-knahmwnvk-oriole-marketing-projects.vercel.app`. Direct verification confirmed that the homepage, direct book-detail routing, Shopify pricing/cart controls, and S3-hosted site images load correctly. Vercel SSO protection applies to Vercel-generated URLs but is configured to exclude custom domains, so `commonthreadpublishing.com` will be public after the domain is assigned in Vercel and its DNS records are changed at the domain provider.
 
 ## AWS Access Setup
 
